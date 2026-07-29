@@ -35,22 +35,22 @@ Currently, [Gallery.tsx](file:///d:/Coding/emlekor-kucko/src/components/Gallery.
 
 ## Implementation & Tracking Checklist
 
-- [ ] **Phase 1: State & Visibility Logic**
-  - [ ] Add `isExpanded` state to [Gallery.tsx](file:///d:/Coding/emlekor-kucko/src/components/Gallery.tsx).
-  - [ ] Reset `isExpanded` state when `active` filter changes.
-  - [ ] Apply mobile hiding logic (e.g. index-based Tailwind classes `index >= 3 && !isExpanded ? 'hidden sm:block' : ''`).
+- [x] **Phase 1: State & Visibility Logic**
+  - [x] Add `isExpanded` state to [Gallery.tsx](file:///d:/Coding/emlekor-kucko/src/components/Gallery.tsx).
+  - [x] Reset `isExpanded` state when `active` filter changes.
+  - [x] Apply mobile hiding logic (e.g. index-based Tailwind classes `index >= 3 && !isExpanded ? 'hidden sm:block' : ''`).
 
-- [ ] **Phase 2: "See More" Button Component & Integration**
-  - [ ] Import `ChevronDown` and `ChevronUp` icons from `lucide-react`.
-  - [ ] Render "Több mutatása" / "Kevesebb mutatása" toggle button below gallery grid when `items.length > 3`.
-  - [ ] Ensure button is styled with existing design system (pink/blush accents, subtle animations, hidden on `sm:` and up).
+- [x] **Phase 2: "See More" Button Component & Integration**
+  - [x] Import `ChevronDown` and `ChevronUp` icons from `lucide-react`.
+  - [x] Render "Több mutatása" / "Kevesebb mutatása" toggle button below gallery grid when `items.length > 3`.
+  - [x] Ensure button is styled with existing design system (pink/blush accents, subtle animations, hidden on `sm:` and up).
 
-- [ ] **Phase 3: Verification & UX Polish**
-  - [ ] Verify functionality on phone view (< 640px viewport): check that 3 images are shown initial state.
-  - [ ] Verify expanding shows remaining images seamlessly with smooth animation.
-  - [ ] Verify collapse action works as expected.
-  - [ ] Verify desktop view (>= 640px): ensure all items remain visible regardless of toggle state.
-  - [ ] Verify changing category filters correctly resets expanded state.
+- [x] **Phase 3: Verification & UX Polish**
+  - [x] Verify functionality on phone view (< 640px viewport): check that 3 images are shown initial state.
+  - [x] Verify expanding shows remaining images seamlessly with smooth animation.
+  - [x] Verify collapse action works as expected.
+  - [x] Verify desktop view (>= 640px): ensure all items remain visible regardless of toggle state.
+  - [x] Verify changing category filters correctly resets expanded state.
 
 ---
 

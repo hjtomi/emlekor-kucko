@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Heart, Maximize2 } from 'lucide-react';
+import { X, Heart, Maximize2, ChevronDown, ChevronUp } from 'lucide-react';
 import { galleryItems, type GalleryItem, type GalleryCategory } from '../data/content';
 import { PetalDivider } from './FloralAccents';
 
@@ -16,6 +16,12 @@ const FILTERS: { key: FilterKey; label: string }[] = [
 export default function Gallery() {
   const [active, setActive] = useState<FilterKey>('osszes');
   const [selected, setSelected] = useState<GalleryItem | null>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleFilterChange = (key: FilterKey) => {
+    setActive(key);
+    setIsExpanded(false);
+  };
 
   const items = useMemo(
     () => (active === 'osszes' ? galleryItems : galleryItems.filter((i) => i.category === active)),
@@ -55,7 +61,7 @@ export default function Gallery() {
           {FILTERS.map((f) => (
             <button
               key={f.key}
-              onClick={() => setActive(f.key)}
+              onClick={() => handleFilterChange(f.key)}
               className={`relative rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-300 ${
                 active === f.key
                   ? 'bg-gradient-to-r from-blush-300 to-warmrose-300 text-white shadow-soft'
@@ -69,49 +75,75 @@ export default function Gallery() {
 
         <motion.div layout className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
-            {items.map((item) => (
-              <motion.article
-                key={item.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4, ease: 'easeOut' }}
-                onClick={() => setSelected(item)}
-                className="group relative cursor-pointer overflow-hidden rounded-2xl bg-white shadow-petal ring-1 ring-blush-100/70 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-soft-lg"
-              >
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.alt}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink-900/70 via-ink-900/10 to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-90" />
+            {items.map((item, index) => {
+              const isHiddenOnMobile = index >= 3 && !isExpanded;
+              return (
+                <motion.article
+                  key={item.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.4, ease: 'easeOut' }}
+                  onClick={() => setSelected(item)}
+                  className={`group relative cursor-pointer overflow-hidden rounded-2xl bg-white shadow-petal ring-1 ring-blush-100/70 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-soft-lg ${
+                    isHiddenOnMobile ? 'hidden sm:block' : 'block'
+                  }`}
+                >
+                  <div className="relative aspect-[4/5] overflow-hidden">
+                    <img
+                      src={item.image}
+                      alt={item.alt}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink-900/70 via-ink-900/10 to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-90" />
 
-                  <span className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/85 text-ink-700 opacity-0 shadow-soft backdrop-blur transition-all duration-300 group-hover:opacity-100">
-                    <Maximize2 className="h-4 w-4" />
-                  </span>
+                    <span className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/85 text-ink-700 opacity-0 shadow-soft backdrop-blur transition-all duration-300 group-hover:opacity-100">
+                      <Maximize2 className="h-4 w-4" />
+                    </span>
 
-                  <div className="absolute inset-x-0 bottom-0 p-5 text-white">
-                    <p className="text-[11px] font-medium uppercase tracking-wider text-blush-200">
-                      {item.category === 'anyatej'
-                        ? 'Anyatejes ékszer'
-                        : item.category === 'hajtincs'
-                          ? 'Hajas ékszer'
-                          : 'Kombinált ékszer'}
-                    </p>
-                    <h3 className="mt-1 font-serif text-xl leading-snug">{item.title}</h3>
+                    <div className="absolute inset-x-0 bottom-0 p-5 text-white">
+                      <p className="text-[11px] font-medium uppercase tracking-wider text-blush-200">
+                        {item.category === 'anyatej'
+                          ? 'Anyatejes ékszer'
+                          : item.category === 'hajtincs'
+                            ? 'Hajas ékszer'
+                            : 'Kombinált ékszer'}
+                      </p>
+                      <h3 className="mt-1 font-serif text-xl leading-snug">{item.title}</h3>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-2 px-5 py-4">
-                  <Heart className="h-4 w-4 shrink-0 text-blush-300" />
-                  <p className="text-sm leading-relaxed text-ink-600">{item.caption}</p>
-                </div>
-              </motion.article>
-            ))}
+                  <div className="flex items-center gap-2 px-5 py-4">
+                    <Heart className="h-4 w-4 shrink-0 text-blush-300" />
+                    <p className="text-sm leading-relaxed text-ink-600">{item.caption}</p>
+                  </div>
+                </motion.article>
+              );
+            })}
           </AnimatePresence>
         </motion.div>
+
+        {items.length > 3 && (
+          <div className="mt-8 flex justify-center sm:hidden">
+            <button
+              onClick={() => setIsExpanded((prev) => !prev)}
+              className="inline-flex items-center gap-2 rounded-full border border-blush-200 bg-white/90 px-6 py-2.5 text-sm font-medium text-ink-700 shadow-soft transition-all duration-300 hover:border-blush-300 hover:text-blush-500 hover:shadow-soft-lg active:scale-95"
+            >
+              {isExpanded ? (
+                <>
+                  Kevesebb mutatása
+                  <ChevronUp className="h-4 w-4 text-blush-400" />
+                </>
+              ) : (
+                <>
+                  Több mutatása
+                  <ChevronDown className="h-4 w-4 text-blush-400" />
+                </>
+              )}
+            </button>
+          </div>
+        )}
       </div>
 
       <Lightbox item={selected} onClose={() => setSelected(null)} />
