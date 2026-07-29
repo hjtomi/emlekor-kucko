@@ -26,22 +26,22 @@ This plan details technical improvements to elevate the **Gallery** component ae
 
 ## Implementation & Tracking Checklist
 
-- [ ] **Phase 1: Mobile Collapsed Cues & Dynamic Button Count**
-  - [ ] Add bottom gradient fade overlay on mobile when `!isExpanded` and `items.length > 3`.
-  - [ ] Update mobile button text to include remaining item count (`+N`).
+- [x] **Phase 1: Mobile Collapsed Cues & Dynamic Button Count**
+  - [x] Add bottom gradient fade overlay on mobile when `!isExpanded` and `items.length > 3`.
+  - [x] Update mobile button text to include remaining item count (`+N`).
 
-- [ ] **Phase 2: Card Glassmorphism & Image Skeleton Loading**
-  - [ ] Add loading skeleton background for images.
-  - [ ] Upgrade hover zoom icon button with glassmorphism styling (`backdrop-blur-md bg-white/70`).
+- [x] **Phase 2: Card Glassmorphism & Image Skeleton Loading**
+  - [x] Add loading skeleton background for images.
+  - [x] Upgrade hover zoom icon button with glassmorphism styling (`backdrop-blur-md bg-white/70`).
 
-- [ ] **Phase 3: Lightbox Controls & Body Scroll Lock**
-  - [ ] Implement `ArrowLeft` and `ArrowRight` keyboard navigation.
-  - [ ] Render on-screen Prev/Next buttons and position counter badge (`X / Y`).
-  - [ ] Implement body scroll lock on Lightbox open/close.
+- [x] **Phase 3: Lightbox Controls & Body Scroll Lock**
+  - [x] Implement `ArrowLeft` and `ArrowRight` keyboard navigation.
+  - [x] Render on-screen Prev/Next buttons and position counter badge (`X / Y`).
+  - [x] Implement body scroll lock on Lightbox open/close.
 
-- [ ] **Phase 4: Staggered Animations & Transition Polish**
-  - [ ] Add staggered reveal animation variants for grid items.
-  - [ ] Verify smooth layout animations when toggling expand/collapse.
+- [x] **Phase 4: Staggered Animations & Transition Polish**
+  - [x] Add staggered reveal animation variants for grid items.
+  - [x] Verify smooth layout animations when toggling expand/collapse.
 
 ---
 
