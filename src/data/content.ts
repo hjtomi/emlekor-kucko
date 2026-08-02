@@ -146,3 +146,45 @@ export const contactInfo = {
   instagram: 'https://instagram.com',
   facebook: 'https://facebook.com',
 };
+
+// PLACEHOLDER: Replace with Szabina-approved client quotes before public launch.
+export interface Testimonial {
+  id: string;
+  quote: string;
+  name: string;
+  location: string;
+  category?: string;
+}
+
+export const testimonials: Testimonial[] = [
+  {
+    id: 't1',
+    quote:
+      'Amikor megkaptam a medált, sírtam. Pontosan olyan lett, amilyennek elképzeltem – finom, diszkrét, és mintha egy darabka a kislányomból lenne velem minden nap.',
+    name: 'Kata',
+    location: 'Budapest',
+    category: 'Anyatejes medál',
+  },
+  {
+    id: 't2',
+    quote:
+      'Féltem elküldeni az első hajtincset, de Szabina végig nyugodt volt, mindent elmagyarázott. A gyűrű gyönyörű, és örökre megmarad az emlék.',
+    name: 'Eszter',
+    location: 'Debrecen',
+    category: 'Hajas gyűrű',
+  },
+  {
+    id: 't3',
+    quote:
+      'Ajándékba rendeltem anyukámnak – a csomagolás is gyönyörű volt. Látszik, hogy szívvel-lélekkel készül minden darab, nem csak egy ékszer.',
+    name: 'Anna',
+    location: 'Szeged',
+    category: 'Kombinált szett',
+  },
+];
+
+export const trustStats: { value: string; label: string }[] = [
+  { value: '100%', label: 'kézi munka' },
+  { value: '6+', label: 'éve emlékeket őrzök' },
+  { value: '✓', label: 'Diszkrét, biztonságos feldolgozás' },
+];

@@ -45,9 +45,9 @@ Navigation (`Header.tsx`, `Footer.tsx`) does **not** need new links unless we la
 
 ### Acceptance Criteria
 
-- [ ] Only one H2 remains in the Galéria section: “Korábbi alkotások”
-- [ ] Heading hierarchy is valid (one H2 per section, no skipped levels)
-- [ ] Vertical rhythm between intro, filters, and grid feels balanced on mobile and desktop
+- [x] Only one H2 remains in the Galéria section: “Korábbi alkotások”
+- [x] Heading hierarchy is valid (one H2 per section, no skipped levels)
+- [x] Vertical rhythm between intro, filters, and grid feels balanced on mobile and desktop
 
 ---
 
@@ -118,11 +118,11 @@ Start with **placeholder quotes** clearly marked in content (replace before laun
 
 ### Acceptance Criteria
 
-- [ ] New `Trust.tsx` component renders between Pricing and FAQ in `App.tsx`
-- [ ] Three testimonial cards with quote + attribution
-- [ ] Credibility stat row visible on all breakpoints
-- [ ] Section uses existing design tokens (blush/lavender/ink, Cormorant/serif headings)
-- [ ] Placeholder content documented for later replacement with real client-approved quotes
+- [x] New `Trust.tsx` component renders between Pricing and FAQ in `App.tsx`
+- [x] Three testimonial cards with quote + attribution
+- [x] Credibility stat row visible on all breakpoints
+- [x] Section uses existing design tokens (blush/lavender/ink, Cormorant/serif headings)
+- [x] Placeholder content documented for later replacement with real client-approved quotes
 
 ---
 
@@ -189,23 +189,23 @@ Copy should match Szabina’s warm, first-person tone where appropriate (“Gond
 ## Implementation & Tracking Checklist
 
 ### Phase 0: Content Prep
-- [ ] Draft 3 testimonial quotes + attributions (placeholder OK, mark for review)
-- [ ] Draft 3 trust stat labels (reuse Hero copy where possible)
+- [x] Draft 3 testimonial quotes + attributions (placeholder OK, mark for review)
+- [x] Draft 3 trust stat labels (reuse Hero copy where possible)
 - [ ] Draft 8 FAQ questions and answers in Hungarian
 - [ ] Szabina review: approve tone, facts (timelines, amounts, shipping)
 
 ### Phase 1: Gallery Heading Cleanup *(quick win)*
-- [ ] Remove “Kézimunkáink galériája” `<motion.h2>` from [Gallery.tsx](file:///d:/Coding/emlekor-kucko/src/components/Gallery.tsx)
-- [ ] Adjust spacing between `PetalDivider` and filter pills if needed
+- [x] Remove “Kézimunkáink galériája” `<motion.h2>` from [Gallery.tsx](file:///d:/Coding/emlekor-kucko/src/components/Gallery.tsx)
+- [x] Adjust spacing between `PetalDivider` and filter pills if needed
 - [ ] Visual check: mobile + desktop gallery header
 
 ### Phase 2: Trust & Social Proof Block
-- [ ] Add `Testimonial` type + `testimonials` + `trustStats` arrays to [content.ts](file:///d:/Coding/emlekor-kucko/src/data/content.ts)
-- [ ] Create [Trust.tsx](file:///d:/Coding/emlekor-kucko/src/components/Trust.tsx) with section header, testimonial grid, stat row
-- [ ] Register `<Trust />` in [App.tsx](file:///d:/Coding/emlekor-kucko/src/App.tsx) after `<Pricing />`, before FAQ
-- [ ] Apply Framer Motion entrance animations (consistent with About/Pricing)
-- [ ] Responsive pass: 1-col mobile, 3-col desktop for cards; stat row wraps cleanly
-- [ ] *(Optional)* Show Hero stat badges on mobile — skip if Trust stats are sufficient
+- [x] Add `Testimonial` type + `testimonials` + `trustStats` arrays to [content.ts](file:///d:/Coding/emlekor-kucko/src/data/content.ts)
+- [x] Create [Trust.tsx](file:///d:/Coding/emlekor-kucko/src/components/Trust.tsx) with section header, testimonial grid, stat row
+- [x] Register `<Trust />` in [App.tsx](file:///d:/Coding/emlekor-kucko/src/App.tsx) after `<Pricing />`, before FAQ
+- [x] Apply Framer Motion entrance animations (consistent with About/Pricing)
+- [x] Responsive pass: 1-col mobile, 3-col desktop for cards; stat row wraps cleanly
+- [x] *(Optional)* Show Hero stat badges on mobile — skip if Trust stats are sufficient
 
 ### Phase 3: FAQ Section
 - [ ] Add `FAQItem` type + `faqItems` array to [content.ts](file:///d:/Coding/emlekor-kucko/src/data/content.ts)

@@ -75,16 +75,6 @@ export default function Gallery() {
           <PetalDivider className="mt-6" />
         </motion.div>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6, delay: 0.08 }}
-          className="mt-3 font-cormorant text-5xl font-semibold tracking-tight text-ink-900 sm:text-6xl text-center"
-        >
-          Kézimunkáink galériája
-        </motion.h2>
-
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
