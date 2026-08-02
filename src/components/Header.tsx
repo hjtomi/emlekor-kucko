@@ -20,6 +20,21 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setOpen(false);
+    
+    // Allow state to update and menu exit animation to start, then scroll to section
+    setTimeout(() => {
+      const targetEl = document.querySelector(href);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth' });
+      } else if (href === '#hero') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }, 50);
+  };
+
   return (
     <motion.header
       initial={{ y: -80, opacity: 0 }}
@@ -27,16 +42,16 @@ export default function Header() {
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-white/85 backdrop-blur-md shadow-petal border-b border-blush-100/60'
+          ? 'glass-nav shadow-glass'
           : 'bg-transparent'
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
-        <a href="#hero" className="group flex items-center gap-2.5">
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blush-100 to-lavender-100 shadow-soft">
-            <Flower2 className="h-5 w-5 text-blush-400" strokeWidth={1.6} />
+        <a href="#hero" onClick={(e) => handleNavClick(e, '#hero')} className="group flex items-center gap-2.5">
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blush-100 via-champagne-100 to-lavender-100 shadow-soft ring-1 ring-blush-200/50 transition-transform duration-300 group-hover:scale-105">
+            <Flower2 className="h-5 w-5 text-blush-400 transition-transform duration-500 group-hover:rotate-12" strokeWidth={1.6} />
           </span>
-          <span className="font-serif text-xl tracking-wide text-ink-900 sm:text-2xl">
+          <span className="font-cormorant text-2xl font-semibold tracking-wide text-ink-900 sm:text-3xl">
             Emlékőr Kuckó
           </span>
         </a>
@@ -86,7 +101,7 @@ export default function Header() {
                 <a
                   key={l.href}
                   href={l.href}
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => handleNavClick(e, l.href)}
                   className="rounded-xl px-4 py-3 text-base font-medium text-ink-700 transition-colors hover:bg-blush-50 hover:text-blush-500"
                 >
                   {l.label}
@@ -94,7 +109,7 @@ export default function Header() {
               ))}
               <a
                 href="#kapcsolat"
-                onClick={() => setOpen(false)}
+                onClick={(e) => handleNavClick(e, '#kapcsolat')}
                 className="mt-2 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blush-300 to-warmrose-300 px-5 py-3 text-sm font-semibold text-white shadow-soft"
               >
                 Beszélgessünk

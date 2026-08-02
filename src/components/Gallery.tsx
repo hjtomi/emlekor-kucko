@@ -75,6 +75,16 @@ export default function Gallery() {
           <PetalDivider className="mt-6" />
         </motion.div>
 
+        <motion.h2
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6, delay: 0.08 }}
+          className="mt-3 font-cormorant text-5xl font-semibold tracking-tight text-ink-900 sm:text-6xl text-center"
+        >
+          Kézimunkáink galériája
+        </motion.h2>
+
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -178,11 +188,11 @@ function GalleryCard({
       animate="visible"
       exit={{ opacity: 0, scale: 0.9 }}
       onClick={onClick}
-      className={`group relative cursor-pointer overflow-hidden rounded-2xl bg-white shadow-petal ring-1 ring-blush-100/70 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-soft-lg ${isHiddenOnMobile ? 'hidden sm:block' : 'block'
+      className={`group relative cursor-pointer overflow-hidden rounded-2xl bg-white shadow-petal ring-1 ring-blush-200/50 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-glow hover:ring-blush-300 ${isHiddenOnMobile ? 'hidden sm:block' : 'block'
         }`}
     >
-      <div className="relative aspect-[4/5] overflow-hidden bg-blush-100/60">
-        {!isLoaded && <div className="absolute inset-0 animate-pulse bg-blush-100/80" />}
+      <div className="relative aspect-[4/5] overflow-hidden bg-blush-50">
+        {!isLoaded && <div className="absolute inset-0 shimmer-mask bg-blush-100/60" />}
         <img
           src={item.image}
           alt={item.alt}
@@ -265,7 +275,7 @@ function Lightbox({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-ink-900/70 p-4 backdrop-blur-sm"
+          className="fixed inset-x-0 inset-y-0 z-[60] flex items-center justify-center bg-ink-900/80 p-4 backdrop-blur-xl"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.92, y: 20 }}
@@ -273,11 +283,11 @@ function Lightbox({
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
             onClick={(e) => e.stopPropagation()}
-            className="relative grid w-full max-w-4xl overflow-hidden rounded-3xl bg-white shadow-soft-lg lg:grid-cols-2"
+            className="relative grid w-full max-w-4xl overflow-hidden rounded-3xl bg-white shadow-glass lg:grid-cols-2 ring-1 ring-blush-100"
           >
             {/* Top Bar Controls */}
             <div className="absolute left-4 top-4 z-10 flex items-center gap-2">
-              <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-ink-700 shadow-soft backdrop-blur-md">
+              <span className="rounded-full bg-white/90 px-3.5 py-1 text-xs font-semibold text-ink-700 shadow-glass backdrop-blur-md">
                 {currentIndex + 1} / {totalCount}
               </span>
             </div>
@@ -285,7 +295,7 @@ function Lightbox({
             <button
               onClick={onClose}
               aria-label="Bezárás"
-              className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-ink-800 shadow-soft backdrop-blur-md transition-colors hover:bg-blush-100 hover:text-blush-500"
+              className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-ink-800 shadow-glass backdrop-blur-md transition-colors hover:bg-blush-100 hover:text-blush-500"
             >
               <X className="h-5 w-5" />
             </button>
@@ -299,7 +309,7 @@ function Lightbox({
                     onPrev();
                   }}
                   aria-label="Előző kép"
-                  className="absolute left-3 top-1/2 z-20 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white/80 text-ink-800 shadow-soft backdrop-blur-md transition-all hover:bg-white hover:scale-110 active:scale-95"
+                  className="absolute left-3 top-1/2 z-20 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white/80 text-ink-800 shadow-glass backdrop-blur-md transition-all hover:bg-white hover:scale-110 active:scale-95"
                 >
                   <ChevronLeft className="h-6 w-6" />
                 </button>
@@ -309,7 +319,7 @@ function Lightbox({
                     onNext();
                   }}
                   aria-label="Következő kép"
-                  className="absolute right-3 top-1/2 z-20 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white/80 text-ink-800 shadow-soft backdrop-blur-md transition-all hover:bg-white hover:scale-110 active:scale-95 lg:right-auto lg:left-[calc(50%-1.25rem)]"
+                  className="absolute right-3 top-1/2 z-20 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white/80 text-ink-800 shadow-glass backdrop-blur-md transition-all hover:bg-white hover:scale-110 active:scale-95 lg:right-auto lg:left-[calc(50%-1.25rem)]"
                 >
                   <ChevronRight className="h-6 w-6" />
                 </button>
@@ -322,14 +332,14 @@ function Lightbox({
             </div>
 
             <div className="flex flex-col justify-center gap-5 p-7 sm:p-10">
-              <span className="w-fit rounded-full bg-blush-100 px-3 py-1 text-[11px] font-medium uppercase tracking-wider text-blush-500">
+              <span className="w-fit rounded-full bg-blush-100/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-blush-500 border border-blush-200/50">
                 {item.category === 'anyatej'
                   ? 'Anyatejes ékszer'
                   : item.category === 'hajtincs'
                     ? 'Hajas ékszer'
                     : 'Kombinált ékszer'}
               </span>
-              <h3 className="font-serif text-2xl leading-snug text-ink-900 sm:text-3xl">
+              <h3 className="font-cormorant text-3xl font-semibold leading-snug text-ink-900 sm:text-4xl">
                 {item.title}
               </h3>
               <p className="flex items-start gap-2 text-base leading-relaxed text-ink-600">

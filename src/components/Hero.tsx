@@ -13,22 +13,22 @@ export default function Hero() {
         className="pointer-events-none absolute -right-20 bottom-10 h-72 w-72 opacity-60 [transform:rotate(140deg)]"
         colors={['#D8B4FE', '#FDA4AF', '#A7F3D0']}
       />
-      <FloatingPetal className="absolute left-[12%] top-[30%] h-6 w-6" color="#FBCFE8" />
+      <FloatingPetal className="pointer-events-none absolute left-[12%] top-[30%] h-6 w-6" color="#FBCFE8" />
       <FloatingPetal
-        className="absolute right-[18%] top-[55%] h-5 w-5"
+        className="pointer-events-none absolute right-[18%] top-[55%] h-5 w-5"
         color="#F9A8D4"
       />
-      <FloatingPetal className="absolute left-[60%] top-[20%] h-4 w-4" color="#E9D5FF" />
+      <FloatingPetal className="pointer-events-none absolute left-[60%] top-[20%] h-4 w-4" color="#E9D5FF" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-[1.05fr_0.95fr]">
         <div className="text-center lg:text-left">
           <motion.span
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 rounded-full border border-blush-200 bg-white/70 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-blush-500 shadow-petal"
+            className="inline-flex items-center gap-2 rounded-full border border-blush-200/60 bg-white/80 px-4.5 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-blush-500 shadow-glass backdrop-blur-md"
           >
-            <Sparkles className="h-3.5 w-3.5" />
+            <Sparkles className="h-3.5 w-3.5 text-blush-400" />
             Kézzel készült emlékőrző ékszerek
           </motion.span>
 
@@ -36,7 +36,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.08 }}
-            className="mt-6 font-serif text-5xl leading-[1.05] tracking-tight text-ink-900 sm:text-6xl lg:text-7xl"
+            className="mt-6 font-cormorant text-6xl font-semibold leading-[1.02] tracking-tight text-ink-900 sm:text-7xl lg:text-8xl"
           >
             Emlékőr Kuckó
           </motion.h1>
@@ -45,7 +45,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.16 }}
-            className="mt-5 font-serif text-xl italic text-blush-400 sm:text-2xl"
+            className="mt-5 font-cormorant text-2xl italic text-blush-500 sm:text-3xl"
           >
             Egyedi gyanta ékszerek anyatejből és hajból
           </motion.p>
@@ -70,7 +70,7 @@ export default function Hero() {
           >
             <a
               href="#kapcsolat"
-              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blush-300 to-warmrose-300 px-7 py-3.5 text-sm font-semibold text-white shadow-soft transition-all duration-300 hover:shadow-soft-lg hover:scale-[1.03]"
+              className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blush-300 to-warmrose-300 px-7 py-3.5 text-sm font-semibold text-white shadow-soft transition-all duration-300 hover:shadow-soft-lg hover:scale-[1.03] active:scale-95 sm:w-auto"
             >
               <HeartHandshake className="h-4 w-4" />
               Vedd fel velem a kapcsolatot
@@ -78,7 +78,7 @@ export default function Hero() {
             </a>
             <a
               href="#galeria"
-              className="inline-flex items-center gap-2 rounded-full border border-blush-200 bg-white/70 px-6 py-3.5 text-sm font-semibold text-ink-800 transition-all duration-300 hover:bg-white hover:shadow-soft"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-blush-200 bg-white/80 px-6 py-3.5 text-sm font-semibold text-ink-800 transition-all duration-300 hover:bg-white hover:shadow-soft active:scale-95 sm:w-auto"
             >
               Galéria megtekintése
             </a>
@@ -109,20 +109,20 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
-            className="absolute -left-4 top-10 hidden rounded-2xl bg-white/90 px-4 py-3 shadow-soft-lg backdrop-blur sm:block"
+            className="absolute -left-4 top-10 hidden rounded-2xl glass-card px-5 py-3.5 shadow-glass sm:block"
           >
-            <p className="font-serif text-2xl text-blush-400">100%</p>
-            <p className="text-xs text-ink-600">kézi munka</p>
+            <p className="font-cormorant text-3xl font-semibold text-blush-500">100%</p>
+            <p className="text-xs font-medium uppercase tracking-wider text-ink-600">kézi munka</p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.62 }}
-            className="absolute -right-4 bottom-16 hidden rounded-2xl bg-white/90 px-4 py-3 shadow-soft-lg backdrop-blur sm:block"
+            className="absolute -right-4 bottom-16 hidden rounded-2xl glass-card px-5 py-3.5 shadow-glass sm:block"
           >
-            <p className="font-serif text-2xl text-lavender-300">6+</p>
-            <p className="text-xs text-ink-600">éve emlékeket őrzök</p>
+            <p className="font-cormorant text-3xl font-semibold text-blush-500">6+</p>
+            <p className="text-xs font-medium uppercase tracking-wider text-ink-600">éve emlékeket őrzök</p>
           </motion.div>
         </motion.div>
       </div>

@@ -40,10 +40,10 @@ export default function Pricing() {
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <span className="text-xs font-semibold uppercase tracking-[0.22em] text-blush-400">
+          <span className="inline-flex items-center gap-2 rounded-full border border-blush-200/60 bg-blush-50/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-blush-500 shadow-glass">
             Tájékoztató árak
           </span>
-          <h2 className="mt-3 font-serif text-4xl text-ink-900 sm:text-5xl">
+          <h2 className="mt-4 font-cormorant text-5xl font-semibold tracking-tight text-ink-900 sm:text-6xl">
             Miből épül az emlék?
           </h2>
           <PetalDivider className="mt-6" />
@@ -52,7 +52,7 @@ export default function Pricing() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="mx-auto mt-6 flex max-w-2xl items-start gap-3 rounded-2xl border border-blush-100 bg-blush-50/60 px-5 py-4 text-left shadow-petal"
+            className="mx-auto mt-6 flex max-w-2xl items-start gap-3 rounded-2xl glass-card px-5 py-4 text-left shadow-glass"
           >
             <Tag className="mt-0.5 h-5 w-5 shrink-0 text-blush-400" />
             <p className="text-sm leading-relaxed text-ink-700">
@@ -85,7 +85,7 @@ export default function Pricing() {
                 )}
 
                 <div className="flex flex-col gap-1.5">
-                  <h3 className="font-serif text-2xl text-ink-900">{tier.name}</h3>
+                  <h3 className="font-cormorant text-3xl font-semibold text-ink-900">{tier.name}</h3>
                   <p className="text-sm leading-relaxed text-ink-600">{tier.blurb}</p>
                 </div>
 
@@ -93,7 +93,7 @@ export default function Pricing() {
                   <span className="text-xs font-medium uppercase tracking-wider text-ink-500">
                     kezdőár
                   </span>
-                  <span className={`font-serif text-4xl ${accent.price}`}>
+                  <span className={`font-cormorant text-5xl font-semibold ${accent.price}`}>
                     {formatHuf(tier.priceFrom)}
                   </span>
                   <span className="text-sm font-medium text-ink-500">Ft-tól</span>
