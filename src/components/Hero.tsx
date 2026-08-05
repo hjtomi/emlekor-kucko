@@ -97,7 +97,7 @@ export default function Hero() {
         >
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] rounded-tl-[5rem] rounded-br-[5rem] bg-gradient-to-br from-blush-100 via-white to-lavender-100 shadow-soft-lg ring-1 ring-white/60">
             <img
-              src="https://images.pexels.com/photos/8895530/pexels-photo-8895530.jpeg?auto=compress&cs=tinysrgb&w=1200"
+              src="images/hero.jfif"
               alt="Kézzel készített gyanta medál, anyatejet és arany füstöt őrizve"
               className="h-full w-full object-cover"
               loading="eager"

@@ -16,7 +16,7 @@ export const galleryItems: GalleryItem[] = [
     caption: 'Az első csepp anyatej, arany füsttel ölelve – egy életre szóló emlék.',
     category: 'anyatej',
     image:
-      'https://images.pexels.com/photos/8895530/pexels-photo-8895530.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      'images/gallery/gallery-01.jfif',
     alt: 'Gyanta medál anyatej és arany füstlemezzel',
   },
   {
@@ -25,7 +25,7 @@ export const galleryItems: GalleryItem[] = [
     caption: 'Egy apró tincs, örökre befoglalva – a legfinomabb kéz nyomán.',
     category: 'hajtincs',
     image:
-      'https://images.pexels.com/photos/8895651/pexels-photo-8895651.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      'images/gallery/gallery-02.jfif',
     alt: 'Gyanta gyűrű gyermekhaj tincsével',
   },
   {
@@ -34,7 +34,7 @@ export const galleryItems: GalleryItem[] = [
     caption: 'Gyöngyszerű anyatej csepp, antik ezüst láncon.',
     category: 'anyatej',
     image:
-      'https://images.pexels.com/photos/8929952/pexels-photo-8929952.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      'images/gallery/gallery-03.jfif',
     alt: 'Anyatej gyöngy nyaklánc',
   },
   {
@@ -43,7 +43,7 @@ export const galleryItems: GalleryItem[] = [
     caption: 'Csecsemőhaj és szárított szirmok – a természet és az emlék együtt.',
     category: 'kombinált',
     image:
-      'https://images.pexels.com/photos/8895536/pexels-photo-8895536.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      'images/gallery/gallery-04.jfif',
     alt: 'Gyanta medál hajjal és szárított virágszirommal',
   },
   {
@@ -52,7 +52,7 @@ export const galleryItems: GalleryItem[] = [
     caption: 'Anyatej gyöngyök arany füsttel – diszkrét, mégis ünnepi ékszer.',
     category: 'anyatej',
     image:
-      'https://images.pexels.com/photos/8895541/pexels-photo-8895541.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      'images/gallery/gallery-05.jfif',
     alt: 'Gyanta karkötő anyatejjel és arany füsttel',
   },
   {
@@ -61,7 +61,7 @@ export const galleryItems: GalleryItem[] = [
     caption: 'Az első hajtincs két apró cseppben – anyának és gyermeknek.',
     category: 'hajtincs',
     image:
-      'https://images.pexels.com/photos/8895648/pexels-photo-8895648.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      'images/gallery/gallery-06.jfif',
     alt: 'Gyanta fülbevaló hajtincsével',
   },
   {
@@ -70,7 +70,7 @@ export const galleryItems: GalleryItem[] = [
     caption: 'Anyatej gyöngy és hajtincs egy medálban – a teljes emlék együtt.',
     category: 'kombinált',
     image:
-      'https://images.pexels.com/photos/8929955/pexels-photo-8929955.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      'images/gallery/gallery-07.jfif',
     alt: 'Kombinált gyanta ékszersett anyatejjel és hajjal',
   },
   {
@@ -79,7 +79,7 @@ export const galleryItems: GalleryItem[] = [
     caption: 'Hajtincs és szárított levendula – nyugalom és emlék együtt.',
     category: 'kombinált',
     image:
-      'https://images.pexels.com/photos/8895545/pexels-photo-8895545.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      'images/gallery/gallery-08.jfif',
     alt: 'Gyanta medál hajtincsével és levendulával',
   },
 ];
@@ -143,8 +143,8 @@ export const contactInfo = {
   email: 'hello@emlekor-kucko.hu',
   phone: '+36 30 123 4567',
   location: 'Magyarország',
-  instagram: 'https://instagram.com',
-  facebook: 'https://facebook.com',
+  instagram: 'https://www.instagram.com/emlekor_kucko.simonszabina/',
+  facebook: 'https://www.facebook.com/profile.php?id=100091594750333',
 };
 
 // PLACEHOLDER: Replace with Szabina-approved client quotes before public launch.
