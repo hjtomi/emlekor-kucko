@@ -178,11 +178,11 @@ Copy should match Szabina’s warm, first-person tone where appropriate (“Gond
 
 ### Acceptance Criteria
 
-- [ ] New `FAQ.tsx` component with accessible accordion behavior
-- [ ] 8 Q&A items driven from `content.ts`
-- [ ] Section placed between Trust and Contact in `App.tsx`
-- [ ] CTA link to `#kapcsolat` at bottom of section
-- [ ] Keyboard and screen-reader friendly (focus visible on triggers, `aria-expanded` toggles)
+- [x] New `FAQ.tsx` component with accessible accordion behavior
+- [x] 8 Q&A items driven from `content.ts`
+- [x] Section placed between Trust and Contact in `App.tsx`
+- [x] CTA link to `#kapcsolat` at bottom of section
+- [x] Keyboard and screen-reader friendly (focus visible on triggers, `aria-expanded` toggles)
 
 ---
 
@@ -191,7 +191,7 @@ Copy should match Szabina’s warm, first-person tone where appropriate (“Gond
 ### Phase 0: Content Prep
 - [x] Draft 3 testimonial quotes + attributions (placeholder OK, mark for review)
 - [x] Draft 3 trust stat labels (reuse Hero copy where possible)
-- [ ] Draft 8 FAQ questions and answers in Hungarian
+- [x] Draft 8 FAQ questions and answers in Hungarian
 - [ ] Szabina review: approve tone, facts (timelines, amounts, shipping)
 
 ### Phase 1: Gallery Heading Cleanup *(quick win)*
@@ -208,18 +208,18 @@ Copy should match Szabina’s warm, first-person tone where appropriate (“Gond
 - [x] *(Optional)* Show Hero stat badges on mobile — skip if Trust stats are sufficient
 
 ### Phase 3: FAQ Section
-- [ ] Add `FAQItem` type + `faqItems` array to [content.ts](file:///d:/Coding/emlekor-kucko/src/data/content.ts)
-- [ ] Create [FAQ.tsx](file:///d:/Coding/emlekor-kucko/src/components/FAQ.tsx) with accordion UI
-- [ ] Implement open/close state (single-open recommended)
-- [ ] Register `<FAQ />` in [App.tsx](file:///d:/Coding/emlekor-kucko/src/App.tsx) after `<Trust />`, before `<Contact />`
-- [ ] Add bottom CTA linking to `#kapcsolat`
-- [ ] Accessibility pass: focus states, ARIA attributes, keyboard navigation
+- [x] Add `FAQItem` type + `faqItems` array to [content.ts](file:///d:/Coding/emlekor-kucko/src/data/content.ts)
+- [x] Create [FAQ.tsx](file:///d:/Coding/emlekor-kucko/src/components/FAQ.tsx) with accordion UI
+- [x] Implement open/close state (single-open recommended)
+- [x] Register `<FAQ />` in [App.tsx](file:///d:/Coding/emlekor-kucko/src/App.tsx) after `<Trust />`, before `<Contact />`
+- [x] Add bottom CTA linking to `#kapcsolat`
+- [x] Accessibility pass: focus states, ARIA attributes, keyboard navigation
 
 ### Phase 4: Integration & Polish
-- [ ] Verify full-page scroll flow: Pricing → Trust → FAQ → Contact feels cohesive
-- [ ] Check background alternation between sections (no two identical bands adjacent)
-- [ ] Confirm heading font convention matches site (Cormorant/serif per existing sections)
-- [ ] Run `npm run lint` and `npm run typecheck`
+- [x] Verify full-page scroll flow: Pricing → Trust → FAQ → Contact feels cohesive
+- [x] Check background alternation between sections (no two identical bands adjacent)
+- [x] Confirm heading font convention matches site (Cormorant/serif per existing sections)
+- [x] Run `npm run lint` and `npm run typecheck`
 - [ ] Replace placeholder testimonials with approved real quotes before public launch
 
 ---

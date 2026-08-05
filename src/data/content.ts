@@ -188,3 +188,67 @@ export const trustStats: { value: string; label: string }[] = [
   { value: '6+', label: 'éve emlékeket őrzök' },
   { value: '✓', label: 'Diszkrét, biztonságos feldolgozás' },
 ];
+
+// PLACEHOLDER facts (timelines, amounts, shipping): confirm with Szabina before public launch.
+export interface FAQItem {
+  id: string;
+  question: string;
+  answer: string;
+  bullets?: string[];
+}
+
+export const faqItems: FAQItem[] = [
+  {
+    id: 'faq1',
+    question: 'Hogyan küldhetem el az anyatejet vagy a hajtincset?',
+    answer:
+      'A mintát diszkrét, jól záró csomagolásban küldheted el postán vagy futárral. A részletes útmutatót a kapcsolatfelvétel után elküldöm – mit jelölj a csomagon, hogyan tartsd hűvösen az anyatejet, és hogyan óvd a hajtincset. Gondosan kezelem minden küldeményt, amint megérkezik.',
+  },
+  {
+    id: 'faq2',
+    question: 'Mennyi anyag szükséges egy ékszerhez?',
+    answer:
+      'Kevesebb is elég, mint sokan gondolják – a pontos mennyiség a formától függ. Tájékoztatóan:',
+    bullets: [
+      'Medál: néhány csepp anyatej vagy egy apró hajtincs',
+      'Gyűrű: hasonlóan kevés minta, a mérettől függően',
+      'Nyaklánc / több darab: egyeztetünk, hogy mindenhova jusson',
+    ],
+  },
+  {
+    id: 'faq3',
+    question: 'Mennyi idő az elkészítés?',
+    answer:
+      'Először egyeztetünk az elképzelésedről, majd a minta megérkezése után általában 2–4 hét az elkészítés. Ünnepi időszakban vagy összetettebb daraboknál ez hosszabb lehet – a várható időpontot mindig előre megbeszéljük.',
+  },
+  {
+    id: 'faq4',
+    question: 'Biztonságos és higiénikus a feldolgozás?',
+    answer:
+      'Igen. A mintádat tisztelettel, tiszta munkaterületen, elkülönítve kezelem – ahogy azt én is elvárnám, ha a saját emlékemet bíznám másra. Minden lépést gondosan dokumentálok magamnak, hogy biztosan a te emlékeidből készüljön az ékszer.',
+  },
+  {
+    id: 'faq5',
+    question: 'Egyedi az ékszer, vagy van sablon?',
+    answer:
+      'Minden darab egyedi. A galéria inspiráció: abból kiindulva közösen alakítjuk ki a formát, a színeket és a részleteket. Két egyforma ékszer sosem készül – a tied a te történetedre születik.',
+  },
+  {
+    id: 'faq6',
+    question: 'Milyen formákat és anyagokat választhatok?',
+    answer:
+      'Gyanta alapra dolgozom, és választhatsz arany- vagy ezüstfüstöt, szárított virágszirmokat, valamint klasszikus vagy egyedi formákat. A tájékoztató áraknál (Alap, Prémium, Szett) látod, mi jár általában az egyes szintekhez – a pontos összeállítást a konzultáción rögzítjük.',
+  },
+  {
+    id: 'faq7',
+    question: 'Mennyibe kerül egy ékszer?',
+    answer:
+      'A weboldalon tájékoztató kezdőárakat találsz. Mivel minden darab személyre szabott, a végleges árat a konzultáció után tudom megmondani – anyag, forma és csomagolás alapján. Nincs rejtett költség: amit megbeszélünk, az lesz az ár.',
+  },
+  {
+    id: 'faq8',
+    question: 'Tudok ajándékba rendelni?',
+    answer:
+      'Igen, szívesen. A Prémium és Szett kategóriákban dísz- vagy prémium ajándékcsomagolás is kérhető. Ha meglepetésnek szánod, a kommunikációt és a szállítást diszkréten intézzük – a címzettnek nem derül ki előre, mi érkezik.',
+  },
+];

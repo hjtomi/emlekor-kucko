@@ -1,0 +1,4 @@
+BUGOK:
+Telefonos nézetben a HERO képnél nincsenek ott a kis címkék, hogy "100% kézimunka", "6+ éve emlékeket őrzök"
+A bemutatkozásnál a kép alati címke kettő sort is elfoglal miközben simán kiférne egy sorban is
+Galériában a kevesebb mutatása megnyomásakor a nézet nem görget vissza a galéria tetejére

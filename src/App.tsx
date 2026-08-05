@@ -4,6 +4,7 @@ import About from './components/About';
 import Gallery from './components/Gallery';
 import Pricing from './components/Pricing';
 import Trust from './components/Trust';
+import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -17,6 +18,7 @@ export default function App() {
         <Gallery />
         <Pricing />
         <Trust />
+        <FAQ />
         <Contact />
       </main>
       <Footer />
