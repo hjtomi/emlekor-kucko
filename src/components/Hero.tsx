@@ -20,7 +20,7 @@ export default function Hero() {
       />
       <FloatingPetal className="pointer-events-none absolute left-[60%] top-[20%] h-4 w-4" color="#EDE4D8" />
 
-      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-[1fr_1.1fr]">
         <div className="text-center lg:text-left">
           <motion.span
             initial={{ opacity: 0, y: 16 }}
@@ -92,10 +92,10 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-          className="relative mx-auto flex w-full max-w-sm items-center justify-center lg:max-w-md"
+          className="relative mx-auto flex w-full max-w-md items-center justify-center sm:max-w-lg lg:max-w-xl"
         >
           <img
-            src="/images/Logo.png"
+            src="/images/LogoNewer.png"
             alt="Emlékőr kuckó – Simon Szabina egyedi gyanta ékszerei"
             className="h-auto w-full drop-shadow-sm"
             loading="eager"
