@@ -135,14 +135,14 @@ Optional later (out of scope for this plan): second process photo mid-story; sti
 
 ## Acceptance Criteria
 
-- [ ] Intro + portrait feel balanced on desktop (no tall empty gap next to a short image).
-- [ ] Long bio is not in the side column next to the portrait.
-- [ ] Story is easy to scan via subheadings.
-- [ ] Closing line reads as a pull-quote, distinct from body copy.
-- [ ] Value cards sit with the intro beat, not buried under the essay.
-- [ ] `#rolam` still works from header/footer.
-- [ ] Mobile stack order is logical and readable.
-- [ ] Motion and floral accents remain consistent with the rest of the site.
+- [x] Intro + portrait feel balanced on desktop (no tall empty gap next to a short image).
+- [x] Long bio is not in the side column next to the portrait.
+- [x] Story is easy to scan via subheadings.
+- [x] Closing line reads as a pull-quote, distinct from body copy.
+- [x] Value cards sit with the intro beat, not buried under the essay.
+- [x] `#rolam` still works from header/footer.
+- [x] Mobile stack order is logical and readable.
+- [x] Motion and floral accents remain consistent with the rest of the site.
 
 ---
 

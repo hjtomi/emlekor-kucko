@@ -47,7 +47,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.16 }}
             className="mt-5 font-cormorant text-2xl italic text-blush-500 sm:text-3xl"
           >
-            Egyedi gyanta ékszerek anyatejből és hajból
+            Simon Szabina egyedi gyanta ékszerei Anyatejből és bármely korosztáy hajából
           </motion.p>
 
           <motion.p
@@ -56,10 +56,9 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.24 }}
             className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-ink-700 lg:mx-0 sm:text-lg"
           >
-            Van néhány pillanat, amit nem akarunk elfelejteni – az első csepp
-            anyatej, egy apró hajtincs, egy csecsemő legfinomabb emléke. Ezeket
-            a kincseket gondos kézzel, gyantába foglalva időtlen ékszerré
-            alakítom, hogy örökre veled maradhassanak.
+            Vannak pillanatok amiket szeretnénk örökre megőrizni. Ezek az emlékőr ékszerek sokkal többről szólnak, mint ami kívülről látszik, hiszen a te történeted van benne.
+            <br /><br />
+            Egy csepp anyatej, köldök csonk, vagy féltve őrzött hajszálak ékszerbe zárva.
           </motion.p>
 
           <motion.div
@@ -93,37 +92,14 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-          className="relative mx-auto w-full max-w-md"
+          className="relative mx-auto flex w-full max-w-sm items-center justify-center lg:max-w-md"
         >
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] rounded-tl-[5rem] rounded-br-[5rem] bg-gradient-to-br from-blush-100 via-white to-lavender-100 shadow-soft-lg ring-1 ring-white/60">
-            <img
-              src="images/hero.jfif"
-              alt="Kézzel készített gyanta medál, anyatejet és arany füstöt őrizve"
-              className="h-full w-full object-cover"
-              loading="eager"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-blush-100/40 via-transparent to-white/10" />
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
-            className="absolute -left-4 top-10 hidden rounded-2xl glass-card px-5 py-3.5 shadow-glass sm:block"
-          >
-            <p className="font-cormorant text-3xl font-semibold text-blush-500">100%</p>
-            <p className="text-xs font-medium uppercase tracking-wider text-ink-600">kézi munka</p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.62 }}
-            className="absolute -right-4 bottom-16 hidden rounded-2xl glass-card px-5 py-3.5 shadow-glass sm:block"
-          >
-            <p className="font-cormorant text-3xl font-semibold text-blush-500">6+</p>
-            <p className="text-xs font-medium uppercase tracking-wider text-ink-600">éve emlékeket őrzök</p>
-          </motion.div>
+          <img
+            src="/images/Logo.png"
+            alt="Emlékőr kuckó – Simon Szabina egyedi gyanta ékszerei"
+            className="h-auto w-full drop-shadow-sm"
+            loading="eager"
+          />
         </motion.div>
       </div>
     </section>
