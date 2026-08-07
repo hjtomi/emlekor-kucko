@@ -63,11 +63,11 @@ const CLOSING_QUOTE =
 
 export default function About() {
   return (
-    <section id="rolam" className="relative overflow-hidden bg-white py-24 sm:py-32">
-      <CornerBlossom className="pointer-events-none absolute -right-24 -top-16 h-80 w-80 opacity-50" color="#FBCFE8" />
+    <section id="rolam" className="relative overflow-hidden bg-cream-50 bg-watercolor-edge py-24 sm:py-32">
+      <CornerBlossom className="pointer-events-none absolute -right-24 -top-16 h-80 w-80 opacity-35" color="#E8D4CE" />
       <CornerBlossom
-        className="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 opacity-40 [transform:rotate(180deg)]"
-        color="#E9D5FF"
+        className="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 opacity-30 [transform:rotate(180deg)]"
+        color="#EDE4D8"
       />
 
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -99,18 +99,18 @@ export default function About() {
             transition={{ duration: 0.7, ease: 'easeOut' }}
             className="relative mx-auto w-full max-w-sm lg:max-w-none"
           >
-            <div className="absolute -inset-3 rounded-[2.5rem] bg-gradient-to-br from-blush-100 via-lavender-100 to-sage-100 opacity-80 blur-[2px]" />
-            <div className="absolute -inset-1 rounded-[2.2rem] bg-gradient-to-tr from-blush-200 to-lavender-200 opacity-60" />
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-soft-lg ring-1 ring-white/70">
+            <div className="absolute -inset-3 rounded-[2.5rem] bg-gradient-to-br from-blush-100 via-cream-200 to-champagne-200 opacity-80 blur-[2px]" />
+            <div className="absolute -inset-1 rounded-[2.2rem] bg-gradient-to-tr from-blush-200 to-cream-300 opacity-60" />
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] shadow-soft-lg ring-1 ring-cream-50/70">
               <img
                 src="/images/Szabina.jpg"
                 alt="Simon Szabina, az Emlékőr Kuckó alapítója, miközben egy gyanta ékszert készít"
                 className="h-full w-full object-cover"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-blush-100/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-cream-200/30 to-transparent" />
             </div>
-            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white px-5 py-2.5 text-xs font-medium text-ink-700 shadow-soft-lg">
+            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-cream-50 px-5 py-2.5 text-xs font-medium text-ink-700 shadow-soft-lg">
               Emlékőr Kuckó · alapító
             </div>
           </motion.div>
@@ -136,9 +136,9 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="rounded-2xl border border-blush-100 bg-blush-50/60 p-5 text-center shadow-petal transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-soft"
+              className="rounded-2xl border border-blush-100 bg-cream-100/70 p-5 text-center shadow-petal transition-all duration-300 hover:-translate-y-1 hover:bg-cream-50 hover:shadow-soft"
             >
-              <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-blush-100 to-lavender-100">
+              <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-blush-100 to-cream-200">
                 <v.icon className="h-5 w-5 text-blush-400" strokeWidth={1.6} />
               </span>
               <h3 className="mt-3 font-serif text-lg text-ink-900">{v.title}</h3>

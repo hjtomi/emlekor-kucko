@@ -113,7 +113,7 @@ export default function Contact() {
                     name="material"
                     required
                     defaultValue=""
-                    className="rounded-xl border border-blush-200 bg-blush-50/40 px-4 py-3 text-sm text-ink-800 outline-none transition-all focus:border-blush-300 focus:bg-white focus:ring-2 focus:ring-blush-200/60"
+                    className="rounded-xl border border-blush-200 bg-cream-100/40 px-4 py-3 text-sm text-ink-800 outline-none transition-all focus:border-blush-300 focus:bg-white focus:ring-2 focus:ring-blush-200/60"
                   >
                     <option value="" disabled>Válassz egyet…</option>
                     {MATERIAL_OPTIONS.map((o) => (
@@ -132,13 +132,13 @@ export default function Contact() {
                   name="message"
                   rows={4}
                   placeholder="Mesélj arról, milyen emléket szeretnél megőrizni..."
-                  className="resize-none rounded-xl border border-blush-200 bg-blush-50/40 px-4 py-3 text-sm text-ink-800 outline-none transition-all placeholder:text-ink-600/60 focus:border-blush-300 focus:bg-white focus:ring-2 focus:ring-blush-200/60"
+                  className="resize-none rounded-xl border border-blush-200 bg-cream-100/40 px-4 py-3 text-sm text-ink-800 outline-none transition-all placeholder:text-ink-600/60 focus:border-blush-300 focus:bg-white focus:ring-2 focus:ring-blush-200/60"
                 />
               </div>
 
               <button
                 type="submit"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blush-300 to-warmrose-300 px-7 py-3.5 text-sm font-semibold text-white shadow-soft transition-all duration-300 hover:shadow-soft-lg hover:scale-[1.02]"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blush-400 to-warmrose-400 px-7 py-3.5 text-sm font-semibold text-white shadow-soft transition-all duration-300 hover:shadow-soft-lg hover:scale-[1.02]"
               >
                 <Send className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 Üzenet küldése
@@ -163,7 +163,7 @@ function ContactRow({
   href?: string;
 }) {
   const inner = (
-    <div className="flex items-center gap-3.5 rounded-xl px-2 py-2 transition-colors hover:bg-blush-50/60">
+    <div className="flex items-center gap-3.5 rounded-xl px-2 py-2 transition-colors hover:bg-cream-100/60">
       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blush-100 text-blush-400">
         <Icon className="h-4 w-4" />
       </span>
@@ -200,7 +200,7 @@ function Field({
         type={type}
         required={required}
         placeholder={placeholder}
-        className="rounded-xl border border-blush-200 bg-blush-50/40 px-4 py-3 text-sm text-ink-800 outline-none transition-all placeholder:text-ink-600/60 focus:border-blush-300 focus:bg-white focus:ring-2 focus:ring-blush-200/60"
+        className="rounded-xl border border-blush-200 bg-cream-100/40 px-4 py-3 text-sm text-ink-800 outline-none transition-all placeholder:text-ink-600/60 focus:border-blush-300 focus:bg-white focus:ring-2 focus:ring-blush-200/60"
       />
     </div>
   );

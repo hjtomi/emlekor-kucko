@@ -8,17 +8,17 @@ export default function Hero() {
       id="hero"
       className="relative overflow-hidden bg-petal-gradient pt-32 pb-24 sm:pt-40 sm:pb-32"
     >
-      <FloralSpray className="pointer-events-none absolute -left-16 top-24 h-64 w-64 opacity-70 sm:left-0" />
+      <FloralSpray className="pointer-events-none absolute -left-16 top-24 h-64 w-64 opacity-45 sm:left-0" />
       <FloralSpray
-        className="pointer-events-none absolute -right-20 bottom-10 h-72 w-72 opacity-60 [transform:rotate(140deg)]"
-        colors={['#D8B4FE', '#FDA4AF', '#A7F3D0']}
+        className="pointer-events-none absolute -right-20 bottom-10 h-72 w-72 opacity-40 [transform:rotate(140deg)]"
+        colors={['#C9A09A', '#C9BDB6', '#A8B8A4']}
       />
-      <FloatingPetal className="pointer-events-none absolute left-[12%] top-[30%] h-6 w-6" color="#FBCFE8" />
+      <FloatingPetal className="pointer-events-none absolute left-[12%] top-[30%] h-6 w-6" color="#E8D4CE" />
       <FloatingPetal
         className="pointer-events-none absolute right-[18%] top-[55%] h-5 w-5"
-        color="#F9A8D4"
+        color="#D4A5A0"
       />
-      <FloatingPetal className="pointer-events-none absolute left-[60%] top-[20%] h-4 w-4" color="#E9D5FF" />
+      <FloatingPetal className="pointer-events-none absolute left-[60%] top-[20%] h-4 w-4" color="#EDE4D8" />
 
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-[1.05fr_0.95fr]">
         <div className="text-center lg:text-left">
@@ -26,7 +26,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 rounded-full border border-blush-200/60 bg-white/80 px-4.5 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-blush-500 shadow-glass backdrop-blur-md"
+            className="inline-flex items-center gap-2 rounded-full border border-blush-200/60 bg-cream-50/80 px-4.5 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-blush-500 shadow-glass backdrop-blur-md"
           >
             <Sparkles className="h-3.5 w-3.5 text-blush-400" />
             Kézzel készült emlékőrző ékszerek
@@ -69,7 +69,7 @@ export default function Hero() {
           >
             <a
               href="#kapcsolat"
-              className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blush-300 to-warmrose-300 px-7 py-3.5 text-sm font-semibold text-white shadow-soft transition-all duration-300 hover:shadow-soft-lg hover:scale-[1.03] active:scale-95 sm:w-auto"
+              className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blush-400 to-warmrose-400 px-7 py-3.5 text-sm font-semibold text-white shadow-soft transition-all duration-300 hover:shadow-soft-lg hover:scale-[1.03] active:scale-95 sm:w-auto"
             >
               <HeartHandshake className="h-4 w-4" />
               Vedd fel velem a kapcsolatot
@@ -77,7 +77,7 @@ export default function Hero() {
             </a>
             <a
               href="#galeria"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-blush-200 bg-white/80 px-6 py-3.5 text-sm font-semibold text-ink-800 transition-all duration-300 hover:bg-white hover:shadow-soft active:scale-95 sm:w-auto"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-blush-200 bg-cream-50/80 px-6 py-3.5 text-sm font-semibold text-ink-800 transition-all duration-300 hover:bg-cream-50 hover:shadow-soft active:scale-95 sm:w-auto"
             >
               Galéria megtekintése
             </a>

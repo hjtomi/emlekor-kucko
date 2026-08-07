@@ -5,7 +5,7 @@ import { PetalDivider } from './FloralAccents';
 
 export default function Trust() {
   return (
-    <section id="bizalom" className="relative overflow-hidden bg-champagne-50 py-24 sm:py-32">
+    <section id="bizalom" className="relative overflow-hidden bg-cream-100 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -35,7 +35,7 @@ export default function Trust() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.6, delay: i * 0.12, ease: 'easeOut' }}
-              className="flex flex-col rounded-2xl border border-blush-100 bg-white/90 p-6 shadow-petal ring-1 ring-blush-100/80 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-soft sm:p-7"
+              className="flex flex-col rounded-2xl border border-blush-100 bg-cream-50/90 p-6 shadow-petal ring-1 ring-blush-100/80 transition-all duration-300 hover:-translate-y-1 hover:bg-cream-50 hover:shadow-soft sm:p-7"
             >
               <Heart className="h-5 w-5 shrink-0 text-blush-300" strokeWidth={1.6} />
               <blockquote className="mt-4 flex-1 text-base leading-relaxed text-ink-700">
@@ -47,7 +47,7 @@ export default function Trust() {
                   <span className="text-ink-500">, {item.location}</span>
                 </cite>
                 {item.category && (
-                  <span className="rounded-full bg-blush-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-blush-500 ring-1 ring-blush-100">
+                  <span className="rounded-full bg-cream-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-blush-500 ring-1 ring-blush-100">
                     {item.category}
                   </span>
                 )}

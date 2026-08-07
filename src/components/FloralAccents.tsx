@@ -5,7 +5,7 @@ type AccentProps = {
   colors?: string[];
 };
 
-export function FloralSpray({ className = '', colors = ['#FDA4AF', '#D8B4FE', '#A7F3D0'] }: AccentProps) {
+export function FloralSpray({ className = '', colors = ['#D4A5A0', '#C9BDB6', '#A8B8A4'] }: AccentProps) {
   return (
     <svg viewBox="0 0 200 200" className={className} aria-hidden="true" fill="none">
       <g stroke={colors[0]} strokeWidth="1.4" strokeLinecap="round" opacity="0.65">
@@ -34,7 +34,7 @@ export function LeafBranch({ className = '' }: AccentProps) {
     <svg viewBox="0 0 120 120" className={className} aria-hidden="true" fill="none">
       <path
         d="M60 116 C 60 80, 60 56, 60 18"
-        stroke="#A7F3D0"
+        stroke="#A8B8A4"
         strokeWidth="1.2"
         strokeLinecap="round"
         opacity="0.7"
@@ -47,7 +47,7 @@ export function LeafBranch({ className = '' }: AccentProps) {
             rx="11"
             ry="5"
             transform={`rotate(${i % 2 === 0 ? -35 : 35} ${i % 2 === 0 ? 46 : 74} ${y})`}
-            fill="#D1FAE5"
+            fill="#D4DDD0"
           />
         </g>
       ))}
@@ -74,7 +74,7 @@ export function PetalDivider({ className = '' }: AccentProps) {
   );
 }
 
-export function CornerBlossom({ className = '', color = '#FDA4AF' }: AccentProps & { color?: string }) {
+export function CornerBlossom({ className = '', color = '#D4A5A0' }: AccentProps & { color?: string }) {
   return (
     <svg viewBox="0 0 160 160" className={className} aria-hidden="true" fill="none">
       <g opacity="0.55">
@@ -90,14 +90,14 @@ export function CornerBlossom({ className = '', color = '#FDA4AF' }: AccentProps
             opacity="0.55"
           />
         ))}
-        <circle cx="80" cy="80" r="10" fill="#FFFBF5" />
-        <circle cx="80" cy="80" r="5" fill="#F472B6" opacity="0.7" />
+        <circle cx="80" cy="80" r="10" fill="#FFFBF7" />
+        <circle cx="80" cy="80" r="5" fill="#C4877F" opacity="0.7" />
       </g>
     </svg>
   );
 }
 
-export function FloatingPetal({ className = '', color = '#FBCFE8' }: AccentProps & { color?: string }) {
+export function FloatingPetal({ className = '', color = '#E8D4CE' }: AccentProps & { color?: string }) {
   return (
     <motion.svg
       viewBox="0 0 40 40"

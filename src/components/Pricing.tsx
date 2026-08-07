@@ -5,18 +5,18 @@ import { PetalDivider } from './FloralAccents';
 
 const ACCENT_MAP: Record<PriceTier['accent'], { bg: string; ring: string; text: string; chip: string; price: string }> = {
   blush: {
-    bg: 'bg-blush-50/70',
+    bg: 'bg-cream-100/80',
     ring: 'ring-blush-100',
     text: 'text-blush-500',
     chip: 'bg-blush-100 text-blush-500',
     price: 'text-blush-400',
   },
   lavender: {
-    bg: 'bg-lavender-50/70',
-    ring: 'ring-lavender-200',
-    text: 'text-lavender-300',
-    chip: 'bg-lavender-100 text-lavender-300',
-    price: 'text-lavender-300',
+    bg: 'bg-champagne-50/80',
+    ring: 'ring-champagne-200',
+    text: 'text-ink-700',
+    chip: 'bg-champagne-100 text-ink-700',
+    price: 'text-ink-800',
   },
   sage: {
     bg: 'bg-sage-50/70',
@@ -31,7 +31,7 @@ const formatHuf = (n: number) => n.toLocaleString('hu-HU').replace(/,/g, ' ');
 
 export default function Pricing() {
   return (
-    <section id="arak" className="relative overflow-hidden bg-white py-24 sm:py-32">
+    <section id="arak" className="relative overflow-hidden bg-cream-50 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -40,7 +40,7 @@ export default function Pricing() {
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-blush-200/60 bg-blush-50/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-blush-500 shadow-glass">
+          <span className="inline-flex items-center gap-2 rounded-full border border-blush-200/60 bg-cream-100/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-blush-500 shadow-glass">
             Tájékoztató árak
           </span>
           <h2 className="mt-4 font-cormorant text-5xl font-semibold tracking-tight text-ink-900 sm:text-6xl">
@@ -78,7 +78,7 @@ export default function Pricing() {
                 }`}
               >
                 {tier.featured && (
-                  <span className="absolute right-5 top-5 inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-blush-300 to-warmrose-300 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-white shadow-soft">
+                  <span className="absolute right-5 top-5 inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-blush-400 to-warmrose-400 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-white shadow-soft">
                     <Sparkles className="h-3 w-3" />
                     Kedvelt
                   </span>
@@ -116,7 +116,7 @@ export default function Pricing() {
                   href="#kapcsolat"
                   className={`mt-7 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition-all duration-300 hover:scale-[1.03] ${
                     tier.featured
-                      ? 'bg-gradient-to-r from-blush-300 to-warmrose-300 text-white shadow-soft hover:shadow-soft-lg'
+                      ? 'bg-gradient-to-r from-blush-400 to-warmrose-400 text-white shadow-soft hover:shadow-soft-lg'
                       : `border ${accent.ring} bg-white/80 ${accent.text} hover:bg-white hover:shadow-soft`
                   }`}
                 >

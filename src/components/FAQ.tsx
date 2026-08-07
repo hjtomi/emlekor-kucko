@@ -13,7 +13,7 @@ export default function FAQ() {
   };
 
   return (
-    <section id="gyakori-kerdesek" className="relative overflow-hidden bg-white py-24 sm:py-32">
+    <section id="gyakori-kerdesek" className="relative overflow-hidden bg-cream-50 py-24 sm:py-32">
       <div className="mx-auto max-w-3xl px-5 sm:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -48,7 +48,7 @@ export default function FAQ() {
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.45, delay: i * 0.04 }}
                 className={`rounded-2xl border border-blush-100 transition-colors duration-300 ${
-                  isOpen ? 'bg-blush-50/60' : 'bg-white'
+                  isOpen ? 'bg-cream-100/70' : 'bg-cream-50'
                 }`}
               >
                 <h3>
@@ -114,7 +114,7 @@ export default function FAQ() {
         >
           <a
             href="#kapcsolat"
-            className="inline-flex items-center gap-2 rounded-full border border-blush-200 bg-blush-50/80 px-5 py-2.5 text-sm font-medium text-blush-500 shadow-glass transition-all hover:border-blush-300 hover:bg-blush-50 hover:text-blush-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blush-300 focus-visible:ring-offset-2"
+            className="inline-flex items-center gap-2 rounded-full border border-blush-200 bg-cream-100/80 px-5 py-2.5 text-sm font-medium text-blush-500 shadow-glass transition-all hover:border-blush-300 hover:bg-cream-100 hover:text-blush-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blush-300 focus-visible:ring-offset-2"
           >
             További kérdésed van? Kapcsolat
             <ArrowRight className="h-4 w-4" strokeWidth={1.8} aria-hidden />

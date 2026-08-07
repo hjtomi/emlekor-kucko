@@ -14,10 +14,10 @@ export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="relative overflow-hidden bg-ink-900 px-5 pt-16 pb-8 text-center sm:px-8">
-      <CornerBlossom className="pointer-events-none absolute -right-20 -top-10 h-64 w-64 opacity-25" color="#FBCFE8" />
+      <CornerBlossom className="pointer-events-none absolute -right-20 -top-10 h-64 w-64 opacity-25" color="#D4A5A0" />
       <CornerBlossom
         className="pointer-events-none absolute -left-20 bottom-0 h-56 w-56 opacity-20 [transform:rotate(160deg)]"
-        color="#E9D5FF"
+        color="#C9BDB6"
       />
 
       <motion.div
@@ -28,7 +28,7 @@ export default function Footer() {
         className="relative mx-auto flex max-w-3xl flex-col items-center"
       >
         <a href="#hero" className="flex items-center gap-2.5">
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blush-200 to-lavender-200">
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blush-200 to-cream-300">
             <Flower2 className="h-5 w-5 text-ink-900" strokeWidth={1.6} />
           </span>
           <span className="font-serif text-2xl text-white">Emlékőr Kuckó</span>

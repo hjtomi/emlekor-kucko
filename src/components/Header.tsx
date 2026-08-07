@@ -48,7 +48,7 @@ export default function Header() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
         <a href="#hero" onClick={(e) => handleNavClick(e, '#hero')} className="group flex items-center gap-2.5">
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blush-100 via-champagne-100 to-lavender-100 shadow-soft ring-1 ring-blush-200/50 transition-transform duration-300 group-hover:scale-105">
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blush-100 via-champagne-100 to-cream-200 shadow-soft ring-1 ring-blush-200/50 transition-transform duration-300 group-hover:scale-105">
             <Flower2 className="h-5 w-5 text-blush-400 transition-transform duration-500 group-hover:rotate-12" strokeWidth={1.6} />
           </span>
           <span className="font-cormorant text-2xl font-semibold tracking-wide text-ink-900 sm:text-3xl">
@@ -71,7 +71,7 @@ export default function Header() {
         <div className="hidden md:block">
           <a
             href="#kapcsolat"
-            className="inline-flex items-center rounded-full bg-gradient-to-r from-blush-300 to-warmrose-300 px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition-all duration-300 hover:shadow-soft-lg hover:scale-[1.03]"
+            className="inline-flex items-center rounded-full bg-gradient-to-r from-blush-400 to-warmrose-400 px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition-all duration-300 hover:shadow-soft-lg hover:scale-[1.03]"
           >
             Beszélgessünk
           </a>
@@ -94,7 +94,7 @@ export default function Header() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="overflow-hidden border-t border-blush-100/60 bg-white/95 backdrop-blur md:hidden"
+            className="overflow-hidden border-t border-blush-100/60 bg-cream-50/95 backdrop-blur md:hidden"
           >
             <div className="flex flex-col gap-1 px-5 py-4">
               {NAV_LINKS.map((l) => (
@@ -102,7 +102,7 @@ export default function Header() {
                   key={l.href}
                   href={l.href}
                   onClick={(e) => handleNavClick(e, l.href)}
-                  className="rounded-xl px-4 py-3 text-base font-medium text-ink-700 transition-colors hover:bg-blush-50 hover:text-blush-500"
+                  className="rounded-xl px-4 py-3 text-base font-medium text-ink-700 transition-colors hover:bg-cream-100 hover:text-blush-500"
                 >
                   {l.label}
                 </a>
@@ -110,7 +110,7 @@ export default function Header() {
               <a
                 href="#kapcsolat"
                 onClick={(e) => handleNavClick(e, '#kapcsolat')}
-                className="mt-2 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blush-300 to-warmrose-300 px-5 py-3 text-sm font-semibold text-white shadow-soft"
+                className="mt-2 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blush-400 to-warmrose-400 px-5 py-3 text-sm font-semibold text-white shadow-soft"
               >
                 Beszélgessünk
               </a>
