@@ -80,25 +80,55 @@ export default function About() {
             transition={{ duration: 0.7, ease: 'easeOut' }}
           >
             <div className="space-y-5 text-base leading-relaxed text-ink-700 sm:text-lg">
+              <p>Sziasztok!</p>
               <p>
-                Szia, Szabinának hívnak. Az Emlékőr Kuckó nem először egy
-                vállalkozás, hanem egy hívás: hogy segítsek megőrizni azt, ami
-                elillan. Amikor az első saját kisbaba megszületett, rájöttem,
-                milyen gyorsan múlik az idő – és milyen sokat ér egyetlen
-                apró emlék.
+                Simon Szabinának hívnak, két csodálatos gyermek Édesanyja
+                vagyok, és az Emlékőr kuckó megálmodója, alapítója.
+                Szabadidőmben szeretek a családommal és a barátaimmal lenni,
+                koncertekre járni, olvasni, és motorozni.
               </p>
               <p>
-                Minden egyes mintát, ami hozzám érkezik, a legnagyobb
-                tisztelettel kezelek. Az anyatejet és a hajtincset szinte
-                babaként fogadom: gondosan, lassan, biztonságos körülmények
-                között dolgozom fel. Tudom, hogy nem csupán egy anyag érkezik
-                hozzám – hanem egy ember története.
+                Hogy is született meg az Emlékőr kuckó?! Amikor másodjára is
+                Anya lettem, ott fogott el az az érzés, hogy milyen gyorsan
+                repül az idő a gyerekek mellett, szerettem volna ezt a kezdeti
+                bár nehéz, de csodálatos pillanatot örökre megtartani.
               </p>
               <p>
-                Célom, hogy az ékszer, amelyet kezeim közül kapsz, ne csak
-                szép legyen, hanem érezd rajta azt a figyelmet és szeretetet,
-                amellyel készült. Egy darab, amely generációkon át mesélhet
-                az életed legédesebb pillanatáról.
+                Szembejött velem az emlékőrző ékszerek készítése, egyvalami
+                különösen felkeltette az érdeklődésem az elkészítésükkel
+                kapcsolatosan, az epoxy gyanta. Már régóta szemezgettem ezzel
+                az anyaggal, sok szép dolgot láttam, amit ebből készítettek,
+                és elkezdett foglalkoztatni ez az egész ékszerkészítés.
+              </p>
+              <p>
+                Egyre jobban elkezdtem belemerülni, utánajárni dolgoknak, sokat
+                kísérletezni mind az alapanyagokkal, mint pedig az anyatej
+                tartósításával kapcsolatban. Ebben az esetben sok más
+                alkotóhoz képest én egy olyan tartósítási eljárást fejlesztettem
+                ki aminél maga az anyatej folyékony formában kerül bele az
+                epoxy gyantába, ezzel megörökítve neked ezt a csodálatos
+                időszakot.
+              </p>
+              <p>
+                A hajból rajzolásnál is mindig próbáltam minél több újabb
+                dolgot kipróbálni, hogy ráérezzek mi is ami az én stílusom lesz.
+                Igyekszem amennyire lehet ebben a szakmában egyedi lenni, és
+                veletek együtt megálmodni, ékszerbe zárni azokat a történeteket
+                amelyekkel megkerestek.
+              </p>
+              <p>
+                Minden egyes hozzám beérkezett dns csomaggal úgy bánok, mintha
+                csak a sajátom lenne, szeretettel, odafigyeléssel a tudásom
+                szerinti legjobb kézügyességgel elkészíteni.
+              </p>
+              <p>
+                Hogy mit hoz a jövő a kuckó életében, azt nem tudhatom, de amíg
+                bírom, amíg hajt az a valami legbelül veletek együtt csinálom.
+                :)
+              </p>
+              <p className="font-serif text-lg italic text-ink-600">
+                „Az Emlékőr kuckó értetek van, hogy megörökítse életetek fontos
+                pillanatait.”
               </p>
             </div>
 
