@@ -72,7 +72,7 @@ export default function Hero() {
               className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blush-400 to-warmrose-400 px-7 py-3.5 text-sm font-semibold text-white shadow-soft transition-all duration-300 hover:shadow-soft-lg hover:scale-[1.03] active:scale-95 sm:w-auto"
             >
               <HeartHandshake className="h-4 w-4" />
-              Vedd fel velem a kapcsolatot
+              Üzenj nekem
               <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
             </a>
             <a

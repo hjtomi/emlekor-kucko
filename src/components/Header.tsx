@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Flower2 } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const NAV_LINKS = [
   { label: 'Rólam', href: '#rolam' },
@@ -48,9 +48,12 @@ export default function Header() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
         <a href="#hero" onClick={(e) => handleNavClick(e, '#hero')} className="group flex items-center gap-2.5">
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blush-100 via-champagne-100 to-cream-200 shadow-soft ring-1 ring-blush-200/50 transition-transform duration-300 group-hover:scale-105">
-            <Flower2 className="h-5 w-5 text-blush-400 transition-transform duration-500 group-hover:rotate-12" strokeWidth={1.6} />
-          </span>
+          <img
+            src="/images/LogoNewer.png"
+            alt=""
+            className="h-11 w-11 object-contain transition-transform duration-300 group-hover:scale-105 sm:h-12 sm:w-12"
+            aria-hidden="true"
+          />
           <span className="font-cormorant text-2xl font-semibold tracking-wide text-ink-900 sm:text-3xl">
             Emlékőr Kuckó
           </span>
