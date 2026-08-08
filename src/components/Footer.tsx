@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Facebook, Instagram, Flower2, Heart } from 'lucide-react';
+import { Facebook, Instagram, Heart } from 'lucide-react';
 import { contactInfo } from '../data/content';
 import { CornerBlossom } from './FloralAccents';
 
@@ -27,10 +27,13 @@ export default function Footer() {
         transition={{ duration: 0.6 }}
         className="relative mx-auto flex max-w-3xl flex-col items-center"
       >
-        <a href="#hero" className="flex items-center gap-2.5">
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blush-200 to-cream-300">
-            <Flower2 className="h-5 w-5 text-ink-900" strokeWidth={1.6} />
-          </span>
+        <a href="#hero" className="group flex items-center gap-2.5">
+          <img
+            src="/images/LogoNewer.png"
+            alt=""
+            className="h-11 w-11 object-contain transition-transform duration-300 group-hover:scale-105 sm:h-12 sm:w-12"
+            aria-hidden="true"
+          />
           <span className="font-serif text-2xl text-white">Emlékőr Kuckó</span>
         </a>
 
