@@ -189,6 +189,31 @@ export const trustStats: { value: string; label: string }[] = [
   { value: '✓', label: 'Diszkrét, biztonságos feldolgozás' },
 ];
 
+export interface PressItem {
+  id: string;
+  outlet: string;
+  title: string;
+  date: string;
+  excerpt: string;
+  url: string;
+  outletLogo?: string;
+  pullQuote?: string;
+}
+
+export const pressItems: PressItem[] = [
+  {
+    id: 'press1',
+    outlet: 'Veritex.hu',
+    title: 'Egyedi ajándék – az Emlékőr Kuckó ékszerei',
+    date: '2025-10-27',
+    excerpt:
+      'A legszebb ajándékok nem a csomagolásban rejlenek, hanem az emlékekben. Az Emlékőr Kuckó arról szól, hogyan válhat egy apró ékszer az élet legfontosabb pillanatainak őrzőjévé – anyatejből és hajból készült gyanta darabokban.',
+    url: 'https://www.veritex.hu/hasznos-tippek-otthonra-unnepekre-kreativ-otletek-karrierhez/unnepek-tippek-otletek/egyedi-ajandek-az-emlekor-kucko-ekszerei/',
+    pullQuote:
+      'Az Emlékőr Kuckó értetek van, hogy megörökítse életetek fontos pillanatait.',
+  },
+];
+
 // PLACEHOLDER facts (timelines, amounts, shipping): confirm with Szabina before public launch.
 export interface FAQItem {
   id: string;
