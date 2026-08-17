@@ -92,14 +92,18 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-          className="relative mx-auto flex w-full max-w-md items-center justify-center sm:max-w-lg lg:max-w-xl"
+          className="relative mx-auto w-full max-w-md sm:max-w-lg lg:max-w-xl"
         >
-          <img
-            src="/images/LogoNewer.png"
-            alt="Emlékőr kuckó – Simon Szabina egyedi gyanta ékszerei"
-            className="h-auto w-full drop-shadow-sm"
-            loading="eager"
-          />
+          <div className="absolute -inset-3 rounded-[2.5rem] bg-gradient-to-br from-blush-100 via-cream-200 to-champagne-200 opacity-80 blur-[2px]" />
+          <div className="absolute -inset-1 rounded-[2.2rem] bg-gradient-to-tr from-blush-200/80 to-cream-300 opacity-70" />
+          <div className="relative overflow-hidden rounded-[2rem] bg-cream-100 p-1.5 shadow-soft-lg ring-1 ring-cream-300/80 sm:p-2">
+            <img
+              src="/images/HeaderKep.png"
+              alt="Emlékőr kuckó – Simon Szabina egyedi gyanta ékszerei"
+              className="h-auto w-full rounded-[1.6rem]"
+              loading="eager"
+            />
+          </div>
         </motion.div>
       </div>
     </section>

@@ -113,7 +113,7 @@ export default function Media() {
             Egy történet, ami minket is elmesél
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-ink-600 sm:text-lg">
-            Amikor mások is szavakba öntik, miért őrzünk emlékeket ékszerben – az
+            Amikor mások is szavakba öntik, miért őrzök emlékeket ékszerben – az
             is bizalom.
           </p>
           <PetalDivider className="mt-6" />

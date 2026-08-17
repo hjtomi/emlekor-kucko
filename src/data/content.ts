@@ -1,87 +1,147 @@
-export type GalleryCategory = 'anyatej' | 'hajtincs' | 'kombinált';
+export type GalleryMainId = 'gyuruk' | 'emlek-gyongyok' | 'medalok';
+export type GalleryLeafId = 'mithril' | 'csepp' | 'emlek-gyongyok' | 'medalok';
+
+export interface GallerySubcategory {
+  id: GalleryLeafId;
+  label: string;
+  priceFrom: number;
+}
+
+export interface GalleryMainCategory {
+  id: GalleryMainId;
+  label: string;
+  children?: GallerySubcategory[];
+  priceFrom?: number;
+}
 
 export interface GalleryItem {
   id: string;
   title: string;
   caption: string;
-  category: GalleryCategory;
+  category: GalleryLeafId;
   image: string;
   alt: string;
 }
 
+export const GALLERY_LEAF_LABELS: Record<GalleryLeafId, string> = {
+  mithril: 'Mithril gyűrű',
+  csepp: 'Csepp gyűrű',
+  'emlek-gyongyok': 'Emlék gyöngy',
+  medalok: 'Medál',
+};
+
+// PLACEHOLDER: confirm starting prices with Szabina before public launch.
+export const galleryCategories: GalleryMainCategory[] = [
+  {
+    id: 'gyuruk',
+    label: 'Gyűrűk',
+    children: [
+      { id: 'mithril', label: 'Mithril gyűrűk', priceFrom: 25000 },
+      { id: 'csepp', label: 'Csepp gyűrűk', priceFrom: 25000 },
+    ],
+  },
+  {
+    id: 'emlek-gyongyok',
+    label: 'Emlék gyöngyök',
+    priceFrom: 15000,
+  },
+  {
+    id: 'medalok',
+    label: 'Medálok',
+    priceFrom: 15000,
+  },
+];
+
+export function getGalleryLeafMeta(leafId: GalleryLeafId): { label: string; priceFrom: number } {
+  for (const main of galleryCategories) {
+    const child = main.children?.find((entry) => entry.id === leafId);
+    if (child) {
+      return { label: GALLERY_LEAF_LABELS[leafId], priceFrom: child.priceFrom };
+    }
+    if (main.id === leafId && typeof main.priceFrom === 'number') {
+      return { label: GALLERY_LEAF_LABELS[leafId], priceFrom: main.priceFrom };
+    }
+  }
+  return { label: GALLERY_LEAF_LABELS[leafId], priceFrom: 0 };
+}
+
+function galleryGroup(
+  category: GalleryLeafId,
+  title: string,
+  caption: string,
+  alt: string,
+  files: string[],
+): GalleryItem[] {
+  return files.map((image, index) => ({
+    id: `${category}-${index + 1}`,
+    title: files.length === 1 ? title : `${title} ${index + 1}`,
+    caption,
+    category,
+    image,
+    alt,
+  }));
+}
+
+// PLACEHOLDER titles/captions: replace with Szabina-approved piece names before launch.
 export const galleryItems: GalleryItem[] = [
-  {
-    id: 'g1',
-    title: 'Anyatej és Arany Füstlemez Medál',
-    caption: 'Az első csepp anyatej, arany füsttel ölelve – egy életre szóló emlék.',
-    category: 'anyatej',
-    image:
-      'images/gallery/gallery-01.jfif',
-    alt: 'Gyanta medál anyatej és arany füstlemezzel',
-  },
-  {
-    id: 'g2',
-    title: 'Gyermekhaj Tincs Gyűrű',
-    caption: 'Egy apró tincs, örökre befoglalva – a legfinomabb kéz nyomán.',
-    category: 'hajtincs',
-    image:
-      'images/gallery/gallery-02.jfif',
-    alt: 'Gyanta gyűrű gyermekhaj tincsével',
-  },
-  {
-    id: 'g3',
-    title: 'Anyatej Gyöngy Nyaklánc',
-    caption: 'Gyöngyszerű anyatej csepp, antik ezüst láncon.',
-    category: 'anyatej',
-    image:
-      'images/gallery/gallery-03.jfif',
-    alt: 'Anyatej gyöngy nyaklánc',
-  },
-  {
-    id: 'g4',
-    title: 'Haj és Virágszirom Medál',
-    caption: 'Csecsemőhaj és szárított szirmok – a természet és az emlék együtt.',
-    category: 'kombinált',
-    image:
-      'images/gallery/gallery-04.jfif',
-    alt: 'Gyanta medál hajjal és szárított virágszirommal',
-  },
-  {
-    id: 'g5',
-    title: 'Arany Füstös Anyatej Karkötő',
-    caption: 'Anyatej gyöngyök arany füsttel – diszkrét, mégis ünnepi ékszer.',
-    category: 'anyatej',
-    image:
-      'images/gallery/gallery-05.jfif',
-    alt: 'Gyanta karkötő anyatejjel és arany füsttel',
-  },
-  {
-    id: 'g6',
-    title: 'Első Tincs Fülbevaló Pár',
-    caption: 'Az első hajtincs két apró cseppben – anyának és gyermeknek.',
-    category: 'hajtincs',
-    image:
-      'images/gallery/gallery-06.jfif',
-    alt: 'Gyanta fülbevaló hajtincsével',
-  },
-  {
-    id: 'g7',
-    title: 'Anyatej és Haj Emléköves Szett',
-    caption: 'Anyatej gyöngy és hajtincs egy medálban – a teljes emlék együtt.',
-    category: 'kombinált',
-    image:
-      'images/gallery/gallery-07.jfif',
-    alt: 'Kombinált gyanta ékszersett anyatejjel és hajjal',
-  },
-  {
-    id: 'g8',
-    title: 'Levendulás Hajtincs Medál',
-    caption: 'Hajtincs és szárított levendula – nyugalom és emlék együtt.',
-    category: 'kombinált',
-    image:
-      'images/gallery/gallery-08.jfif',
-    alt: 'Gyanta medál hajtincsével és levendulával',
-  },
+  ...galleryGroup(
+    'mithril',
+    'Mithril gyűrű',
+    'Egyedi mithril gyűrű, kézzel foglalt emlékkel.',
+    'Kézzel készített mithril emlékgyűrű',
+    [
+      'images/gallery/gyuruk/mithril/IMG_20260605_171907.jpg',
+      'images/gallery/gyuruk/mithril/IMG_20260726_122024.jpg',
+      'images/gallery/gyuruk/mithril/IMG_20260726_140347.jpg',
+      'images/gallery/gyuruk/mithril/IMG_20260802_001421.jpg',
+      'images/gallery/gyuruk/mithril/IMG_20260802_001528.jpg',
+    ],
+  ),
+  ...galleryGroup(
+    'csepp',
+    'Csepp gyűrű',
+    'Csepp formájú gyűrű – egy korábbi, egyedi elkészítésű darab.',
+    'Kézzel készített csepp formájú emlékgyűrű',
+    [
+      'images/gallery/gyuruk/csepp/IMG_20260716_180147.jpg',
+      'images/gallery/gyuruk/csepp/IMG_20260716_180245.jpg',
+    ],
+  ),
+  ...galleryGroup(
+    'emlek-gyongyok',
+    'Emlék gyöngy',
+    'Emlék gyöngy – anyatejből vagy hajból, kézzel formázva.',
+    'Kézzel készített emlék gyöngy',
+    [
+      'images/gallery/emlekgyongyok/IMG_20250424_141031.png',
+      'images/gallery/emlekgyongyok/IMG_20250728_172208.jpg',
+      'images/gallery/emlekgyongyok/IMG_20251024_144353.jpg',
+      'images/gallery/emlekgyongyok/IMG_20251101_210514.jpg',
+      'images/gallery/emlekgyongyok/IMG_20251101_210550.jpg',
+      'images/gallery/emlekgyongyok/IMG_20260129_163445.jpg',
+      'images/gallery/emlekgyongyok/IMG_20260606_235216.jpg',
+      'images/gallery/emlekgyongyok/IMG_20260606_235303.jpg',
+      'images/gallery/emlekgyongyok/IMG_20260607_154714.jpg',
+      'images/gallery/emlekgyongyok/IMG_20260702_230040.jpg',
+      'images/gallery/emlekgyongyok/IMG_20260704_223453.jpg',
+      'images/gallery/emlekgyongyok/IMG_20260713_175126.jpg',
+      'images/gallery/emlekgyongyok/IMG_20260718_161922.jpg',
+      'images/gallery/emlekgyongyok/IMG_20260726_161505.jpg',
+    ],
+  ),
+  ...galleryGroup(
+    'medalok',
+    'Medál',
+    'Egyedi medál, kézzel készített emlékőrző darab.',
+    'Kézzel készített emlékőrző medál',
+    [
+      'images/gallery/medalok/IMG_20251120_205757.jpg',
+      'images/gallery/medalok/IMG_20260316_160811.jpg',
+      'images/gallery/medalok/IMG_20260323_100757.jpg',
+      'images/gallery/medalok/IMG_20260629_165353.jpg',
+      'images/gallery/medalok/IMG_20260702_224800.jpg',
+    ],
+  ),
 ];
 
 export interface PriceTier {
@@ -160,24 +220,24 @@ export const testimonials: Testimonial[] = [
   {
     id: 't1',
     quote:
-      'Amikor megkaptam a medált, sírtam. Pontosan olyan lett, amilyennek elképzeltem – finom, diszkrét, és mintha egy darabka a kislányomból lenne velem minden nap.',
-    name: 'Kata',
+      'Nagyon elégedett vagyok vele, kedves precíz és alapos. Csodaszép gyűrűt és kulcstartót készített nekem anyatejjel és babahajjal ❤️',
+    name: 'Alexa',
     location: 'Budapest',
     category: 'Anyatejes medál',
   },
   {
     id: 't2',
     quote:
-      'Féltem elküldeni az első hajtincset, de Szabina végig nyugodt volt, mindent elmagyarázott. A gyűrű gyönyörű, és örökre megmarad az emlék.',
-    name: 'Eszter',
+      'Szabina gyönyörű dolgokat alkot. Csak ajánlani tudom mindenkinek,aki ilyen emléket szeretne készíttetni. Odafigyel a részletekre, alapos és körültekintő. Minden munkájába szívét és lelkét beleteszi.',
+    name: 'Annamária',
     location: 'Debrecen',
     category: 'Hajas gyűrű',
   },
   {
     id: 't3',
     quote:
-      'Ajándékba rendeltem anyukámnak – a csomagolás is gyönyörű volt. Látszik, hogy szívvel-lélekkel készül minden darab, nem csak egy ékszer.',
-    name: 'Anna',
+      'Nehéz szavakba leírni mennyire csodálatos lett a charm amit nekem készített. Szívből ajánlom mindenkinek aki precíz és tökéletes ékszert szeretne! ❤️ Külön kiemelném hogy a készítést lépésről lépésre végig kísérhettem! 🥰🌸',
+    name: 'Kitti',
     location: 'Szeged',
     category: 'Kombinált szett',
   },
@@ -185,7 +245,7 @@ export const testimonials: Testimonial[] = [
 
 export const trustStats: { value: string; label: string }[] = [
   { value: '100%', label: 'kézi munka' },
-  { value: '6+', label: 'éve emlékeket őrzök' },
+  { value: '3+', label: 'éve emlékeket őrzök' },
   { value: '✓', label: 'Diszkrét, biztonságos feldolgozás' },
 ];
 
@@ -227,7 +287,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq1',
     question: 'Hogyan küldhetem el az anyatejet vagy a hajtincset?',
     answer:
-      'A mintát diszkrét, jól záró csomagolásban küldheted el postán vagy futárral. A részletes útmutatót a kapcsolatfelvétel után elküldöm – mit jelölj a csomagon, hogyan tartsd hűvösen az anyatejet, és hogyan óvd a hajtincset. Gondosan kezelem minden küldeményt, amint megérkezik.',
+      'Erre egy általam kitalált, könnyen követhető rendszer van. A kapcsolatfelvétel után a minta elküldési folyamatról a csomagolási utasításokat elküldöm.',
   },
   {
     id: 'faq2',
@@ -247,12 +307,6 @@ export const faqItems: FAQItem[] = [
       'Először egyeztetünk az elképzelésedről, majd a minta megérkezése után általában 2–4 hét az elkészítés. Ünnepi időszakban vagy összetettebb daraboknál ez hosszabb lehet – a várható időpontot mindig előre megbeszéljük.',
   },
   {
-    id: 'faq4',
-    question: 'Biztonságos és higiénikus a feldolgozás?',
-    answer:
-      'Igen. A mintádat tisztelettel, tiszta munkaterületen, elkülönítve kezelem – ahogy azt én is elvárnám, ha a saját emlékemet bíznám másra. Minden lépést gondosan dokumentálok magamnak, hogy biztosan a te emlékeidből készüljön az ékszer.',
-  },
-  {
     id: 'faq5',
     question: 'Egyedi az ékszer, vagy van sablon?',
     answer:
@@ -262,18 +316,22 @@ export const faqItems: FAQItem[] = [
     id: 'faq6',
     question: 'Milyen formákat és anyagokat választhatok?',
     answer:
-      'Gyanta alapra dolgozom, és választhatsz arany- vagy ezüstfüstöt, szárított virágszirmokat, valamint klasszikus vagy egyedi formákat. A tájékoztató áraknál (Alap, Prémium, Szett) látod, mi jár általában az egyes szintekhez – a pontos összeállítást a konzultáción rögzítjük.',
+      '',
+      bullets: [
+        'Forma: A formákról a galériában megtalálod a lehetőségeket.',
+        'Anyag: Nemesacéllal illetve ezüst tartalmú ötvözetekkel dolgozom.',
+      ],
   },
   {
     id: 'faq7',
     question: 'Mennyibe kerül egy ékszer?',
     answer:
-      'A weboldalon tájékoztató kezdőárakat találsz. Mivel minden darab személyre szabott, a végleges árat a konzultáció után tudom megmondani – anyag, forma és csomagolás alapján. Nincs rejtett költség: amit megbeszélünk, az lesz az ár.',
+      'Az egyes ékszerek árairól a galériában tájékozódhatsz.',
   },
   {
     id: 'faq8',
     question: 'Tudok ajándékba rendelni?',
     answer:
-      'Igen, szívesen. A Prémium és Szett kategóriákban dísz- vagy prémium ajándékcsomagolás is kérhető. Ha meglepetésnek szánod, a kommunikációt és a szállítást diszkréten intézzük – a címzettnek nem derül ki előre, mi érkezik.',
+      'Igen. A kézbesítés lehetőségeiről a konzultáción részletesen beszélünk.'
   },
 ];
