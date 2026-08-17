@@ -6,3 +6,27 @@ Galériában a kevesebb mutatása megnyomásakor a nézet nem görget vissza a g
 MODOSITASOK:
 Színvilág
 Ne legyen emailes kapcsolatfelvétel, csak irányítson át facebookra/instára
+
+PRICES:
+
+Mithril: Milk and or hair: 45000
+Mithril: Hair only: 38000
+
+Csepp: Milk and or hair: 40000
+Csepp: Hair only: 35000
+
+Emlékgyöngy:
+-Nemesacélból: 
+--Milk and or hair: 28000
+--Hair only: 19000
+-Ezüst tartalmú ötvözetből:
+--Milk and or hair: 45000
+--Hair only: 38000
+
+Medálok:
+-Nemesacélból:
+--Milk and or Hair 29000
+--Hair only: 20000
+-Ezüst tartalmú ötvözetből:
+--Milk and or Hair: 45000
+--Hair only: 38000
