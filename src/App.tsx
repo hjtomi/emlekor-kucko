@@ -2,7 +2,6 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
 import Gallery from './components/Gallery';
-import Pricing from './components/Pricing';
 import Trust from './components/Trust';
 import Media from './components/Media';
 import FAQ from './components/FAQ';
@@ -17,7 +16,6 @@ export default function App() {
         <Hero />
         <About />
         <Gallery />
-        <Pricing />
         <Trust />
         <Media />
         <FAQ />

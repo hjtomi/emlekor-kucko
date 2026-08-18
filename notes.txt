@@ -30,3 +30,7 @@ Medálok:
 -Ezüst tartalmú ötvözetből:
 --Milk and or Hair: 45000
 --Hair only: 38000
+
+EXTRAS:
+-Hajjal rajzolás: + 4500/óra
+-Hajjal betű rajzolás: + 3000/óra

@@ -4,14 +4,33 @@ export type GalleryLeafId = 'mithril' | 'csepp' | 'emlek-gyongyok' | 'medalok';
 export interface GallerySubcategory {
   id: GalleryLeafId;
   label: string;
-  priceFrom: number;
 }
 
 export interface GalleryMainCategory {
   id: GalleryMainId;
   label: string;
   children?: GallerySubcategory[];
-  priceFrom?: number;
+}
+
+export type GalleryFillingId = 'milk-or-hair' | 'hair';
+export type GalleryMetalId = 'nemesacel' | 'ezust';
+
+export const GALLERY_FILLING_LABELS: Record<GalleryFillingId, string> = {
+  'milk-or-hair': 'Anyatej és/vagy haj',
+  hair: 'Csak haj',
+};
+
+export const GALLERY_METAL_LABELS: Record<GalleryMetalId, string> = {
+  nemesacel: 'Nemesacél',
+  ezust: 'Ezüst tartalmú ötvözet',
+};
+
+export interface GalleryPriceTable {
+  metals: GalleryMetalId[];
+  rows: {
+    filling: GalleryFillingId;
+    prices: Partial<Record<GalleryMetalId, number>>;
+  }[];
 }
 
 export interface GalleryItem {
@@ -30,39 +49,68 @@ export const GALLERY_LEAF_LABELS: Record<GalleryLeafId, string> = {
   medalok: 'Medál',
 };
 
-// PLACEHOLDER: confirm starting prices with Szabina before public launch.
 export const galleryCategories: GalleryMainCategory[] = [
   {
     id: 'gyuruk',
     label: 'Gyűrűk',
     children: [
-      { id: 'mithril', label: 'Mithril gyűrűk', priceFrom: 25000 },
-      { id: 'csepp', label: 'Csepp gyűrűk', priceFrom: 25000 },
+      { id: 'mithril', label: 'Mithril gyűrűk' },
+      { id: 'csepp', label: 'Csepp gyűrűk' },
     ],
   },
   {
     id: 'emlek-gyongyok',
     label: 'Emlék gyöngyök',
-    priceFrom: 15000,
   },
   {
     id: 'medalok',
     label: 'Medálok',
-    priceFrom: 15000,
   },
 ];
 
-export function getGalleryLeafMeta(leafId: GalleryLeafId): { label: string; priceFrom: number } {
-  for (const main of galleryCategories) {
-    const child = main.children?.find((entry) => entry.id === leafId);
-    if (child) {
-      return { label: GALLERY_LEAF_LABELS[leafId], priceFrom: child.priceFrom };
-    }
-    if (main.id === leafId && typeof main.priceFrom === 'number') {
-      return { label: GALLERY_LEAF_LABELS[leafId], priceFrom: main.priceFrom };
-    }
-  }
-  return { label: GALLERY_LEAF_LABELS[leafId], priceFrom: 0 };
+export interface GalleryPriceExtra {
+  label: string;
+  amount: number;
+}
+
+export const galleryPriceExtras: GalleryPriceExtra[] = [
+  { label: 'Hajjal rajzolás', amount: 4500 },
+  { label: 'Hajjal betűrajzolás', amount: 3000 },
+];
+
+export const galleryPrices: Record<GalleryLeafId, GalleryPriceTable> = {
+  mithril: {
+    metals: ['ezust'],
+    rows: [
+      { filling: 'milk-or-hair', prices: { ezust: 45000 } },
+      { filling: 'hair', prices: { ezust: 38000 } },
+    ],
+  },
+  csepp: {
+    metals: ['ezust'],
+    rows: [
+      { filling: 'milk-or-hair', prices: { ezust: 40000 } },
+      { filling: 'hair', prices: { ezust: 35000 } },
+    ],
+  },
+  'emlek-gyongyok': {
+    metals: ['nemesacel', 'ezust'],
+    rows: [
+      { filling: 'milk-or-hair', prices: { nemesacel: 28000, ezust: 45000 } },
+      { filling: 'hair', prices: { nemesacel: 19000, ezust: 38000 } },
+    ],
+  },
+  medalok: {
+    metals: ['nemesacel', 'ezust'],
+    rows: [
+      { filling: 'milk-or-hair', prices: { nemesacel: 29000, ezust: 45000 } },
+      { filling: 'hair', prices: { nemesacel: 20000, ezust: 38000 } },
+    ],
+  },
+};
+
+export function getGalleryLeafMeta(leafId: GalleryLeafId): { label: string } {
+  return { label: GALLERY_LEAF_LABELS[leafId] };
 }
 
 function galleryGroup(
@@ -142,61 +190,6 @@ export const galleryItems: GalleryItem[] = [
       'images/gallery/medalok/IMG_20260702_224800.jpg',
     ],
   ),
-];
-
-export interface PriceTier {
-  id: string;
-  name: string;
-  priceFrom: number;
-  blurb: string;
-  includes: string[];
-  accent: 'blush' | 'lavender' | 'sage';
-  featured?: boolean;
-}
-
-export const priceTiers: PriceTier[] = [
-  {
-    id: 'p1',
-    name: 'Alap Emlékőrző Medálok',
-    priceFrom: 15000,
-    blurb: 'A legszerényebb, mégis legőszintébb emlékőrző darabok.',
-    includes: [
-      'Egyedi gyanta kivitelezés',
-      'Hajtincs vagy anyatej minta befoglalása',
-      'Klasszikus medál vagy gyűrű forma',
-      'Egyszerű, elegáns láncon',
-    ],
-    accent: 'blush',
-  },
-  {
-    id: 'p2',
-    name: 'Prémium Gyűrűk & Medálok',
-    priceFrom: 25000,
-    blurb: 'Nemes fémek és természetes szirmok, egyedi formákban.',
-    includes: [
-      'Arany- vagy ezüstfüstös gyanta',
-      'Szárított virágszirom befoglalása',
-      'Egyedi forma és méret',
-      'Kézzel polírozott, fénylő felület',
-      'Díszcsomagolás',
-    ],
-    accent: 'lavender',
-    featured: true,
-  },
-  {
-    id: 'p3',
-    name: 'Egyedi Szettek',
-    priceFrom: 40000,
-    blurb: 'Egymáshoz illő darabok, az igazi ünnepi ajándékhoz.',
-    includes: [
-      'Illő medál és gyűrű szett',
-      'Prémium nemesfém és szirmos kivitelezés',
-      'Személyre szabott gravírozás',
-      'Prémium ajándékcsomagolás kézzel',
-      'Személyes átadás vagy biztos küldemény',
-    ],
-    accent: 'sage',
-  },
 ];
 
 export const contactInfo = {
@@ -310,7 +303,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq5',
     question: 'Egyedi az ékszer, vagy van sablon?',
     answer:
-      'Minden darab egyedi. A galéria inspiráció: abból kiindulva közösen alakítjuk ki a formát, a színeket és a részleteket. Két egyforma ékszer sosem készül – a tied a te történetedre születik.',
+      'Minden darab egyedi. Az Árak és galéria szekció inspiráció: abból kiindulva közösen alakítjuk ki a formát, a színeket és a részleteket. Két egyforma ékszer sosem készül – a tied a te történetedre születik.',
   },
   {
     id: 'faq6',
@@ -318,7 +311,7 @@ export const faqItems: FAQItem[] = [
     answer:
       '',
       bullets: [
-        'Forma: A formákról a galériában megtalálod a lehetőségeket.',
+        'Forma: A formákról az Árak és galéria szekcióban megtalálod a lehetőségeket.',
         'Anyag: Nemesacéllal illetve ezüst tartalmú ötvözetekkel dolgozom.',
       ],
   },
@@ -326,7 +319,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq7',
     question: 'Mennyibe kerül egy ékszer?',
     answer:
-      'Az egyes ékszerek árairól a galériában tájékozódhatsz.',
+      'Az egyes ékszerek árairól az Árak és galéria szekcióban tájékozódhatsz.',
   },
   {
     id: 'faq8',

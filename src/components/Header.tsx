@@ -4,8 +4,7 @@ import { Menu, X } from 'lucide-react';
 
 const NAV_LINKS = [
   { label: 'Rólam', href: '#rolam' },
-  { label: 'Galéria', href: '#galeria' },
-  { label: 'Árak', href: '#arak' },
+  { label: 'Árak és galéria', href: '#galeria' },
   { label: 'Gyik', href: '#gyakori-kerdesek' },
   { label: 'Kapcsolat', href: '#kapcsolat' },
 ];

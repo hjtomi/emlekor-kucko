@@ -79,7 +79,7 @@ export default function Hero() {
               href="#galeria"
               className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-blush-200 bg-cream-50/80 px-6 py-3.5 text-sm font-semibold text-ink-800 transition-all duration-300 hover:bg-cream-50 hover:shadow-soft active:scale-95 sm:w-auto"
             >
-              Galéria megtekintése
+              Árak és galéria
             </a>
           </motion.div>
 

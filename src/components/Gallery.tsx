@@ -2,24 +2,27 @@ import { useState, useMemo, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   X,
-  Heart,
   Maximize2,
   ChevronDown,
   ChevronUp,
   ChevronLeft,
   ChevronRight,
   Images,
-  Tag,
 } from 'lucide-react';
 import {
   galleryItems,
   galleryCategories,
+  galleryPrices,
+  galleryPriceExtras,
   getGalleryLeafMeta,
+  GALLERY_FILLING_LABELS,
+  GALLERY_METAL_LABELS,
   type GalleryItem,
   type GalleryMainId,
   type GalleryLeafId,
   type GalleryMainCategory,
   type GallerySubcategory,
+  type GalleryPriceTable,
 } from '../data/content';
 import { PetalDivider } from './FloralAccents';
 
@@ -38,6 +41,19 @@ const itemVariants = {
 };
 
 const formatHuf = (n: number) => n.toLocaleString('hu-HU').replace(/,/g, ' ');
+
+function PriceExtrasNote() {
+  return (
+    <p className="mt-4 text-center text-sm leading-relaxed text-ink-500">
+      {galleryPriceExtras.map((extra, index) => (
+        <span key={extra.label}>
+          {index > 0 && <br />}
+          + {extra.label}: {formatHuf(extra.amount)} Ft/óra
+        </span>
+      ))}
+    </p>
+  );
+}
 
 function pillClass(active: boolean, size: 'main' | 'sub' = 'main') {
   const padding = size === 'sub' ? 'px-4 py-2 text-sm' : 'px-5 py-2.5 text-sm';
@@ -58,8 +74,6 @@ export default function Gallery() {
     () => galleryCategories.find((category) => category.id === mainId) ?? null,
     [mainId],
   );
-
-  const leafMeta = leafId ? getGalleryLeafMeta(leafId) : null;
 
   const items = useMemo(
     () => (leafId ? galleryItems.filter((item) => item.category === leafId) : []),
@@ -103,7 +117,7 @@ export default function Gallery() {
 
   const emptyCopy =
     mainId === 'gyuruk' && !leafId
-      ? 'Válaszd ki a gyűrű típusát — Mithril gyűrűk vagy Csepp gyűrűk —, hogy lásd a darabokat és a kezdőárat.'
+      ? 'Válaszd ki a gyűrű típusát — Mithril gyűrűk vagy Csepp gyűrűk —, hogy lásd a darabokat és az árakat.'
       : 'Válassz egy kategóriát, hogy megtekinthesd a képeket és az árakat.';
 
   return (
@@ -117,14 +131,15 @@ export default function Gallery() {
           className="text-center"
         >
           <span className="text-xs font-semibold uppercase tracking-[0.22em] text-blush-400">
-            Galéria
+            Árak és galéria
           </span>
           <h2 className="mt-3 font-serif text-4xl text-ink-900 sm:text-5xl">
-            Korábbi alkotások
+            Milyen emléket őriznél?
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-ink-600 sm:text-lg">
-            Néhány darab a múltból – minden egyedi, minden egy történet. Bármelyik
-            ihletet adhat a te saját emlékőrző ékszeredhez.
+            Válassz kategóriát: gyűrű, emlék gyöngy vagy medál. A képek korábbi,
+            egyedi darabok. Az árak tájékoztatóak; a tied a saját
+            mintáidból készül.
           </p>
           <PetalDivider className="mt-6" />
         </motion.div>
@@ -211,17 +226,7 @@ export default function Gallery() {
               exit={{ opacity: 0, y: 8 }}
               transition={{ duration: 0.35 }}
             >
-              {leafMeta && (
-                <div className="mx-auto mt-10 flex max-w-xl flex-col items-center gap-2 text-center">
-                  <p className="inline-flex items-center gap-2 rounded-full border border-blush-200/70 bg-white/80 px-4 py-1.5 text-sm font-medium text-ink-700 shadow-glass">
-                    <Tag className="h-4 w-4 text-blush-400" aria-hidden />
-                    Kezdőár: {formatHuf(leafMeta.priceFrom)} Ft-tól
-                  </p>
-                  <p className="text-sm leading-relaxed text-ink-500">
-                    Tájékoztató ár – a végleges összeg a konzultáción dől el.
-                  </p>
-                </div>
-              )}
+              <GalleryPriceBlock leafId={leafId} />
 
               <div className="relative mt-10">
                 <motion.div
@@ -296,6 +301,118 @@ export default function Gallery() {
   );
 }
 
+function GalleryPriceBlock({ leafId }: { leafId: GalleryLeafId }) {
+  const table = galleryPrices[leafId];
+  const isSingleMetal = table.metals.length === 1;
+  const metalChoice = table.metals.length > 1 ? ' és a fémet' : '';
+
+  return (
+    <div className="mx-auto mt-10 max-w-3xl rounded-3xl border border-blush-100 bg-white/70 px-5 py-6 shadow-glass sm:px-8 sm:py-7">
+      {isSingleMetal ? <RingPriceList table={table} /> : <MetalPriceMatrix table={table} />}
+      <PriceExtrasNote />
+      <p className="mt-3 text-center text-sm leading-relaxed text-ink-500">
+        Tájékoztató árak. A fotók példák – a töltést{metalChoice} rendeléskor választod. Egyedi
+        daraboknál a konzultáció dönt.
+      </p>
+    </div>
+  );
+}
+
+function RingPriceList({ table }: { table: GalleryPriceTable }) {
+  const metal = table.metals[0];
+
+  return (
+    <div>
+      <p className="text-center text-sm font-medium text-ink-600">
+        Csak ezüst tartalmú ötvözetből készül.
+      </p>
+      <ul className="mx-auto mt-4 max-w-md divide-y divide-blush-100/80">
+        {table.rows.map((row) => {
+          const amount = metal ? row.prices[metal] : undefined;
+          if (amount == null) return null;
+          return (
+            <li key={row.filling} className="flex items-baseline justify-between gap-4 py-2.5">
+              <span className="text-sm text-ink-700">{GALLERY_FILLING_LABELS[row.filling]}</span>
+              <span className="font-cormorant text-2xl font-semibold text-ink-900">
+                {formatHuf(amount)} Ft
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
+function MetalPriceMatrix({ table }: { table: GalleryPriceTable }) {
+  return (
+    <div>
+      <div className="space-y-5 sm:hidden">
+        {table.metals.map((metal) => (
+          <div key={metal}>
+            <p className="text-sm font-semibold text-blush-500">{GALLERY_METAL_LABELS[metal]}</p>
+            <ul className="mt-2 divide-y divide-blush-100/80">
+              {table.rows.map((row) => {
+                const amount = row.prices[metal];
+                if (amount == null) return null;
+                return (
+                  <li key={row.filling} className="flex items-baseline justify-between gap-4 py-2">
+                    <span className="text-sm text-ink-700">{GALLERY_FILLING_LABELS[row.filling]}</span>
+                    <span className="font-cormorant text-2xl font-semibold text-ink-900">
+                      {formatHuf(amount)} Ft
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <div className="hidden overflow-hidden rounded-2xl border border-blush-100/80 sm:block">
+        <table className="w-full text-left">
+          <thead>
+            <tr className="border-b border-blush-100 bg-cream-50/80">
+              <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-ink-500">
+                Töltés
+              </th>
+              {table.metals.map((metal) => (
+                <th
+                  key={metal}
+                  className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-blush-500"
+                >
+                  {GALLERY_METAL_LABELS[metal]}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {table.rows.map((row) => (
+              <tr key={row.filling} className="border-b border-blush-100/70 last:border-b-0">
+                <td className="px-4 py-3.5 text-sm text-ink-700">
+                  {GALLERY_FILLING_LABELS[row.filling]}
+                </td>
+                {table.metals.map((metal) => {
+                  const amount = row.prices[metal];
+                  return (
+                    <td key={metal} className="px-4 py-3.5">
+                      {amount != null && (
+                        <span className="font-cormorant text-2xl font-semibold text-ink-900">
+                          {formatHuf(amount)} Ft
+                        </span>
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
 function GalleryCard({
   item,
   isHiddenOnMobile,
@@ -342,10 +459,6 @@ function GalleryCard({
           <h3 className="mt-1 font-serif text-xl leading-snug">{item.title}</h3>
         </div>
       </div>
-      <div className="flex items-center gap-2 px-5 py-4">
-        <Heart className="h-4 w-4 shrink-0 text-blush-300" />
-        <p className="text-sm leading-relaxed text-ink-600">{item.caption}</p>
-      </div>
     </motion.article>
   );
 }
@@ -365,8 +478,6 @@ function Lightbox({
   onPrev: () => void;
   onNext: () => void;
 }) {
-  const leafMeta = item ? getGalleryLeafMeta(item.category) : null;
-
   useEffect(() => {
     if (item) {
       document.body.style.overflow = 'hidden';
@@ -393,7 +504,7 @@ function Lightbox({
 
   return (
     <AnimatePresence>
-      {item && currentIndex !== null && leafMeta && (
+      {item && currentIndex !== null && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -407,9 +518,9 @@ function Lightbox({
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
             onClick={(e) => e.stopPropagation()}
-            className="relative grid w-full max-w-4xl overflow-hidden rounded-3xl bg-white shadow-glass lg:grid-cols-2 ring-1 ring-blush-100"
+            className="relative w-full max-w-3xl overflow-hidden rounded-3xl bg-ink-900 shadow-glass ring-1 ring-blush-100/30"
           >
-            <div className="absolute left-4 top-4 z-10 flex items-center gap-2">
+            <div className="absolute left-4 top-4 z-10">
               <span className="rounded-full bg-white/90 px-3.5 py-1 text-xs font-semibold text-ink-700 shadow-glass backdrop-blur-md">
                 {currentIndex + 1} / {totalCount}
               </span>
@@ -433,7 +544,7 @@ function Lightbox({
                     onPrev();
                   }}
                   aria-label="Előző kép"
-                  className="absolute left-3 top-1/2 z-20 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white/80 text-ink-800 shadow-glass backdrop-blur-md transition-all hover:bg-white hover:scale-110 active:scale-95"
+                  className="absolute left-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-ink-800 shadow-glass backdrop-blur-md transition-all hover:scale-110 hover:bg-white active:scale-95"
                 >
                   <ChevronLeft className="h-6 w-6" />
                 </button>
@@ -444,45 +555,20 @@ function Lightbox({
                     onNext();
                   }}
                   aria-label="Következő kép"
-                  className="absolute right-3 top-1/2 z-20 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white/80 text-ink-800 shadow-glass backdrop-blur-md transition-all hover:bg-white hover:scale-110 active:scale-95 lg:right-auto lg:left-[calc(50%-1.25rem)]"
+                  className="absolute right-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-ink-800 shadow-glass backdrop-blur-md transition-all hover:scale-110 hover:bg-white active:scale-95"
                 >
                   <ChevronRight className="h-6 w-6" />
                 </button>
               </>
             )}
 
-            <div className="relative aspect-square lg:aspect-auto">
+            <div className="relative aspect-[4/5] max-h-[85vh] w-full sm:aspect-[3/4]">
               <img src={item.image} alt={item.alt} className="h-full w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-cream-200/20 to-transparent lg:bg-gradient-to-r" />
-            </div>
-
-            <div className="flex flex-col justify-center gap-5 p-7 sm:p-10">
-              <span className="w-fit rounded-full bg-cream-100/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-blush-500 border border-blush-200/50">
-                {leafMeta.label}
-              </span>
-              <h3 className="font-cormorant text-3xl font-semibold leading-snug text-ink-900 sm:text-4xl">
-                {item.title}
-              </h3>
-              <p className="flex items-start gap-2 text-base leading-relaxed text-ink-600">
-                <Heart className="mt-1 h-4 w-4 shrink-0 text-blush-300" />
-                {item.caption}
-              </p>
-              <p className="text-sm font-medium text-ink-700">
-                Kezdőár: {formatHuf(leafMeta.priceFrom)} Ft-tól
-              </p>
-              <p className="text-sm leading-relaxed text-ink-600">
-                Ez egy korábbi, egyedi elkészítésű darab. A te ékszered a
-                saját mintáidból, a saját történetedből fog megszületni –
-                beszéljük meg közösen a részleteket.
-              </p>
-              <a
-                href="#kapcsolat"
-                onClick={onClose}
-                className="mt-2 inline-flex w-fit items-center gap-2 rounded-full bg-gradient-to-r from-blush-400 to-warmrose-400 px-6 py-3 text-sm font-semibold text-white shadow-soft transition-all duration-300 hover:shadow-soft-lg hover:scale-[1.03]"
-              >
-                <Heart className="h-4 w-4" />
-                Ilyet szeretnék / Érdeklődöm
-              </a>
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-900/85 via-ink-900/40 to-transparent px-6 pb-6 pt-16">
+                <h3 className="font-cormorant text-2xl font-semibold text-white sm:text-3xl">
+                  {item.title}
+                </h3>
+              </div>
             </div>
           </motion.div>
         </motion.div>

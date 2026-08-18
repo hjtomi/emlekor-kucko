@@ -5,8 +5,7 @@ import { CornerBlossom } from './FloralAccents';
 
 const NAV_LINKS = [
   { label: 'Rólam', href: '#rolam' },
-  { label: 'Galéria', href: '#galeria' },
-  { label: 'Árak', href: '#arak' },
+  { label: 'Árak és galéria', href: '#galeria' },
   { label: 'Kapcsolat', href: '#kapcsolat' },
 ];
 
