@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Facebook, Instagram, Heart } from 'lucide-react';
+import { Facebook, Heart, Instagram } from 'lucide-react';
 import { contactInfo } from '../data/content';
 import { CornerBlossom } from './FloralAccents';
 
@@ -73,6 +73,36 @@ export default function Footer() {
             <Instagram className="h-5 w-5" />
           </a>
         </div>
+
+        <address className="mt-9 grid w-full max-w-2xl grid-cols-1 gap-6 not-italic sm:grid-cols-3 sm:gap-5">
+          <p className="flex flex-col gap-1">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-600">
+              Székhely
+            </span>
+            <span className="text-sm leading-relaxed text-blush-200/90">
+              {contactInfo.headquarters}
+            </span>
+          </p>
+          <p className="flex flex-col gap-1">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-600">
+              Levelezési cím
+            </span>
+            <span className="text-sm leading-relaxed text-blush-200/90">
+              {contactInfo.mailingAddress}
+            </span>
+          </p>
+          <p className="flex flex-col gap-1">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-ink-600">
+              Telefon
+            </span>
+            <a
+              href={`tel:${contactInfo.phone.replace(/\s/g, '')}`}
+              className="text-sm leading-relaxed text-blush-200/90 transition-colors hover:text-blush-300"
+            >
+              {contactInfo.phone}
+            </a>
+          </p>
+        </address>
 
         <div className="mt-9 w-full border-t border-white/10 pt-6" />
 

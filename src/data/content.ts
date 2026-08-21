@@ -239,7 +239,9 @@ export const galleryItems: GalleryItem[] = [
 
 export const contactInfo = {
   email: 'hello@emlekor-kucko.hu',
-  phone: '+36 30 123 4567',
+  phone: '+36 30 605 82 86',
+  headquarters: '3300 Eger, Deák Ferenc utca 80. as 4.',
+  mailingAddress: '3398 Nagytálya, Váci Mihály utca 10.',
   location: 'Magyarország',
   instagram: 'https://www.instagram.com/emlekor_kucko.simonszabina/',
   facebook: 'https://www.facebook.com/profile.php?id=100091594750333',
