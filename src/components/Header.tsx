@@ -5,6 +5,8 @@ import { Menu, X } from 'lucide-react';
 const NAV_LINKS = [
   { label: 'Rólam', href: '#rolam' },
   { label: 'Árak és galéria', href: '#galeria' },
+  { label: 'Visszajelzések', href: '#bizalom' },
+  { label: 'Média', href: '#sajto' },
   { label: 'Gyik', href: '#gyakori-kerdesek' },
   { label: 'Kapcsolat', href: '#kapcsolat' },
 ];
@@ -59,19 +61,19 @@ export default function Header() {
           </span>
         </a>
 
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-5 lg:flex xl:gap-8">
           {NAV_LINKS.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="relative text-sm font-medium text-ink-700 transition-colors hover:text-blush-500 after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-0 after:bg-blush-400 after:transition-all after:duration-300 hover:after:w-full"
+              className="relative whitespace-nowrap text-sm font-medium text-ink-700 transition-colors hover:text-blush-500 after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-0 after:bg-blush-400 after:transition-all after:duration-300 hover:after:w-full"
             >
               {l.label}
             </a>
           ))}
         </div>
 
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <a
             href="#kapcsolat"
             className="inline-flex items-center rounded-full bg-gradient-to-r from-blush-400 to-warmrose-400 px-5 py-2.5 text-sm font-semibold text-white shadow-soft transition-all duration-300 hover:shadow-soft-lg hover:scale-[1.03]"
@@ -82,7 +84,7 @@ export default function Header() {
 
         <button
           onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-white/70 text-ink-800 shadow-petal md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-white/70 text-ink-800 shadow-petal lg:hidden"
           aria-label={open ? 'Menü bezárása' : 'Menü megnyitása'}
           aria-expanded={open}
         >
@@ -97,7 +99,7 @@ export default function Header() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="overflow-hidden border-t border-blush-100/60 bg-cream-50/95 backdrop-blur md:hidden"
+            className="overflow-hidden border-t border-blush-100/60 bg-cream-50/95 backdrop-blur lg:hidden"
           >
             <div className="flex flex-col gap-1 px-5 py-4">
               {NAV_LINKS.map((l) => (
