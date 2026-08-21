@@ -14,9 +14,9 @@ import {
   galleryCategories,
   galleryPrices,
   galleryPriceExtras,
+  galleryLeafDescriptions,
   getGalleryLeafMeta,
   GALLERY_FILLING_LABELS,
-  GALLERY_METAL_LABELS,
   type GalleryItem,
   type GalleryMainId,
   type GalleryLeafId,
@@ -56,8 +56,11 @@ function PriceExtrasNote() {
 }
 
 function pillClass(active: boolean, size: 'main' | 'sub' = 'main') {
-  const padding = size === 'sub' ? 'px-4 py-2 text-sm' : 'px-5 py-2.5 text-sm';
-  return `relative rounded-full font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blush-300 focus-visible:ring-offset-2 ${padding} ${
+  const shape =
+    size === 'sub'
+      ? 'rounded-full px-4 py-2 text-sm'
+      : 'rounded-2xl px-5 py-3 text-sm leading-snug';
+  return `relative font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blush-300 focus-visible:ring-offset-2 ${shape} ${
     active
       ? 'bg-gradient-to-r from-blush-400 to-warmrose-400 text-white shadow-soft'
       : 'border border-blush-200 bg-white/80 text-ink-700 hover:border-blush-300 hover:text-blush-500'
@@ -95,11 +98,7 @@ export default function Gallery() {
       return;
     }
     setMainId(category.id);
-    if (category.children?.length) {
-      setLeafId(null);
-    } else {
-      setLeafId(category.id as GalleryLeafId);
-    }
+    setLeafId(null);
   };
 
   const handleSubClick = (sub: GallerySubcategory) => {
@@ -116,9 +115,11 @@ export default function Gallery() {
   }, [items.length]);
 
   const emptyCopy =
-    mainId === 'gyuruk' && !leafId
+    mainId === 'ezust-otvozet' && !leafId
       ? 'Válaszd ki a gyűrű típusát — Mithril gyűrűk vagy Csepp gyűrűk —, hogy lásd a darabokat és az árakat.'
-      : 'Válassz egy kategóriát, hogy megtekinthesd a képeket és az árakat.';
+      : mainId === 'nemesacel' && !leafId
+        ? 'Válaszd ki a típust — Emlék gyöngyök vagy Medálok —, hogy lásd a darabokat és az árakat.'
+        : 'Válassz egy kategóriát, hogy megtekinthesd a képeket és az árakat.';
 
   return (
     <section id="galeria" className="relative overflow-hidden bg-cream-100/80 bg-watercolor-edge py-24 sm:py-32">
@@ -137,7 +138,7 @@ export default function Gallery() {
             Milyen emléket őriznél?
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-ink-600 sm:text-lg">
-            Válassz kategóriát: gyűrű, emlék gyöngy vagy medál. A képek korábbi,
+            Először válaszd ki az anyagot, majd a típust. A képek korábbi,
             egyedi darabok. Az árak tájékoztatóak; a tied a saját
             mintáidból készül.
           </p>
@@ -154,7 +155,7 @@ export default function Gallery() {
           <div
             role="group"
             aria-label="Kategória"
-            className="flex flex-wrap items-center justify-center gap-2.5"
+            className="mx-auto flex max-w-3xl flex-col items-stretch justify-center gap-2.5 sm:flex-row sm:items-stretch"
           >
             {galleryCategories.map((category) => (
               <button
@@ -162,7 +163,7 @@ export default function Gallery() {
                 type="button"
                 aria-pressed={mainId === category.id}
                 onClick={() => handleMainClick(category)}
-                className={pillClass(mainId === category.id)}
+                className={`${pillClass(mainId === category.id)} flex w-full items-center justify-center text-center sm:w-1/2`}
               >
                 {category.label}
               </button>
@@ -170,9 +171,9 @@ export default function Gallery() {
           </div>
 
           <AnimatePresence initial={false}>
-            {selectedMain?.children && (
+            {selectedMain && (
               <motion.div
-                key="subcategories"
+                key={`subcategories-${selectedMain.id}`}
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
@@ -181,7 +182,9 @@ export default function Gallery() {
               >
                 <div
                   role="group"
-                  aria-label="Gyűrű típusa"
+                  aria-label={
+                    selectedMain.id === 'ezust-otvozet' ? 'Gyűrű típusa' : 'Ékszer típusa'
+                  }
                   className="mt-3 flex flex-wrap items-center justify-center gap-2"
                 >
                   {selectedMain.children.map((sub) => (
@@ -303,113 +306,66 @@ export default function Gallery() {
 
 function GalleryPriceBlock({ leafId }: { leafId: GalleryLeafId }) {
   const table = galleryPrices[leafId];
-  const isSingleMetal = table.metals.length === 1;
-  const metalChoice = table.metals.length > 1 ? ' és a fémet' : '';
+  const copy = galleryLeafDescriptions[leafId];
 
   return (
-    <div className="mx-auto mt-10 max-w-3xl rounded-3xl border border-blush-100 bg-white/70 px-5 py-6 shadow-glass sm:px-8 sm:py-7">
-      {isSingleMetal ? <RingPriceList table={table} /> : <MetalPriceMatrix table={table} />}
+    <div className="mx-auto mt-10 max-w-3xl rounded-3xl border border-blush-100 bg-white/70 px-5 py-6 shadow-glass sm:px-8 sm:py-8">
+      <div className="text-center">
+        <h3 className="font-serif text-2xl text-ink-900 sm:text-3xl">{copy.heading}</h3>
+        {copy.quote && (
+          <blockquote className="mx-auto mt-4 max-w-xl font-serif text-lg italic leading-relaxed text-ink-700 sm:text-xl">
+            „{copy.quote}”
+          </blockquote>
+        )}
+        {copy.paragraphs.map((paragraph) => (
+          <p
+            key={paragraph}
+            className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-ink-600 sm:text-base"
+          >
+            {paragraph}
+          </p>
+        ))}
+        {copy.specs.length > 0 && (
+          <ul className="mx-auto mt-4 max-w-xl space-y-1 text-sm leading-relaxed text-ink-700 sm:text-base">
+            {copy.specs.map((spec) => (
+              <li key={spec}>{spec}</li>
+            ))}
+          </ul>
+        )}
+        {copy.contactNote && (
+          <p className="mx-auto mt-4 max-w-xl text-sm font-medium leading-relaxed text-blush-500 sm:text-base">
+            {copy.contactNote}
+          </p>
+        )}
+      </div>
+      <PriceList table={table} />
       <PriceExtrasNote />
       <p className="mt-3 text-center text-sm leading-relaxed text-ink-500">
-        Tájékoztató árak. A fotók példák – a töltést{metalChoice} rendeléskor választod. Egyedi
-        daraboknál a konzultáció dönt.
+        Tájékoztató árak. A fotók példák – a töltést rendeléskor választod. Egyedi daraboknál a
+        konzultáció dönt.
       </p>
     </div>
   );
 }
 
-function RingPriceList({ table }: { table: GalleryPriceTable }) {
+function PriceList({ table }: { table: GalleryPriceTable }) {
   const metal = table.metals[0];
 
   return (
-    <div>
-      <p className="text-center text-sm font-medium text-ink-600">
-        Csak ezüst tartalmú ötvözetből készül.
-      </p>
-      <ul className="mx-auto mt-4 max-w-md divide-y divide-blush-100/80">
-        {table.rows.map((row) => {
-          const amount = metal ? row.prices[metal] : undefined;
-          if (amount == null) return null;
-          return (
-            <li key={row.filling} className="flex items-baseline justify-between gap-4 py-2.5">
-              <span className="text-sm text-ink-700">{GALLERY_FILLING_LABELS[row.filling]}</span>
-              <span className="font-cormorant text-2xl font-semibold text-ink-900">
-                {formatHuf(amount)} Ft
-              </span>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
-}
-
-function MetalPriceMatrix({ table }: { table: GalleryPriceTable }) {
-  return (
-    <div>
-      <div className="space-y-5 sm:hidden">
-        {table.metals.map((metal) => (
-          <div key={metal}>
-            <p className="text-sm font-semibold text-blush-500">{GALLERY_METAL_LABELS[metal]}</p>
-            <ul className="mt-2 divide-y divide-blush-100/80">
-              {table.rows.map((row) => {
-                const amount = row.prices[metal];
-                if (amount == null) return null;
-                return (
-                  <li key={row.filling} className="flex items-baseline justify-between gap-4 py-2">
-                    <span className="text-sm text-ink-700">{GALLERY_FILLING_LABELS[row.filling]}</span>
-                    <span className="font-cormorant text-2xl font-semibold text-ink-900">
-                      {formatHuf(amount)} Ft
-                    </span>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        ))}
-      </div>
-
-      <div className="hidden overflow-hidden rounded-2xl border border-blush-100/80 sm:block">
-        <table className="w-full text-left">
-          <thead>
-            <tr className="border-b border-blush-100 bg-cream-50/80">
-              <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-ink-500">
-                Töltés
-              </th>
-              {table.metals.map((metal) => (
-                <th
-                  key={metal}
-                  className="px-4 py-3 text-xs font-semibold uppercase tracking-wider text-blush-500"
-                >
-                  {GALLERY_METAL_LABELS[metal]}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {table.rows.map((row) => (
-              <tr key={row.filling} className="border-b border-blush-100/70 last:border-b-0">
-                <td className="px-4 py-3.5 text-sm text-ink-700">
-                  {GALLERY_FILLING_LABELS[row.filling]}
-                </td>
-                {table.metals.map((metal) => {
-                  const amount = row.prices[metal];
-                  return (
-                    <td key={metal} className="px-4 py-3.5">
-                      {amount != null && (
-                        <span className="font-cormorant text-2xl font-semibold text-ink-900">
-                          {formatHuf(amount)} Ft
-                        </span>
-                      )}
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <ul className="mx-auto mt-6 max-w-md divide-y divide-blush-100/80 border-t border-blush-100/80 pt-2">
+      {table.rows.map((row) => {
+        const amount = metal ? row.prices[metal] : undefined;
+        if (amount == null) return null;
+        return (
+          <li key={row.filling} className="flex items-baseline justify-between gap-4 py-2.5">
+            <span className="text-sm text-ink-700">{GALLERY_FILLING_LABELS[row.filling]}</span>
+            <span className="font-cormorant text-2xl font-semibold text-ink-900">
+              {formatHuf(amount)} Ft
+            </span>
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 

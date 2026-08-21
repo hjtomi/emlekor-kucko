@@ -1,4 +1,4 @@
-export type GalleryMainId = 'gyuruk' | 'emlek-gyongyok' | 'medalok';
+export type GalleryMainId = 'ezust-otvozet' | 'nemesacel';
 export type GalleryLeafId = 'mithril' | 'csepp' | 'emlek-gyongyok' | 'medalok';
 
 export interface GallerySubcategory {
@@ -9,7 +9,7 @@ export interface GallerySubcategory {
 export interface GalleryMainCategory {
   id: GalleryMainId;
   label: string;
-  children?: GallerySubcategory[];
+  children: GallerySubcategory[];
 }
 
 export type GalleryFillingId = 'milk-or-hair' | 'hair';
@@ -18,11 +18,6 @@ export type GalleryMetalId = 'nemesacel' | 'ezust';
 export const GALLERY_FILLING_LABELS: Record<GalleryFillingId, string> = {
   'milk-or-hair': 'Anyatej és/vagy haj',
   hair: 'Csak haj',
-};
-
-export const GALLERY_METAL_LABELS: Record<GalleryMetalId, string> = {
-  nemesacel: 'Nemesacél',
-  ezust: 'Ezüst tartalmú ötvözet',
 };
 
 export interface GalleryPriceTable {
@@ -51,22 +46,72 @@ export const GALLERY_LEAF_LABELS: Record<GalleryLeafId, string> = {
 
 export const galleryCategories: GalleryMainCategory[] = [
   {
-    id: 'gyuruk',
-    label: 'Gyűrűk',
+    id: 'ezust-otvozet',
+    label: 'Ezüst tartalmú ötvözetből készült emlékőr ékszerek',
     children: [
       { id: 'mithril', label: 'Mithril gyűrűk' },
       { id: 'csepp', label: 'Csepp gyűrűk' },
     ],
   },
   {
-    id: 'emlek-gyongyok',
-    label: 'Emlék gyöngyök',
-  },
-  {
-    id: 'medalok',
-    label: 'Medálok',
+    id: 'nemesacel',
+    label: 'Nemesacélból készült emlékőr ékszerek',
+    children: [
+      { id: 'emlek-gyongyok', label: 'Emlék gyöngyök' },
+      { id: 'medalok', label: 'Medálok' },
+    ],
   },
 ];
+
+export interface GalleryLeafDescription {
+  heading: string;
+  paragraphs: string[];
+  quote?: string;
+  specs: string[];
+  contactNote?: string;
+}
+
+export const galleryLeafDescriptions: Record<GalleryLeafId, GalleryLeafDescription> = {
+  mithril: {
+    heading: 'A Mithril Emlék gyűrű',
+    paragraphs: [
+      'A Mithril szó jelentése ritka és értékes, mint az a pillanat, amire ezt a gyűrűt terveztem, hogy méltó őrzője lehessen egy Anyatejkőnek, vagy egy apró tincs baba hajnak, mert bár könnyűnek tűnik, de benne van az az elpusztíthatatlan erő, ami csak egy Anyát és gyermekét kötheti össze.',
+      'Ezüst tartalmú ötvözetből készült gyűrű, aminek a nevében is benne van, hogy ezüstből készült 800-as alatti ötvözetszámból.',
+    ],
+    specs: [
+      'Méretre készül, 50-estől 59-es méretig rendelhető!',
+      'Foglalat mérete: 6 mm.',
+    ],
+    contactNote: 'A személyre szabás érdekében mindenképp vedd fel velem a kapcsolatot.',
+  },
+  csepp: {
+    heading: 'Csepp gyűrű',
+    quote: 'Egy csepp Anyatej, hogy sose felejtsd el hogy milyen erő lakozik benned.',
+    paragraphs: [
+      'Ezüst tartalmú ötvözetből készült gyűrű, aminek a nevében is benne van, hogy ezüstből készült 800-as alatti ötvözetszámból.',
+    ],
+    specs: [
+      'Méretre készül, 50-estől 59-es méretig rendelhető!',
+      'Foglalat mérete: 6×8 mm.',
+    ],
+  },
+  'emlek-gyongyok': {
+    heading: 'Emlék gyöngyök',
+    paragraphs: [
+      'Nemes acél gyöngybetéttel ellátva (304-es minőségű), ami nem allergén, és nem színeződik, nincs bevonattal ellátva, így nem kopik.',
+    ],
+    specs: ['Furat átmérője 5 mm, Pandora karkötővel kompatibilis.'],
+    contactNote: 'A személyre szabás miatt mindenképp vedd fel velem a kapcsolatot.',
+  },
+  medalok: {
+    heading: 'Medálok',
+    paragraphs: [
+      'Nemes acél alapra készült (304-es minőségű), ami nem allergén, és nem színeződik, nincs bevonattal ellátva, így nem kopik.',
+      'Többféle formával és mérettel dolgozom, ezt a személyre szabásnál egyeztetjük.',
+    ],
+    specs: [],
+  },
+};
 
 export interface GalleryPriceExtra {
   label: string;
@@ -94,17 +139,17 @@ export const galleryPrices: Record<GalleryLeafId, GalleryPriceTable> = {
     ],
   },
   'emlek-gyongyok': {
-    metals: ['nemesacel', 'ezust'],
+    metals: ['nemesacel'],
     rows: [
-      { filling: 'milk-or-hair', prices: { nemesacel: 28000, ezust: 45000 } },
-      { filling: 'hair', prices: { nemesacel: 19000, ezust: 38000 } },
+      { filling: 'milk-or-hair', prices: { nemesacel: 28000 } },
+      { filling: 'hair', prices: { nemesacel: 19000 } },
     ],
   },
   medalok: {
-    metals: ['nemesacel', 'ezust'],
+    metals: ['nemesacel'],
     rows: [
-      { filling: 'milk-or-hair', prices: { nemesacel: 29000, ezust: 45000 } },
-      { filling: 'hair', prices: { nemesacel: 20000, ezust: 38000 } },
+      { filling: 'milk-or-hair', prices: { nemesacel: 29000 } },
+      { filling: 'hair', prices: { nemesacel: 20000 } },
     ],
   },
 };
@@ -312,7 +357,7 @@ export const faqItems: FAQItem[] = [
       '',
       bullets: [
         'Forma: A formákról az Árak és galéria szekcióban megtalálod a lehetőségeket.',
-        'Anyag: Nemesacéllal illetve ezüst tartalmú ötvözetekkel dolgozom.',
+        'Anyag: Nemesacéllal illetve ezüst tartalmú ötvözetekkel dolgozom. A gyűrűk ezüst tartalmú ötvözetből, az emlék gyöngyök és medálok nemesacélból készülnek.',
       ],
   },
   {
