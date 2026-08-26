@@ -14,8 +14,11 @@ import {
   galleryCategories,
   galleryPrices,
   galleryPriceExtras,
+  galleryLeafExtras,
+  galleryPrioritySurcharge,
   galleryLeafDescriptions,
   getGalleryLeafMeta,
+  allowsPrioritySurcharge,
   GALLERY_FILLING_LABELS,
   type GalleryItem,
   type GalleryMainId,
@@ -42,13 +45,36 @@ const itemVariants = {
 
 const formatHuf = (n: number) => n.toLocaleString('hu-HU').replace(/,/g, ' ');
 
-function PriceExtrasNote() {
+function extraLine(extra: { label: string; amount: number; unit?: 'hour' | 'flat' }) {
+  const suffix = extra.unit === 'flat' ? ' Ft' : ' Ft/óra';
+  return `+ ${extra.label}: ${formatHuf(extra.amount)}${suffix}`;
+}
+
+function PriceExtrasNote({
+  showHourlyExtras,
+  showPriority,
+  leafExtras,
+}: {
+  showHourlyExtras: boolean;
+  showPriority: boolean;
+  leafExtras: { label: string; amount: number; unit?: 'hour' | 'flat' }[];
+}) {
+  const lines: string[] = [];
+  if (showHourlyExtras) {
+    lines.push(...galleryPriceExtras.map(extraLine));
+  }
+  lines.push(...leafExtras.map(extraLine));
+  if (showPriority) {
+    lines.push(galleryPrioritySurcharge);
+  }
+  if (lines.length === 0) return null;
+
   return (
     <p className="mt-4 text-center text-sm leading-relaxed text-ink-500">
-      {galleryPriceExtras.map((extra, index) => (
-        <span key={extra.label}>
+      {lines.map((line, index) => (
+        <span key={line}>
           {index > 0 && <br />}
-          + {extra.label}: {formatHuf(extra.amount)} Ft/óra
+          {line}
         </span>
       ))}
     </p>
@@ -350,7 +376,11 @@ function GalleryPriceBlock({ leafId }: { leafId: GalleryLeafId }) {
         )}
       </div>
       {table.rows.length > 0 && <PriceList table={table} />}
-      {fillingPrices && <PriceExtrasNote />}
+      <PriceExtrasNote
+        showHourlyExtras={fillingPrices}
+        showPriority={allowsPrioritySurcharge(leafId)}
+        leafExtras={galleryLeafExtras[leafId] ?? []}
+      />
       <p className="mt-3 text-center text-sm leading-relaxed text-ink-500">
         {fillingPrices
           ? 'Tájékoztató árak. A fotók példák – a töltést rendeléskor választod. Egyedi daraboknál a konzultáció dönt.'

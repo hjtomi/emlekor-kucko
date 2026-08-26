@@ -247,12 +247,26 @@ export const galleryLeafDescriptions: Record<GalleryLeafId, GalleryLeafDescripti
 export interface GalleryPriceExtra {
   label: string;
   amount: number;
+  unit?: 'hour' | 'flat';
 }
 
 export const galleryPriceExtras: GalleryPriceExtra[] = [
-  { label: 'Hajjal rajzolás', amount: 4500 },
-  { label: 'Hajjal betűrajzolás', amount: 3000 },
+  { label: 'Hajjal rajzolás', amount: 4500, unit: 'hour' },
+  { label: 'Hajjal betűrajzolás', amount: 3000, unit: 'hour' },
 ];
+
+export const galleryLeafExtras: Partial<Record<GalleryLeafId, GalleryPriceExtra[]>> = {
+  'emlek-gyongyok': [{ label: 'Feles öntés', amount: 4000, unit: 'flat' }],
+};
+
+export const galleryPrioritySurcharge =
+  'Elsőbbségi (sürgős) elkészítés: az adott termék értékének +30%-a';
+
+export function allowsPrioritySurcharge(leafId: GalleryLeafId): boolean {
+  if (leafId === 'ajandekutalvanyok') return false;
+  const ezust = galleryCategories.find((category) => category.id === 'ezust-otvozet');
+  return !ezust?.children.some((child) => child.id === leafId);
+}
 
 export const galleryPrices: Record<GalleryLeafId, GalleryPriceTable> = {
   mithril: {
@@ -679,7 +693,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq3',
     question: 'Mennyi idő az elkészítés?',
     answer:
-      'Először egyeztetünk az elképzelésedről, majd a minta megérkezése után általában 2–4 hét az elkészítés. Ünnepi időszakban vagy összetettebb daraboknál ez hosszabb lehet – a várható időpontot mindig előre megbeszéljük.',
+      'Először egyeztetünk az elképzelésedről, majd a minta megérkezése után általában 2–4 hét az elkészítés. Ünnepi időszakban vagy összetettebb daraboknál ez hosszabb lehet – a várható időpontot mindig előre megbeszéljük. Ha ennél hamarabb kell: Elsőbbségi (sürgős) elkészítés: az adott termék értékének +30%-a. Ezüst tartalmú ötvözetből készült ékszereknél sürgősségi elkészítés nem kérhető.',
   },
   {
     id: 'faq5',
