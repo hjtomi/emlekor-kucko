@@ -1,5 +1,19 @@
-export type GalleryMainId = 'ezust-otvozet' | 'nemesacel';
-export type GalleryLeafId = 'mithril' | 'csepp' | 'emlek-gyongyok' | 'medalok';
+export type GalleryMainId = 'ezust-otvozet' | 'nemesacel' | 'dns-mentes' | 'ajandekutalvanyok';
+export type GalleryLeafId =
+  | 'mithril'
+  | 'csepp'
+  | 'emlek-gyongyok'
+  | 'medalok'
+  | 'fulbevalok'
+  | 'gyuruk-allithato'
+  | 'gyuruk-karika'
+  | 'karkoto-ferfi'
+  | 'karkoto-noi'
+  | 'kulcstarto'
+  | 'kulcstarto-ferfi'
+  | 'dns-mentes-emlek-gyongy'
+  | 'dns-mentes-karkoto'
+  | 'ajandekutalvanyok';
 
 export interface GallerySubcategory {
   id: GalleryLeafId;
@@ -12,12 +26,13 @@ export interface GalleryMainCategory {
   children: GallerySubcategory[];
 }
 
-export type GalleryFillingId = 'milk-or-hair' | 'hair';
+export type GalleryFillingId = 'milk-or-hair' | 'hair' | 'fixed';
 export type GalleryMetalId = 'nemesacel' | 'ezust';
 
 export const GALLERY_FILLING_LABELS: Record<GalleryFillingId, string> = {
   'milk-or-hair': 'Anyatej és/vagy haj',
   hair: 'Csak haj',
+  fixed: 'Ár',
 };
 
 export interface GalleryPriceTable {
@@ -42,6 +57,16 @@ export const GALLERY_LEAF_LABELS: Record<GalleryLeafId, string> = {
   csepp: 'Csepp gyűrű',
   'emlek-gyongyok': 'Emlék gyöngy',
   medalok: 'Medál',
+  fulbevalok: 'Fülbevaló',
+  'gyuruk-allithato': 'Állítható gyűrű',
+  'gyuruk-karika': 'Karika gyűrű',
+  'karkoto-ferfi': 'Férfi karkötő',
+  'karkoto-noi': 'Női karkötő',
+  kulcstarto: 'Kulcstartó',
+  'kulcstarto-ferfi': 'Férfi kulcstartó',
+  'dns-mentes-emlek-gyongy': 'DNS mentes emlék gyöngy',
+  'dns-mentes-karkoto': 'Anya-gyermek karkötő',
+  ajandekutalvanyok: 'Ajándékutalvány',
 };
 
 export const galleryCategories: GalleryMainCategory[] = [
@@ -59,7 +84,27 @@ export const galleryCategories: GalleryMainCategory[] = [
     children: [
       { id: 'emlek-gyongyok', label: 'Emlék gyöngyök' },
       { id: 'medalok', label: 'Medálok' },
+      { id: 'fulbevalok', label: 'Fülbevalók' },
+      { id: 'gyuruk-allithato', label: 'Gyűrű (állítható méretű)' },
+      { id: 'gyuruk-karika', label: 'Gyűrűk (karika)' },
+      { id: 'karkoto-ferfi', label: 'Paracord férfi karkötő 1 db DNS gyönggyel' },
+      { id: 'karkoto-noi', label: 'Paracord női karkötő tányéros alappal' },
+      { id: 'kulcstarto', label: 'Kulcstartó' },
+      { id: 'kulcstarto-ferfi', label: 'Férfi kulcstartó' },
     ],
+  },
+  {
+    id: 'dns-mentes',
+    label: 'DNS mentes ékszerek / emlékőrök',
+    children: [
+      { id: 'dns-mentes-emlek-gyongy', label: 'DNS mentes emlék gyöngy (charm)' },
+      { id: 'dns-mentes-karkoto', label: 'Paracord női karkötő anya-gyermek köztessel' },
+    ],
+  },
+  {
+    id: 'ajandekutalvanyok',
+    label: 'Ajándékutalványok',
+    children: [{ id: 'ajandekutalvanyok', label: 'Ajándékutalványok' }],
   },
 ];
 
@@ -111,6 +156,92 @@ export const galleryLeafDescriptions: Record<GalleryLeafId, GalleryLeafDescripti
     ],
     specs: [],
   },
+  fulbevalok: {
+    heading: 'Fülbevalók',
+    paragraphs: [
+      'Nemes acél alapra készült (304-es minőségű), ami nem allergén, és nem színeződik, nincs bevonattal ellátva, így nem kopik.',
+      'Többféle formával és mérettel dolgozom, ezt a személyre szabásnál egyeztetjük. Francia kapcsos és bedugós változatban is elérhető.',
+    ],
+    specs: [],
+  },
+  'gyuruk-allithato': {
+    heading: 'Gyűrű (állítható méretű)',
+    paragraphs: [
+      'Nemes acél alapra készült (304-es minőségű), ami nem allergén, és nem színeződik, nincs bevonattal ellátva, így nem kopik.',
+      'Többféle formával dolgozom, ezt a személyre szabásnál egyeztetjük.',
+    ],
+    specs: [],
+  },
+  'gyuruk-karika': {
+    heading: 'Gyűrűk (karika)',
+    paragraphs: [
+      'Nemes acél alapra készült (304-es minőségű), ami nem allergén, és nem színeződik, nincs bevonattal ellátva, így nem kopik.',
+      'Többféle típussal és mérettel dolgozom. A méret ebben az esetben fix, próba szükséges az emlékőr elkészítése előtt.',
+    ],
+    specs: [],
+    contactNote: 'Vedd fel velem a kapcsolatot a részletek egyeztetése miatt.',
+  },
+  'karkoto-ferfi': {
+    heading: 'Paracord férfi karkötő 1 db DNS gyönggyel',
+    paragraphs: [
+      'Nemes acél csattal készült a karkötő a biztonságos viselés érdekében, illetve a benne lévő emlék gyöngy is nemes acél gyöngy betéttel készül (304-es minőségű), ami nem allergén, és nem színeződik, nincs bevonattal ellátva, így nem kopik.',
+    ],
+    specs: [
+      'A gyöngy átmérője 14 mm, a paracord zsinór fonva 16 mm széles, 4 mm vastag.',
+      'Méretre készül!',
+    ],
+    contactNote: 'Vedd fel velem a kapcsolatot a személyre szabás érdekében.',
+  },
+  'karkoto-noi': {
+    heading: 'Paracord női karkötő tányéros alappal',
+    paragraphs: [
+      'Nemes acél csattal készült a karkötő a biztonságos viselés érdekében, illetve a tányéros alapok is nemes acélból készültek (304-es minőségű), ami nem allergén, és nem színeződik, nincs bevonattal ellátva, így nem kopik.',
+      'Többféle színű zsinórral és tányéros alappal dolgozom.',
+    ],
+    specs: ['Méretre készül!'],
+    contactNote: 'Vedd fel velem a kapcsolatot a személyre szabás érdekében.',
+  },
+  kulcstarto: {
+    heading: 'Kulcstartó',
+    paragraphs: [
+      'Nemes acél alapra készült (304-es minőségű), ami nem allergén, és nem színeződik, nincs bevonattal ellátva, így nem kopik.',
+      'Többféle formával és mérettel dolgozom, ezt a személyre szabásnál egyeztetjük.',
+    ],
+    specs: [],
+    contactNote: 'Vedd fel velem a kapcsolatot a személyre szabás érdekében.',
+  },
+  'kulcstarto-ferfi': {
+    heading: 'Férfi kulcstartó',
+    paragraphs: [
+      'Nemes acél alapra készült (304-es minőségű), ami nem allergén, és nem színeződik, nincs bevonattal ellátva, így nem kopik.',
+      'Fekete és barna bőr kulcstartó alappal választható, kör és téglalap formában.',
+    ],
+    specs: [],
+    contactNote: 'Vedd fel velem a kapcsolatot a személyre szabás érdekében.',
+  },
+  'dns-mentes-emlek-gyongy': {
+    heading: 'DNS mentes emlék gyöngy (charm)',
+    paragraphs: [
+      'Nemes acél gyöngybetéttel ellátva (304-es minőségű), ami nem allergén, és nem színeződik, nincs bevonattal ellátva, így nem kopik.',
+    ],
+    specs: ['Furat átmérője 5 mm, Pandora karkötővel kompatibilis.'],
+    contactNote: 'A személyre szabáshoz kérlek vedd fel velem a kapcsolatot!',
+  },
+  'dns-mentes-karkoto': {
+    heading: 'Paracord női karkötő anya-gyermek köztessel',
+    paragraphs: [
+      'Nemes acél csattal készült a karkötő a biztonságos viselés érdekében (304-es minőségű), ami nem allergén, és nem színeződik, nincs bevonattal ellátva, így nem kopik. Ezüst színű cirkónia köves anya-gyermek kapcsoló elemmel, ami ezüst színű bronzból készült.',
+    ],
+    specs: ['Mérete: 23×24 mm'],
+  },
+  ajandekutalvanyok: {
+    heading: 'Ajándékutalványok',
+    paragraphs: [
+      'Ha kész ékszer helyett választást szeretnél ajándékozni, ajándékutalvánnyal is készülök.',
+    ],
+    specs: [],
+    contactNote: 'Az összeg és a részletek egyeztetése miatt vedd fel velem a kapcsolatot.',
+  },
 };
 
 export interface GalleryPriceExtra {
@@ -152,6 +283,67 @@ export const galleryPrices: Record<GalleryLeafId, GalleryPriceTable> = {
       { filling: 'hair', prices: { nemesacel: 20000 } },
     ],
   },
+  fulbevalok: {
+    metals: ['nemesacel'],
+    rows: [
+      { filling: 'milk-or-hair', prices: { nemesacel: 26000 } },
+      { filling: 'hair', prices: { nemesacel: 18000 } },
+    ],
+  },
+  'gyuruk-allithato': {
+    metals: ['nemesacel'],
+    rows: [
+      { filling: 'milk-or-hair', prices: { nemesacel: 26000 } },
+      { filling: 'hair', prices: { nemesacel: 18000 } },
+    ],
+  },
+  'gyuruk-karika': {
+    metals: ['nemesacel'],
+    rows: [
+      { filling: 'milk-or-hair', prices: { nemesacel: 29000 } },
+      { filling: 'hair', prices: { nemesacel: 21000 } },
+    ],
+  },
+  'karkoto-ferfi': {
+    metals: ['nemesacel'],
+    rows: [
+      { filling: 'milk-or-hair', prices: { nemesacel: 31000 } },
+      { filling: 'hair', prices: { nemesacel: 22000 } },
+    ],
+  },
+  'karkoto-noi': {
+    metals: ['nemesacel'],
+    rows: [
+      { filling: 'milk-or-hair', prices: { nemesacel: 32000 } },
+      { filling: 'hair', prices: { nemesacel: 23000 } },
+    ],
+  },
+  kulcstarto: {
+    metals: ['nemesacel'],
+    rows: [
+      { filling: 'milk-or-hair', prices: { nemesacel: 30000 } },
+      { filling: 'hair', prices: { nemesacel: 21000 } },
+    ],
+  },
+  'kulcstarto-ferfi': {
+    metals: ['nemesacel'],
+    rows: [
+      { filling: 'milk-or-hair', prices: { nemesacel: 30000 } },
+      { filling: 'hair', prices: { nemesacel: 22000 } },
+    ],
+  },
+  'dns-mentes-emlek-gyongy': {
+    metals: ['nemesacel'],
+    rows: [{ filling: 'fixed', prices: { nemesacel: 17000 } }],
+  },
+  'dns-mentes-karkoto': {
+    metals: ['nemesacel'],
+    rows: [{ filling: 'fixed', prices: { nemesacel: 9000 } }],
+  },
+  ajandekutalvanyok: {
+    metals: [],
+    rows: [],
+  },
 };
 
 export function getGalleryLeafMeta(leafId: GalleryLeafId): { label: string } {
@@ -170,7 +362,7 @@ function galleryGroup(
     title: files.length === 1 ? title : `${title} ${index + 1}`,
     caption,
     category,
-    image,
+    image: encodeURI(image),
     alt,
   }));
 }
@@ -233,6 +425,149 @@ export const galleryItems: GalleryItem[] = [
       'images/gallery/medalok/IMG_20260323_100757.jpg',
       'images/gallery/medalok/IMG_20260629_165353.jpg',
       'images/gallery/medalok/IMG_20260702_224800.jpg',
+    ],
+  ),
+  ...galleryGroup(
+    'fulbevalok',
+    'Fülbevaló',
+    'Egyedi fülbevaló, kézzel készített emlékőrző darab.',
+    'Kézzel készített emlékőrző fülbevaló',
+    [
+      'images/gallery/fulbevalok/IMG_20250312_182400 (2).png',
+      'images/gallery/fulbevalok/IMG_20250718_221402 (1).jpg',
+      'images/gallery/fulbevalok/IMG_20260629_165846.jpg',
+      'images/gallery/fulbevalok/Photo_1734006800573.jpg',
+    ],
+  ),
+  ...galleryGroup(
+    'gyuruk-allithato',
+    'Állítható gyűrű',
+    'Nemesacél állítható gyűrű – egy korábbi, egyedi elkészítésű darab.',
+    'Kézzel készített állítható emlékgyűrű',
+    [
+      'images/gallery/gyuruk_allithato/IMG_20260502_194716.jpg',
+      'images/gallery/gyuruk_allithato/IMG_20260511_133659.jpg',
+      'images/gallery/gyuruk_allithato/IMG_20260626_131055.jpg',
+      'images/gallery/gyuruk_allithato/IMG_20260629_165432.jpg',
+      'images/gallery/gyuruk_allithato/Photo_1707584687973.jpg',
+    ],
+  ),
+  ...galleryGroup(
+    'gyuruk-karika',
+    'Karika gyűrű',
+    'Nemesacél karika gyűrű – egy korábbi, egyedi elkészítésű darab.',
+    'Kézzel készített karika emlékgyűrű',
+    [
+      'images/gallery/gyuruk_karika/IMG_20250618_213520 (1).jpg',
+      'images/gallery/gyuruk_karika/IMG_20250731_202741 (1).jpg',
+      'images/gallery/gyuruk_karika/IMG_20250731_203101 (1).jpg',
+      'images/gallery/gyuruk_karika/IMG_20251219_184821 (2).jpg',
+      'images/gallery/gyuruk_karika/IMG_20260219_165918.jpg',
+      'images/gallery/gyuruk_karika/IMG_20260225_181655.jpg',
+      'images/gallery/gyuruk_karika/IMG_20260316_161850.jpg',
+      'images/gallery/gyuruk_karika/IMG_20260511_230304_1.jpg',
+    ],
+  ),
+  ...galleryGroup(
+    'karkoto-ferfi',
+    'Férfi karkötő',
+    'Paracord férfi karkötő DNS gyönggyel, kézzel készítve.',
+    'Kézzel készített paracord férfi emlék karkötő',
+    [
+      'images/gallery/karkoto_ferfi/1767646305357.jpg',
+      'images/gallery/karkoto_ferfi/1771146711390.jpg',
+      'images/gallery/karkoto_ferfi/IMG_20250906_142640.jpg',
+      'images/gallery/karkoto_ferfi/IMG_20251011_142231.jpg',
+      'images/gallery/karkoto_ferfi/IMG_20251025_134220.jpg',
+      'images/gallery/karkoto_ferfi/IMG_20251208_175905.jpg',
+      'images/gallery/karkoto_ferfi/IMG_20260614_120935.jpg',
+      'images/gallery/karkoto_ferfi/IMG_20260704_223811.jpg',
+    ],
+  ),
+  ...galleryGroup(
+    'karkoto-noi',
+    'Női karkötő',
+    'Paracord női karkötő tányéros alappal, kézzel készítve.',
+    'Kézzel készített paracord női emlék karkötő',
+    [
+      'images/gallery/karkoto_noi/IMG_20250520_123103.png',
+      'images/gallery/karkoto_noi/IMG_20250618_212105 (1).jpg',
+      'images/gallery/karkoto_noi/IMG_20251011_141614.jpg',
+      'images/gallery/karkoto_noi/IMG_20251021_074609.jpg',
+      'images/gallery/karkoto_noi/IMG_20251203_185802.jpg',
+      'images/gallery/karkoto_noi/IMG_20260201_165540.jpg',
+      'images/gallery/karkoto_noi/IMG_20260423_172304.jpg',
+      'images/gallery/karkoto_noi/IMG_20260617_105646.jpg',
+      'images/gallery/karkoto_noi/IMG_20260619_094205.jpg',
+    ],
+  ),
+  ...galleryGroup(
+    'kulcstarto',
+    'Kulcstartó',
+    'Egyedi kulcstartó, kézzel készített emlékőrző darab.',
+    'Kézzel készített emlékőrző kulcstartó',
+    [
+      'images/gallery/kulcstarto/IMG_20250424_134154.png',
+      'images/gallery/kulcstarto/IMG_20250828_164840.jpg',
+      'images/gallery/kulcstarto/IMG_20260316_161413.jpg',
+      'images/gallery/kulcstarto/IMG_20260407_161634.jpg.jpg',
+      'images/gallery/kulcstarto/IMG_20260702_225636.jpg',
+      'images/gallery/kulcstarto/Photo_1734006412463.jpg',
+    ],
+  ),
+  ...galleryGroup(
+    'kulcstarto-ferfi',
+    'Férfi kulcstartó',
+    'Bőr alapú férfi kulcstartó, kézzel készített emlékőrző darab.',
+    'Kézzel készített férfi emlékőrző kulcstartó',
+    [
+      'images/gallery/kulcstarto_ferfi/IMG_20260201_105515.jpg',
+      'images/gallery/kulcstarto_ferfi/IMG_20260407_161511.jpg.jpg',
+      'images/gallery/kulcstarto_ferfi/IMG_20260528_072308.jpg',
+      'images/gallery/kulcstarto_ferfi/IMG_20260528_100011.jpg',
+    ],
+  ),
+  ...galleryGroup(
+    'dns-mentes-emlek-gyongy',
+    'DNS mentes emlék gyöngy',
+    'DNS mentes emlék gyöngy – kézzel formázva.',
+    'Kézzel készített DNS mentes emlék gyöngy',
+    [
+      'images/gallery/dnsmentes_emlekgyongy/IMG_20250731_111152 (1).jpg',
+      'images/gallery/dnsmentes_emlekgyongy/IMG_20250731_111342 (1).jpg',
+      'images/gallery/dnsmentes_emlekgyongy/IMG_20250731_111509 (1).jpg',
+      'images/gallery/dnsmentes_emlekgyongy/IMG_20250731_111750 (1).jpg',
+      'images/gallery/dnsmentes_emlekgyongy/IMG_20250817_161346 (1).jpg',
+      'images/gallery/dnsmentes_emlekgyongy/IMG_20250817_161427 (1).jpg',
+      'images/gallery/dnsmentes_emlekgyongy/IMG_20250817_161515 (1).jpg',
+      'images/gallery/dnsmentes_emlekgyongy/IMG_20250914_143131.jpg',
+      'images/gallery/dnsmentes_emlekgyongy/IMG_20250914_143214.jpg',
+      'images/gallery/dnsmentes_emlekgyongy/IMG_20250914_143324.jpg',
+      'images/gallery/dnsmentes_emlekgyongy/IMG_20251002_162510 (1).jpg',
+      'images/gallery/dnsmentes_emlekgyongy/IMG_20260604_100840.jpg',
+      'images/gallery/dnsmentes_emlekgyongy/IMG_20260604_100923.jpg',
+      'images/gallery/dnsmentes_emlekgyongy/IMG_20260604_101000.jpg',
+    ],
+  ),
+  ...galleryGroup(
+    'dns-mentes-karkoto',
+    'Anya-gyermek karkötő',
+    'Paracord női karkötő anya-gyermek köztessel, kézzel készítve.',
+    'Kézzel készített paracord női karkötő anya-gyermek köztessel',
+    [
+      'images/gallery/dnsmentes_karkoto/IMG_20250313_165230.png',
+      'images/gallery/dnsmentes_karkoto/IMG_20250314_152613.png',
+      'images/gallery/dnsmentes_karkoto/IMG_20250315_131157.png',
+    ],
+  ),
+  ...galleryGroup(
+    'ajandekutalvanyok',
+    'Ajándékutalvány',
+    'Ajándékutalvány az Emlékőr Kuckó ékszereire.',
+    'Emlékőr Kuckó ajándékutalvány',
+    [
+      'images/gallery/ajandekutalvany/Beige and Pink Simple Watercolor Floral Gift Certificate _20250919_140103_0000.jpg',
+      'images/gallery/ajandekutalvany/Beige and Pink Simple Watercolor Floral Gift Certificate _20251120_095547_0000.jpg',
     ],
   ),
 ];
@@ -359,7 +694,7 @@ export const faqItems: FAQItem[] = [
       '',
       bullets: [
         'Forma: A formákról az Árak és galéria szekcióban megtalálod a lehetőségeket.',
-        'Anyag: Nemesacéllal illetve ezüst tartalmú ötvözetekkel dolgozom. A gyűrűk ezüst tartalmú ötvözetből, az emlék gyöngyök és medálok nemesacélból készülnek.',
+        'Anyag: Nemesacéllal illetve ezüst tartalmú ötvözetekkel dolgozom. A Mithril és Csepp gyűrűk ezüst tartalmú ötvözetből, a többi emlékőr ékszer nemesacélból készül. DNS mentes darabok és ajándékutalványok is elérhetők.',
       ],
   },
   {
@@ -372,6 +707,6 @@ export const faqItems: FAQItem[] = [
     id: 'faq8',
     question: 'Tudok ajándékba rendelni?',
     answer:
-      'Igen. A kézbesítés lehetőségeiről a konzultáción részletesen beszélünk.'
+      'Igen. Ajándékutalvány is kérhető, a kézbesítés lehetőségeiről a konzultáción részletesen beszélünk.'
   },
 ];

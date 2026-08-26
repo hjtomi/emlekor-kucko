@@ -58,7 +58,7 @@ function PriceExtrasNote() {
 function pillClass(active: boolean, size: 'main' | 'sub' = 'main') {
   const shape =
     size === 'sub'
-      ? 'rounded-full px-4 py-2 text-sm'
+      ? 'rounded-full px-4 py-2 text-sm leading-snug'
       : 'rounded-2xl px-5 py-3 text-sm leading-snug';
   return `relative font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blush-300 focus-visible:ring-offset-2 ${shape} ${
     active
@@ -98,7 +98,7 @@ export default function Gallery() {
       return;
     }
     setMainId(category.id);
-    setLeafId(null);
+    setLeafId(category.children.length === 1 ? category.children[0].id : null);
   };
 
   const handleSubClick = (sub: GallerySubcategory) => {
@@ -115,11 +115,13 @@ export default function Gallery() {
   }, [items.length]);
 
   const emptyCopy =
-    mainId === 'ezust-otvozet' && !leafId
+    mainId === 'ezust-otvozet'
       ? 'Válaszd ki a gyűrű típusát — Mithril gyűrűk vagy Csepp gyűrűk —, hogy lásd a darabokat és az árakat.'
-      : mainId === 'nemesacel' && !leafId
-        ? 'Válaszd ki a típust — Emlék gyöngyök vagy Medálok —, hogy lásd a darabokat és az árakat.'
-        : 'Válassz egy kategóriát, hogy megtekinthesd a képeket és az árakat.';
+      : mainId === 'nemesacel'
+        ? 'Válaszd ki a típust, hogy lásd a darabokat és az árakat.'
+        : mainId === 'dns-mentes'
+          ? 'Válaszd ki a típust — DNS mentes emlék gyöngy vagy paracord női karkötő —, hogy lásd a darabokat és az árakat.'
+          : 'Válassz egy kategóriát, hogy megtekinthesd a képeket és az árakat.';
 
   return (
     <section id="galeria" className="relative overflow-hidden bg-cream-100/80 bg-watercolor-edge py-24 sm:py-32">
@@ -138,7 +140,7 @@ export default function Gallery() {
             Milyen emléket őriznél?
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-ink-600 sm:text-lg">
-            Először válaszd ki az anyagot, majd a típust. A képek korábbi,
+            Először válaszd ki a kategóriát, majd a típust. A képek korábbi,
             egyedi darabok. Az árak tájékoztatóak; a tied a saját
             mintáidból készül.
           </p>
@@ -155,7 +157,7 @@ export default function Gallery() {
           <div
             role="group"
             aria-label="Kategória"
-            className="mx-auto flex max-w-3xl flex-col items-stretch justify-center gap-2.5 sm:flex-row sm:items-stretch"
+            className="mx-auto grid max-w-4xl grid-cols-1 gap-2.5 sm:grid-cols-2"
           >
             {galleryCategories.map((category) => (
               <button
@@ -163,7 +165,7 @@ export default function Gallery() {
                 type="button"
                 aria-pressed={mainId === category.id}
                 onClick={() => handleMainClick(category)}
-                className={`${pillClass(mainId === category.id)} flex w-full items-center justify-center text-center sm:w-1/2`}
+                className={`${pillClass(mainId === category.id)} flex w-full items-center justify-center text-center`}
               >
                 {category.label}
               </button>
@@ -171,7 +173,7 @@ export default function Gallery() {
           </div>
 
           <AnimatePresence initial={false}>
-            {selectedMain && (
+            {selectedMain && selectedMain.children.length > 1 && (
               <motion.div
                 key={`subcategories-${selectedMain.id}`}
                 initial={{ opacity: 0, height: 0 }}
@@ -193,7 +195,7 @@ export default function Gallery() {
                       type="button"
                       aria-pressed={leafId === sub.id}
                       onClick={() => handleSubClick(sub)}
-                      className={pillClass(leafId === sub.id, 'sub')}
+                      className={`${pillClass(leafId === sub.id, 'sub')} text-center`}
                     >
                       {sub.label}
                     </button>
@@ -237,7 +239,11 @@ export default function Gallery() {
                   variants={containerVariants}
                   initial="hidden"
                   animate="visible"
-                  className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+                  className={
+                    leafId === 'ajandekutalvanyok'
+                      ? 'grid grid-cols-1 gap-6 lg:grid-cols-2'
+                      : 'grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3'
+                  }
                 >
                   <AnimatePresence mode="popLayout">
                     {items.map((item, index) => {
@@ -304,9 +310,14 @@ export default function Gallery() {
   );
 }
 
+function hasFillingPrices(table: GalleryPriceTable) {
+  return table.rows.some((row) => row.filling === 'milk-or-hair' || row.filling === 'hair');
+}
+
 function GalleryPriceBlock({ leafId }: { leafId: GalleryLeafId }) {
   const table = galleryPrices[leafId];
   const copy = galleryLeafDescriptions[leafId];
+  const fillingPrices = hasFillingPrices(table);
 
   return (
     <div className="mx-auto mt-10 max-w-3xl rounded-3xl border border-blush-100 bg-white/70 px-5 py-6 shadow-glass sm:px-8 sm:py-8">
@@ -338,11 +349,14 @@ function GalleryPriceBlock({ leafId }: { leafId: GalleryLeafId }) {
           </p>
         )}
       </div>
-      <PriceList table={table} />
-      <PriceExtrasNote />
+      {table.rows.length > 0 && <PriceList table={table} />}
+      {fillingPrices && <PriceExtrasNote />}
       <p className="mt-3 text-center text-sm leading-relaxed text-ink-500">
-        Tájékoztató árak. A fotók példák – a töltést rendeléskor választod. Egyedi daraboknál a
-        konzultáció dönt.
+        {fillingPrices
+          ? 'Tájékoztató árak. A fotók példák – a töltést rendeléskor választod. Egyedi daraboknál a konzultáció dönt.'
+          : table.rows.length > 0
+            ? 'Tájékoztató árak. A fotók példák – egyedi daraboknál a konzultáció dönt.'
+            : 'A fotók példák. A részleteket a konzultáción egyeztetjük.'}
       </p>
     </div>
   );
@@ -380,6 +394,7 @@ function GalleryCard({
 }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const label = getGalleryLeafMeta(item.category).label;
+  const showFullImage = item.category === 'ajandekutalvanyok';
 
   return (
     <motion.article
@@ -393,28 +408,42 @@ function GalleryCard({
         isHiddenOnMobile ? 'hidden sm:block' : 'block'
       }`}
     >
-      <div className="relative aspect-[4/5] overflow-hidden bg-cream-100">
+      <div
+        className={`relative overflow-hidden ${
+          showFullImage ? 'aspect-[3/2] bg-cream-50' : 'aspect-[4/5] bg-cream-100'
+        }`}
+      >
         {!isLoaded && <div className="absolute inset-0 shimmer-mask bg-cream-200/60" />}
         <img
           src={item.image}
           alt={item.alt}
           loading="lazy"
           onLoad={() => setIsLoaded(true)}
-          className={`h-full w-full object-cover transition-all duration-700 group-hover:scale-110 ${
-            isLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
+          className={`h-full w-full transition-all duration-700 ${
+            showFullImage ? 'object-contain' : 'object-cover group-hover:scale-110'
+          } ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink-900/70 via-ink-900/10 to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-90" />
+        {!showFullImage && (
+          <div className="absolute inset-0 bg-gradient-to-t from-ink-900/70 via-ink-900/10 to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-90" />
+        )}
 
         <span className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/70 text-ink-800 opacity-0 shadow-soft backdrop-blur-md transition-all duration-300 group-hover:opacity-100">
           <Maximize2 className="h-4 w-4" />
         </span>
 
-        <div className="absolute inset-x-0 bottom-0 p-5 text-white">
-          <p className="text-[11px] font-medium uppercase tracking-wider text-blush-200">{label}</p>
-          <h3 className="mt-1 font-serif text-xl leading-snug">{item.title}</h3>
-        </div>
+        {!showFullImage && (
+          <div className="absolute inset-x-0 bottom-0 p-5 text-white">
+            <p className="text-[11px] font-medium uppercase tracking-wider text-blush-200">{label}</p>
+            <h3 className="mt-1 font-serif text-xl leading-snug">{item.title}</h3>
+          </div>
+        )}
       </div>
+      {showFullImage && (
+        <div className="px-5 py-4">
+          <p className="text-[11px] font-medium uppercase tracking-wider text-blush-400">{label}</p>
+          <h3 className="mt-1 font-serif text-xl leading-snug text-ink-900">{item.title}</h3>
+        </div>
+      )}
     </motion.article>
   );
 }
@@ -474,7 +503,9 @@ function Lightbox({
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-3xl overflow-hidden rounded-3xl bg-ink-900 shadow-glass ring-1 ring-blush-100/30"
+            className={`relative w-full overflow-hidden rounded-3xl bg-ink-900 shadow-glass ring-1 ring-blush-100/30 ${
+              item.category === 'ajandekutalvanyok' ? 'max-w-5xl' : 'max-w-3xl'
+            }`}
           >
             <div className="absolute left-4 top-4 z-10">
               <span className="rounded-full bg-white/90 px-3.5 py-1 text-xs font-semibold text-ink-700 shadow-glass backdrop-blur-md">
@@ -518,14 +549,31 @@ function Lightbox({
               </>
             )}
 
-            <div className="relative aspect-[4/5] max-h-[85vh] w-full sm:aspect-[3/4]">
-              <img src={item.image} alt={item.alt} className="h-full w-full object-cover" />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-900/85 via-ink-900/40 to-transparent px-6 pb-6 pt-16">
-                <h3 className="font-cormorant text-2xl font-semibold text-white sm:text-3xl">
-                  {item.title}
-                </h3>
+            {item.category === 'ajandekutalvanyok' ? (
+              <div className="bg-cream-50">
+                <div className="flex max-h-[80vh] w-full items-center justify-center">
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    className="max-h-[80vh] w-full object-contain"
+                  />
+                </div>
+                <div className="px-6 py-4">
+                  <h3 className="font-cormorant text-2xl font-semibold text-ink-900 sm:text-3xl">
+                    {item.title}
+                  </h3>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="relative aspect-[4/5] max-h-[85vh] w-full sm:aspect-[3/4]">
+                <img src={item.image} alt={item.alt} className="h-full w-full object-cover" />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-900/85 via-ink-900/40 to-transparent px-6 pb-6 pt-16">
+                  <h3 className="font-cormorant text-2xl font-semibold text-white sm:text-3xl">
+                    {item.title}
+                  </h3>
+                </div>
+              </div>
+            )}
           </motion.div>
         </motion.div>
       )}
