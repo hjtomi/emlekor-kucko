@@ -6,12 +6,12 @@ const VALUES = [
   {
     icon: Heart,
     title: 'Gondos kezek',
-    text: 'Mintát szinte babaként kezelem – tisztelettel, lassan, a legnagyobb odafigyeléssel.',
+    text: 'Szívvel, lélekkel, a legnagyobb odafigyeléssel.',
   },
   {
     icon: Leaf,
-    title: 'Természetes anyagok',
-    text: 'Minőségi gyanta és nemes fémek, amelyek diszkréten ölelik az emléket.',
+    title: 'Minőségi anyagok',
+    text: 'Időt álló nemesacél ékszer alapokkal, minőségi gyantával, és ezüst tartalmú ötvözetből.',
   },
   {
     icon: Sparkles,

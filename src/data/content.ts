@@ -434,6 +434,9 @@ export const galleryItems: GalleryItem[] = [
     'Egyedi medál, kézzel készített emlékőrző darab.',
     'Kézzel készített emlékőrző medál',
     [
+      'images/gallery/medalok/1000032642.jpg',
+      'images/gallery/medalok/1000032644.jpg',
+      'images/gallery/medalok/1000034563.jpg',
       'images/gallery/medalok/IMG_20251120_205757.jpg',
       'images/gallery/medalok/IMG_20260316_160811.jpg',
       'images/gallery/medalok/IMG_20260323_100757.jpg',
@@ -535,6 +538,8 @@ export const galleryItems: GalleryItem[] = [
     'Bőr alapú férfi kulcstartó, kézzel készített emlékőrző darab.',
     'Kézzel készített férfi emlékőrző kulcstartó',
     [
+      'images/gallery/kulcstarto_ferfi/1000034029.jpg',
+      'images/gallery/kulcstarto_ferfi/1000034561.jpg',
       'images/gallery/kulcstarto_ferfi/IMG_20260201_105515.jpg',
       'images/gallery/kulcstarto_ferfi/IMG_20260407_161511.jpg.jpg',
       'images/gallery/kulcstarto_ferfi/IMG_20260528_072308.jpg',
@@ -597,12 +602,18 @@ export const contactInfo = {
 };
 
 // PLACEHOLDER: Replace with Szabina-approved client quotes before public launch.
+export interface TestimonialPiece {
+  image: string;
+  label: string;
+  alt: string;
+}
+
 export interface Testimonial {
   id: string;
   quote: string;
   name: string;
   location: string;
-  category?: string;
+  pieces: TestimonialPiece[];
 }
 
 export const testimonials: Testimonial[] = [
@@ -611,8 +622,19 @@ export const testimonials: Testimonial[] = [
     quote:
       'Nagyon elégedett vagyok vele, kedves precíz és alapos. Csodaszép gyűrűt és kulcstartót készített nekem anyatejjel és babahajjal ❤️',
     name: 'Alexa',
-    location: 'Budapest',
-    category: 'Anyatejes medál',
+    location: 'Miskolc',
+    pieces: [
+      {
+        image: 'images/trust/Alexa2.jpg',
+        label: 'Gyűrű',
+        alt: 'Alexa szív alakú emlékgyűrűje',
+      },
+      {
+        image: 'images/trust/Alexa1.jpg',
+        label: 'Kulcstartó',
+        alt: 'Alexa bőr emlék kulcstartója',
+      },
+    ],
   },
   {
     id: 't2',
@@ -620,7 +642,13 @@ export const testimonials: Testimonial[] = [
       'Szabina gyönyörű dolgokat alkot. Csak ajánlani tudom mindenkinek,aki ilyen emléket szeretne készíttetni. Odafigyel a részletekre, alapos és körültekintő. Minden munkájába szívét és lelkét beleteszi.',
     name: 'Annamária',
     location: 'Debrecen',
-    category: 'Hajas gyűrű',
+    pieces: [
+      {
+        image: 'images/trust/placeholder.svg',
+        label: 'Hajas gyűrű',
+        alt: 'PLACEHOLDER: Annamária ékszere, fotó hamarosan',
+      },
+    ],
   },
   {
     id: 't3',
@@ -628,7 +656,13 @@ export const testimonials: Testimonial[] = [
       'Nehéz szavakba leírni mennyire csodálatos lett a charm amit nekem készített. Szívből ajánlom mindenkinek aki precíz és tökéletes ékszert szeretne! ❤️ Külön kiemelném hogy a készítést lépésről lépésre végig kísérhettem! 🥰🌸',
     name: 'Kitti',
     location: 'Szeged',
-    category: 'Kombinált szett',
+    pieces: [
+      {
+        image: 'images/trust/placeholder.svg',
+        label: 'Charm',
+        alt: 'PLACEHOLDER: Kitti charmja, fotó hamarosan',
+      },
+    ],
   },
 ];
 

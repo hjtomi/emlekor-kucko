@@ -1,9 +1,42 @@
-import { motion } from 'framer-motion';
-import { Heart, ShieldCheck } from 'lucide-react';
-import { testimonials, trustStats } from '../data/content';
+import { useCallback, useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight, Heart, ShieldCheck, X } from 'lucide-react';
+import { testimonials, trustStats, type Testimonial, type TestimonialPiece } from '../data/content';
 import { PetalDivider } from './FloralAccents';
 
+function isPlaceholderImage(image: string) {
+  return image.includes('placeholder');
+}
+
 export default function Trust() {
+  const [lightbox, setLightbox] = useState<{ testimonialId: string; index: number } | null>(null);
+
+  const activeTestimonial = lightbox
+    ? testimonials.find((item) => item.id === lightbox.testimonialId) ?? null
+    : null;
+  const activePiece =
+    activeTestimonial && lightbox ? activeTestimonial.pieces[lightbox.index] ?? null : null;
+
+  const closeLightbox = useCallback(() => setLightbox(null), []);
+
+  const showPrev = useCallback(() => {
+    if (!activeTestimonial) return;
+    setLightbox((current) => {
+      if (!current) return current;
+      const last = activeTestimonial.pieces.length - 1;
+      return { ...current, index: current.index === 0 ? last : current.index - 1 };
+    });
+  }, [activeTestimonial]);
+
+  const showNext = useCallback(() => {
+    if (!activeTestimonial) return;
+    setLightbox((current) => {
+      if (!current) return current;
+      const last = activeTestimonial.pieces.length - 1;
+      return { ...current, index: current.index === last ? 0 : current.index + 1 };
+    });
+  }, [activeTestimonial]);
+
   return (
     <section id="bizalom" className="relative overflow-hidden bg-cream-100 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -35,23 +68,27 @@ export default function Trust() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.6, delay: i * 0.12, ease: 'easeOut' }}
-              className="flex flex-col rounded-2xl border border-blush-100 bg-cream-50/90 p-6 shadow-petal ring-1 ring-blush-100/80 transition-all duration-300 hover:-translate-y-1 hover:bg-cream-50 hover:shadow-soft sm:p-7"
+              className="flex flex-col overflow-hidden rounded-2xl border border-blush-100 bg-cream-50/90 shadow-petal ring-1 ring-blush-100/80 transition-all duration-300 hover:-translate-y-1 hover:bg-cream-50 hover:shadow-soft"
             >
-              <Heart className="h-5 w-5 shrink-0 text-blush-300" strokeWidth={1.6} />
-              <blockquote className="mt-4 flex-1 text-base leading-relaxed text-ink-700">
-                „{item.quote}"
-              </blockquote>
-              <footer className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-blush-100/80 pt-5">
-                <cite className="not-italic">
-                  <span className="font-serif text-lg text-ink-900">{item.name}</span>
-                  <span className="text-ink-500">, {item.location}</span>
-                </cite>
-                {item.category && (
-                  <span className="rounded-full bg-cream-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-blush-500 ring-1 ring-blush-100">
-                    {item.category}
-                  </span>
-                )}
-              </footer>
+              <PieceStrip
+                pieces={item.pieces}
+                onOpen={(index) => setLightbox({ testimonialId: item.id, index })}
+              />
+              <div className="flex flex-1 flex-col p-6 sm:p-7">
+                <Heart className="h-5 w-5 shrink-0 text-blush-300" strokeWidth={1.6} />
+                <blockquote className="mt-4 flex-1 text-base leading-relaxed text-ink-700">
+                  „{item.quote}"
+                </blockquote>
+                <footer className="mt-6 border-t border-blush-100/80 pt-5">
+                  <cite className="not-italic">
+                    <span className="font-serif text-lg text-ink-900">{item.name}</span>
+                    <span className="text-ink-500">, {item.location}</span>
+                  </cite>
+                  <p className="mt-2 text-[11px] font-semibold uppercase tracking-wider text-blush-500">
+                    {item.pieces.map((piece) => piece.label).join(' · ')}
+                  </p>
+                </footer>
+              </div>
             </motion.article>
           ))}
         </div>
@@ -82,6 +119,179 @@ export default function Trust() {
           ))}
         </motion.div>
       </div>
+
+      <PieceLightbox
+        testimonial={activeTestimonial}
+        piece={activePiece}
+        currentIndex={lightbox?.index ?? null}
+        onClose={closeLightbox}
+        onPrev={showPrev}
+        onNext={showNext}
+      />
     </section>
+  );
+}
+
+function PieceStrip({
+  pieces,
+  onOpen,
+}: {
+  pieces: TestimonialPiece[];
+  onOpen: (index: number) => void;
+}) {
+  return (
+    <div className={`grid gap-px bg-blush-100 ${pieces.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+      {pieces.map((piece, index) => {
+        const placeholder = isPlaceholderImage(piece.image);
+        return (
+          <button
+            key={`${piece.image}-${index}`}
+            type="button"
+            disabled={placeholder}
+            onClick={() => onOpen(index)}
+            className={`group relative h-40 overflow-hidden bg-cream-200 sm:h-44 ${
+              placeholder ? 'cursor-default' : 'cursor-pointer'
+            }`}
+            aria-label={placeholder ? piece.alt : `${piece.label} megnyitása`}
+          >
+            <img
+              src={piece.image}
+              alt={piece.alt}
+              className={`h-full w-full object-cover transition-transform duration-500 ${
+                placeholder ? '' : 'group-hover:scale-105'
+              }`}
+            />
+            {placeholder && (
+              <span className="absolute inset-0 flex items-center justify-center bg-ink-600/10">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-ink-600">
+                  Placeholder
+                </span>
+              </span>
+            )}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function PieceLightbox({
+  testimonial,
+  piece,
+  currentIndex,
+  onClose,
+  onPrev,
+  onNext,
+}: {
+  testimonial: Testimonial | null;
+  piece: TestimonialPiece | null;
+  currentIndex: number | null;
+  onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+}) {
+  const totalCount = testimonial?.pieces.length ?? 0;
+
+  useEffect(() => {
+    if (piece) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [piece]);
+
+  useEffect(() => {
+    if (!piece) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowLeft') onPrev();
+      if (e.key === 'ArrowRight') onNext();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [piece, onClose, onPrev, onNext]);
+
+  return (
+    <AnimatePresence>
+      {piece && testimonial && currentIndex !== null && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+          className="fixed inset-x-0 inset-y-0 z-[60] flex items-center justify-center bg-ink-900/80 p-4 backdrop-blur-xl"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.92, y: 20 }}
+            transition={{ duration: 0.35, ease: 'easeOut' }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-3xl overflow-hidden rounded-3xl bg-ink-900 shadow-glass ring-1 ring-blush-100/30"
+          >
+            {totalCount > 1 && (
+              <div className="absolute left-4 top-4 z-10">
+                <span className="rounded-full bg-white/90 px-3.5 py-1 text-xs font-semibold text-ink-700 shadow-glass backdrop-blur-md">
+                  {currentIndex + 1} / {totalCount}
+                </span>
+              </div>
+            )}
+
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Bezárás"
+              className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-ink-800 shadow-glass backdrop-blur-md transition-colors hover:bg-blush-100 hover:text-blush-500"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            {totalCount > 1 && (
+              <>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onPrev();
+                  }}
+                  aria-label="Előző kép"
+                  className="absolute left-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-ink-800 shadow-glass backdrop-blur-md transition-all hover:scale-110 hover:bg-white active:scale-95"
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onNext();
+                  }}
+                  aria-label="Következő kép"
+                  className="absolute right-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-ink-800 shadow-glass backdrop-blur-md transition-all hover:scale-110 hover:bg-white active:scale-95"
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </button>
+              </>
+            )}
+
+            <div className="relative aspect-[4/5] max-h-[85vh] w-full sm:aspect-[3/4]">
+              <img src={piece.image} alt={piece.alt} className="h-full w-full object-cover" />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-900/85 via-ink-900/40 to-transparent px-6 pb-6 pt-16">
+                <p className="text-[11px] font-medium uppercase tracking-wider text-blush-200">
+                  {testimonial.name}
+                </p>
+                <h3 className="mt-1 font-cormorant text-2xl font-semibold text-white sm:text-3xl">
+                  {piece.label}
+                </h3>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

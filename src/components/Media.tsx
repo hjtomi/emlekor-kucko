@@ -110,7 +110,7 @@ export default function Media() {
             Média
           </span>
           <h2 className="mt-3 font-cormorant text-5xl font-semibold tracking-tight text-ink-900 sm:text-6xl">
-            Egy történet, ami minket is elmesél
+            Egy történet, ami engem is elmesél
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-ink-600 sm:text-lg">
             Amikor mások is szavakba öntik, miért őrzök emlékeket ékszerben – az
