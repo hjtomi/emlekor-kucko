@@ -612,6 +612,7 @@ export interface TestimonialPiece {
   image: string;
   label: string;
   alt: string;
+  fit?: 'cover' | 'contain';
 }
 
 export interface Testimonial {
@@ -650,9 +651,9 @@ export const testimonials: Testimonial[] = [
     location: 'Debrecen',
     pieces: [
       {
-        image: 'images/trust/placeholder.svg',
-        label: 'Hajas gyűrű',
-        alt: 'PLACEHOLDER: Annamária ékszere, fotó hamarosan',
+        image: 'images/trust/Annamária.jpg',
+        label: 'Medál',
+        alt: 'Annamária kerek emlékmedálja, hajból formált szívvel és virágokkal',
       },
     ],
   },
@@ -664,9 +665,10 @@ export const testimonials: Testimonial[] = [
     location: 'Szeged',
     pieces: [
       {
-        image: 'images/trust/placeholder.svg',
+        image: 'images/trust/Kitti.jpg',
         label: 'Charm',
-        alt: 'PLACEHOLDER: Kitti charmja, fotó hamarosan',
+        alt: 'Kitti életfa mintás emlékcharmjai, hajjal és virágokkal',
+        fit: 'contain',
       },
     ],
   },

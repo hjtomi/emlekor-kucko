@@ -47,7 +47,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.16 }}
             className="mt-5 font-cormorant text-2xl italic text-blush-500 sm:text-3xl"
           >
-            Simon Szabina egyedi gyanta ékszerei Anyatejből és bármely korosztáy hajából
+            Simon Szabina egyedi gyanta ékszerei Anyatejből és bármely korosztály hajából
           </motion.p>
 
           <motion.p

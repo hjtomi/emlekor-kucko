@@ -139,8 +139,10 @@ function PieceStrip({
   pieces: TestimonialPiece[];
   onOpen: (index: number) => void;
 }) {
+  const multi = pieces.length > 1;
+
   return (
-    <div className={`grid gap-px bg-blush-100 ${pieces.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+    <div className={`grid gap-px bg-blush-100 ${multi ? 'grid-cols-2' : 'grid-cols-1'}`}>
       {pieces.map((piece, index) => {
         const placeholder = isPlaceholderImage(piece.image);
         return (
@@ -149,16 +151,16 @@ function PieceStrip({
             type="button"
             disabled={placeholder}
             onClick={() => onOpen(index)}
-            className={`group relative h-40 overflow-hidden bg-cream-200 sm:h-44 ${
-              placeholder ? 'cursor-default' : 'cursor-pointer'
-            }`}
+            className={`relative overflow-hidden bg-cream-100 ${
+              multi ? 'aspect-[3/4]' : 'aspect-square'
+            } ${placeholder ? 'cursor-default' : 'cursor-pointer'}`}
             aria-label={placeholder ? piece.alt : `${piece.label} megnyitása`}
           >
             <img
               src={piece.image}
               alt={piece.alt}
-              className={`h-full w-full object-cover transition-transform duration-500 ${
-                placeholder ? '' : 'group-hover:scale-105'
+              className={`h-full w-full ${
+                piece.fit === 'contain' ? 'object-contain' : 'object-cover'
               }`}
             />
             {placeholder && (
@@ -232,62 +234,68 @@ function PieceLightbox({
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-3xl overflow-hidden rounded-3xl bg-ink-900 shadow-glass ring-1 ring-blush-100/30"
+            className="relative w-full max-w-4xl overflow-hidden rounded-3xl bg-cream-50 shadow-glass ring-1 ring-blush-100/30"
           >
-            {totalCount > 1 && (
-              <div className="absolute left-4 top-4 z-10">
-                <span className="rounded-full bg-white/90 px-3.5 py-1 text-xs font-semibold text-ink-700 shadow-glass backdrop-blur-md">
-                  {currentIndex + 1} / {totalCount}
-                </span>
+            <div className="relative">
+              {totalCount > 1 && (
+                <div className="absolute left-4 top-4 z-10">
+                  <span className="rounded-full bg-white/90 px-3.5 py-1 text-xs font-semibold text-ink-700 shadow-glass ring-1 ring-ink-900/10 backdrop-blur-md">
+                    {currentIndex + 1} / {totalCount}
+                  </span>
+                </div>
+              )}
+
+              <button
+                type="button"
+                onClick={onClose}
+                aria-label="Bezárás"
+                className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-ink-800 shadow-glass ring-1 ring-ink-900/10 backdrop-blur-md transition-colors hover:bg-blush-100 hover:text-blush-500"
+              >
+                <X className="h-5 w-5" />
+              </button>
+
+              {totalCount > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onPrev();
+                    }}
+                    aria-label="Előző kép"
+                    className="absolute left-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-ink-800 shadow-glass ring-1 ring-ink-900/10 backdrop-blur-md transition-all hover:scale-110 hover:bg-white active:scale-95"
+                  >
+                    <ChevronLeft className="h-6 w-6" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onNext();
+                    }}
+                    aria-label="Következő kép"
+                    className="absolute right-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-ink-800 shadow-glass ring-1 ring-ink-900/10 backdrop-blur-md transition-all hover:scale-110 hover:bg-white active:scale-95"
+                  >
+                    <ChevronRight className="h-6 w-6" />
+                  </button>
+                </>
+              )}
+
+              <div className="flex max-h-[75vh] w-full items-center justify-center bg-cream-100">
+                <img
+                  src={piece.image}
+                  alt={piece.alt}
+                  className="max-h-[75vh] w-full object-contain"
+                />
               </div>
-            )}
-
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="Bezárás"
-              className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-ink-800 shadow-glass backdrop-blur-md transition-colors hover:bg-blush-100 hover:text-blush-500"
-            >
-              <X className="h-5 w-5" />
-            </button>
-
-            {totalCount > 1 && (
-              <>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onPrev();
-                  }}
-                  aria-label="Előző kép"
-                  className="absolute left-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-ink-800 shadow-glass backdrop-blur-md transition-all hover:scale-110 hover:bg-white active:scale-95"
-                >
-                  <ChevronLeft className="h-6 w-6" />
-                </button>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onNext();
-                  }}
-                  aria-label="Következő kép"
-                  className="absolute right-3 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-ink-800 shadow-glass backdrop-blur-md transition-all hover:scale-110 hover:bg-white active:scale-95"
-                >
-                  <ChevronRight className="h-6 w-6" />
-                </button>
-              </>
-            )}
-
-            <div className="relative aspect-[4/5] max-h-[85vh] w-full sm:aspect-[3/4]">
-              <img src={piece.image} alt={piece.alt} className="h-full w-full object-cover" />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-900/85 via-ink-900/40 to-transparent px-6 pb-6 pt-16">
-                <p className="text-[11px] font-medium uppercase tracking-wider text-blush-200">
-                  {testimonial.name}
-                </p>
-                <h3 className="mt-1 font-cormorant text-2xl font-semibold text-white sm:text-3xl">
-                  {piece.label}
-                </h3>
-              </div>
+            </div>
+            <div className="border-t border-blush-100/80 px-6 py-4">
+              <p className="text-[11px] font-medium uppercase tracking-wider text-blush-400">
+                {testimonial.name}
+              </p>
+              <h3 className="mt-0.5 font-cormorant text-2xl font-semibold text-ink-900 sm:text-3xl">
+                {piece.label}
+              </h3>
             </div>
           </motion.div>
         </motion.div>

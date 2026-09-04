@@ -12,7 +12,7 @@ const STEPS = [
   {
     num: '02',
     title: 'A minta biztonságos elküldése',
-    text: 'Az anyatejet vagy hajtincset diszkrét, biztonságos csomagolásban küldöd el nekem.',
+    text: 'A kapcsolatfelvétel után mindenről részletesen tájékoztatlak. Küldök majd csomagolási utasítást, hogy mit és hogyan kell összekészítened és feladnod nekem.',
   },
   {
     num: '03',
