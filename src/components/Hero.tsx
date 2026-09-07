@@ -26,9 +26,11 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 rounded-full border border-blush-200/60 bg-cream-50/80 px-4.5 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-blush-500 shadow-glass backdrop-blur-md"
+            className="inline-flex items-center rounded-full border border-blush-200/60 bg-cream-50/80 py-1.5 pr-5 text-xs font-medium uppercase tracking-[0.2em] text-blush-500 shadow-glass backdrop-blur-md"
           >
-            <Sparkles className="h-3.5 w-3.5 text-blush-400" />
+            <span className="inline-flex w-11 shrink-0 items-center justify-center" aria-hidden>
+              <Sparkles className="h-3.5 w-3.5 text-blush-400" />
+            </span>
             Kézzel készült emlékőrző ékszerek
           </motion.span>
 
