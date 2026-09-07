@@ -1,42 +1,25 @@
 import { motion } from 'framer-motion';
 import { Facebook, Instagram, ShieldCheck, ArrowUpRight } from 'lucide-react';
-import { contactInfo } from '../data/content';
+import { useSiteContent } from '../content/SiteContentContext';
 import { PetalDivider } from './FloralAccents';
 
-const STEPS = [
-  {
-    num: '01',
-    title: 'Kapcsolatfelvétel & megbeszélés',
-    text: 'Üzenj nekem Facebookon vagy Instagramon, és átbeszéljük az elképzelésedet.',
-  },
-  {
-    num: '02',
-    title: 'A minta biztonságos elküldése',
-    text: 'A kapcsolatfelvétel után mindenről részletesen tájékoztatlak. Küldök majd csomagolási utasítást, hogy mit és hogyan kell összekészítened és feladnod nekem.',
-  },
-  {
-    num: '03',
-    title: 'Az ékszer elkészítése szeretettel',
-    text: 'Gondos kézi munkával elkészítem a te egyedi emlékőrző ékszeredet.',
-  },
-];
-
-const SOCIAL_CHANNELS = [
-  {
-    label: 'Üzenet Facebookon',
-    href: contactInfo.facebook,
-    icon: Facebook,
-    variant: 'primary' as const,
-  },
-  {
-    label: 'Üzenet Instagramon',
-    href: contactInfo.instagram,
-    icon: Instagram,
-    variant: 'secondary' as const,
-  },
-];
-
 export default function Contact() {
+  const { contactInfo, contactSteps } = useSiteContent();
+
+  const socialChannels = [
+    {
+      label: 'Üzenet Facebookon',
+      href: contactInfo.facebook,
+      icon: Facebook,
+      variant: 'primary' as const,
+    },
+    {
+      label: 'Üzenet Instagramon',
+      href: contactInfo.instagram,
+      icon: Instagram,
+      variant: 'secondary' as const,
+    },
+  ];
   return (
     <section id="kapcsolat" className="relative overflow-hidden bg-petal-gradient py-24 sm:py-32">
       <div className="mx-auto max-w-3xl px-5 sm:px-8">
@@ -61,7 +44,7 @@ export default function Contact() {
         </motion.div>
 
         <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:gap-5">
-          {SOCIAL_CHANNELS.map((channel, i) => (
+          {socialChannels.map((channel, i) => (
             <motion.a
               key={channel.label}
               href={channel.href}
@@ -111,7 +94,7 @@ export default function Contact() {
             Hogyan zajlik a folyamat?
           </h3>
           <div className="mt-8 flex flex-col gap-6">
-            {STEPS.map((s, i) => (
+            {contactSteps.map((s, i) => (
               <motion.div
                 key={s.num}
                 initial={{ opacity: 0, y: 16 }}

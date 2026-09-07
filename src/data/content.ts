@@ -1,19 +1,5 @@
-export type GalleryMainId = 'ezust-otvozet' | 'nemesacel' | 'dns-mentes' | 'ajandekutalvanyok';
-export type GalleryLeafId =
-  | 'mithril'
-  | 'csepp'
-  | 'emlek-gyongyok'
-  | 'medalok'
-  | 'fulbevalok'
-  | 'gyuruk-allithato'
-  | 'gyuruk-karika'
-  | 'karkoto-ferfi'
-  | 'karkoto-noi'
-  | 'kulcstarto'
-  | 'kulcstarto-ferfi'
-  | 'dns-mentes-emlek-gyongy'
-  | 'dns-mentes-karkoto'
-  | 'ajandekutalvanyok';
+export type GalleryMainId = string;
+export type GalleryLeafId = string;
 
 export interface GallerySubcategory {
   id: GalleryLeafId;
@@ -24,6 +10,7 @@ export interface GalleryMainCategory {
   id: GalleryMainId;
   label: string;
   children: GallerySubcategory[];
+  emptyPrompt?: string;
 }
 
 export type GalleryFillingId = 'milk-or-hair' | 'hair' | 'fixed';
@@ -73,6 +60,8 @@ export const galleryCategories: GalleryMainCategory[] = [
   {
     id: 'ezust-otvozet',
     label: 'Ezüst tartalmú ötvözetből készült emlékőr ékszerek',
+    emptyPrompt:
+      'Válaszd ki a gyűrű típusát — Mithril gyűrűk vagy Csepp gyűrűk —, hogy lásd a darabokat és az árakat.',
     children: [
       { id: 'mithril', label: 'Mithril gyűrűk' },
       { id: 'csepp', label: 'Csepp gyűrűk' },
@@ -81,6 +70,7 @@ export const galleryCategories: GalleryMainCategory[] = [
   {
     id: 'nemesacel',
     label: 'Nemesacélból készült emlékőr ékszerek',
+    emptyPrompt: 'Válaszd ki a típust, hogy lásd a darabokat és az árakat.',
     children: [
       { id: 'emlek-gyongyok', label: 'Emlék gyöngyök' },
       { id: 'medalok', label: 'Medálok' },
@@ -96,6 +86,8 @@ export const galleryCategories: GalleryMainCategory[] = [
   {
     id: 'dns-mentes',
     label: 'DNS mentes ékszerek / emlékőrök',
+    emptyPrompt:
+      'Válaszd ki a típust — DNS mentes emlék gyöngy vagy paracord női karkötő —, hogy lásd a darabokat és az árakat.',
     children: [
       { id: 'dns-mentes-emlek-gyongy', label: 'DNS mentes emlék gyöngy (charm)' },
       { id: 'dns-mentes-karkoto', label: 'Paracord női karkötő anya-gyermek köztessel' },
@@ -104,6 +96,7 @@ export const galleryCategories: GalleryMainCategory[] = [
   {
     id: 'ajandekutalvanyok',
     label: 'Ajándékutalványok',
+    emptyPrompt: 'Válassz egy kategóriát, hogy megtekinthesd a képeket és az árakat.',
     children: [{ id: 'ajandekutalvanyok', label: 'Ajándékutalványok' }],
   },
 ];
@@ -766,3 +759,163 @@ export const faqItems: FAQItem[] = [
       'Igen. Ajándékutalvány is kérhető, a kézbesítés lehetőségeiről a konzultáción részletesen beszélünk.'
   },
 ];
+
+export interface ContactStep {
+  num: string;
+  title: string;
+  text: string;
+}
+
+export const contactSteps: ContactStep[] = [
+  {
+    num: '01',
+    title: 'Kapcsolatfelvétel & megbeszélés',
+    text: 'Üzenj nekem Facebookon vagy Instagramon, és átbeszéljük az elképzelésedet.',
+  },
+  {
+    num: '02',
+    title: 'A minta biztonságos elküldése',
+    text: 'A kapcsolatfelvétel után mindenről részletesen tájékoztatlak. Küldök majd csomagolási utasítást, hogy mit és hogyan kell összekészítened és feladnod nekem.',
+  },
+  {
+    num: '03',
+    title: 'Az ékszer elkészítése szeretettel',
+    text: 'Gondos kézi munkával elkészítem a te egyedi emlékőrző ékszeredet.',
+  },
+];
+
+export type AboutValueIcon = 'heart' | 'leaf' | 'sparkles';
+
+export interface AboutValue {
+  icon: AboutValueIcon;
+  title: string;
+  text: string;
+}
+
+export interface AboutStorySection {
+  heading?: string;
+  paragraphs: string[];
+}
+
+export interface AboutContent {
+  eyebrow: string;
+  heading: string;
+  tagline: string;
+  portrait: { image: string; alt: string };
+  founderBadge: string;
+  introParagraphs: string[];
+  values: AboutValue[];
+  storySections: AboutStorySection[];
+  closingQuote: string;
+}
+
+export const aboutContent: AboutContent = {
+  eyebrow: 'Rólam',
+  heading: 'Simon Szabina',
+  tagline: 'A kéz, amely emléket őriz',
+  portrait: {
+    image: '/images/Szabina.jpg',
+    alt: 'Simon Szabina, az Emlékőr Kuckó alapítója, miközben egy gyanta ékszert készít',
+  },
+  founderBadge: 'Emlékőr Kuckó · alapító',
+  introParagraphs: [
+    'Sziasztok!',
+    'Simon Szabinának hívnak, két csodálatos gyermek Édesanyja vagyok, és az Emlékőr kuckó megálmodója, alapítója. Szabadidőmben szeretek a családommal és a barátaimmal lenni, koncertekre járni, olvasni, és motorozni.',
+  ],
+  values: [
+    {
+      icon: 'heart',
+      title: 'Gondos kezek',
+      text: 'Szívvel, lélekkel, a legnagyobb odafigyeléssel.',
+    },
+    {
+      icon: 'leaf',
+      title: 'Minőségi anyagok',
+      text: 'Időt álló nemesacél ékszer alapokkal, minőségi gyantával, és ezüst tartalmú ötvözetből.',
+    },
+    {
+      icon: 'sparkles',
+      title: 'Egyedi alkotás',
+      text: 'Két egyforma darab sosem készül – minden ékszer a te történetedre születik.',
+    },
+  ],
+  storySections: [
+    {
+      heading: 'Hogy is született meg az Emlékőr kuckó?!',
+      paragraphs: [
+        'Amikor másodjára is Anya lettem, ott fogott el az az érzés, hogy milyen gyorsan repül az idő a gyerekek mellett, szerettem volna ezt a kezdeti bár nehéz, de csodálatos pillanatot örökre megtartani.',
+      ],
+    },
+    {
+      heading: 'Az epoxy gyanta',
+      paragraphs: [
+        'Szembejött velem az emlékőrző ékszerek készítése, egyvalami különösen felkeltette az érdeklődésem az elkészítésükkel kapcsolatosan, az epoxy gyanta. Már régóta szemezgettem ezzel az anyaggal, sok szép dolgot láttam, amit ebből készítettek, és elkezdett foglalkoztatni ez az egész ékszerkészítés.',
+      ],
+    },
+    {
+      heading: 'Az anyatej tartósítása',
+      paragraphs: [
+        'Egyre jobban elkezdtem belemerülni, utánajárni dolgoknak, sokat kísérletezni mind az alapanyagokkal, mint pedig az anyatej tartósításával kapcsolatban. Ebben az esetben sok más alkotóhoz képest én egy olyan tartósítási eljárást fejlesztettem ki aminél maga az anyatej folyékony formában kerül bele az epoxy gyantába, ezzel megörökítve neked ezt a csodálatos időszakot.',
+      ],
+    },
+    {
+      heading: 'Hajból rajzolás',
+      paragraphs: [
+        'A hajból rajzolásnál is mindig próbáltam minél több újabb dolgot kipróbálni, hogy ráérezzek mi is ami az én stílusom lesz. Igyekszem amennyire lehet ebben a szakmában egyedi lenni, és veletek együtt megálmodni, ékszerbe zárni azokat a történeteket amelyekkel megkerestek.',
+      ],
+    },
+    {
+      paragraphs: [
+        'Minden egyes hozzám beérkezett dns csomaggal úgy bánok, mintha csak a sajátom lenne, szeretettel, odafigyeléssel a tudásom szerinti legjobb kézügyességgel elkészíteni.',
+        'Hogy mit hoz a jövő a kuckó életében, azt nem tudhatom, de amíg bírom, amíg hajt az a valami legbelül veletek együtt csinálom. :)',
+      ],
+    },
+  ],
+  closingQuote: '„Az Emlékőr kuckó értetek van, hogy megörökítse életetek fontos pillanatait.”',
+};
+
+export interface SiteContent {
+  galleryCategories: GalleryMainCategory[];
+  galleryItems: GalleryItem[];
+  galleryPrices: Record<string, GalleryPriceTable>;
+  galleryPriceExtras: GalleryPriceExtra[];
+  galleryLeafExtras: Partial<Record<string, GalleryPriceExtra[]>>;
+  galleryPrioritySurcharge: string;
+  galleryLeafDescriptions: Record<string, GalleryLeafDescription>;
+  galleryLeafLabels: Record<string, string>;
+  fillingLabels: Record<GalleryFillingId, string>;
+  allowsPriorityByLeaf: Record<string, boolean>;
+  testimonials: Testimonial[];
+  trustStats: { value: string; label: string }[];
+  faqItems: FAQItem[];
+  pressItems: PressItem[];
+  contactInfo: typeof contactInfo;
+  contactSteps: ContactStep[];
+  about: AboutContent;
+}
+
+function buildAllowsPriorityByLeaf(): Record<string, boolean> {
+  return Object.fromEntries(
+    Object.keys(GALLERY_LEAF_LABELS).map((leafId) => [leafId, allowsPrioritySurcharge(leafId)]),
+  );
+}
+
+export const fallbackSiteContent: SiteContent = {
+  galleryCategories,
+  galleryItems,
+  galleryPrices,
+  galleryPriceExtras,
+  galleryLeafExtras,
+  galleryPrioritySurcharge,
+  galleryLeafDescriptions,
+  galleryLeafLabels: GALLERY_LEAF_LABELS,
+  fillingLabels: GALLERY_FILLING_LABELS,
+  allowsPriorityByLeaf: buildAllowsPriorityByLeaf(),
+  testimonials,
+  trustStats,
+  faqItems,
+  pressItems,
+  contactInfo,
+  contactSteps,
+  about: aboutContent,
+};

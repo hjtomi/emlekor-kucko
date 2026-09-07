@@ -10,16 +10,6 @@ import {
   Images,
 } from 'lucide-react';
 import {
-  galleryItems,
-  galleryCategories,
-  galleryPrices,
-  galleryPriceExtras,
-  galleryLeafExtras,
-  galleryPrioritySurcharge,
-  galleryLeafDescriptions,
-  getGalleryLeafMeta,
-  allowsPrioritySurcharge,
-  GALLERY_FILLING_LABELS,
   type GalleryItem,
   type GalleryMainId,
   type GalleryLeafId,
@@ -27,6 +17,7 @@ import {
   type GallerySubcategory,
   type GalleryPriceTable,
 } from '../data/content';
+import { useSiteContent } from '../content/SiteContentContext';
 import { PetalDivider } from './FloralAccents';
 
 const containerVariants = {
@@ -59,6 +50,7 @@ function PriceExtrasNote({
   showPriority: boolean;
   leafExtras: { label: string; amount: number; unit?: 'hour' | 'flat' }[];
 }) {
+  const { galleryPriceExtras, galleryPrioritySurcharge } = useSiteContent();
   const lines: string[] = [];
   if (showHourlyExtras) {
     lines.push(...galleryPriceExtras.map(extraLine));
@@ -94,6 +86,7 @@ function pillClass(active: boolean, size: 'main' | 'sub' = 'main') {
 }
 
 export default function Gallery() {
+  const { galleryCategories, galleryItems } = useSiteContent();
   const [mainId, setMainId] = useState<GalleryMainId | null>(null);
   const [leafId, setLeafId] = useState<GalleryLeafId | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -141,13 +134,8 @@ export default function Gallery() {
   }, [items.length]);
 
   const emptyCopy =
-    mainId === 'ezust-otvozet'
-      ? 'Válaszd ki a gyűrű típusát — Mithril gyűrűk vagy Csepp gyűrűk —, hogy lásd a darabokat és az árakat.'
-      : mainId === 'nemesacel'
-        ? 'Válaszd ki a típust, hogy lásd a darabokat és az árakat.'
-        : mainId === 'dns-mentes'
-          ? 'Válaszd ki a típust — DNS mentes emlék gyöngy vagy paracord női karkötő —, hogy lásd a darabokat és az árakat.'
-          : 'Válassz egy kategóriát, hogy megtekinthesd a képeket és az árakat.';
+    selectedMain?.emptyPrompt ??
+    'Válassz egy kategóriát, hogy megtekinthesd a képeket és az árakat.';
 
   return (
     <section id="galeria" className="relative overflow-hidden bg-cream-100/80 bg-watercolor-edge py-24 sm:py-32">
@@ -341,8 +329,15 @@ function hasFillingPrices(table: GalleryPriceTable) {
 }
 
 function GalleryPriceBlock({ leafId }: { leafId: GalleryLeafId }) {
+  const {
+    galleryPrices,
+    galleryLeafDescriptions,
+    galleryLeafExtras,
+    allowsPriorityByLeaf,
+  } = useSiteContent();
   const table = galleryPrices[leafId];
   const copy = galleryLeafDescriptions[leafId];
+  if (!table || !copy) return null;
   const fillingPrices = hasFillingPrices(table);
 
   return (
@@ -378,7 +373,7 @@ function GalleryPriceBlock({ leafId }: { leafId: GalleryLeafId }) {
       {table.rows.length > 0 && <PriceList table={table} />}
       <PriceExtrasNote
         showHourlyExtras={fillingPrices}
-        showPriority={allowsPrioritySurcharge(leafId)}
+        showPriority={Boolean(allowsPriorityByLeaf[leafId])}
         leafExtras={galleryLeafExtras[leafId] ?? []}
       />
       <p className="mt-3 text-center text-sm leading-relaxed text-ink-500">
@@ -393,6 +388,7 @@ function GalleryPriceBlock({ leafId }: { leafId: GalleryLeafId }) {
 }
 
 function PriceList({ table }: { table: GalleryPriceTable }) {
+  const { fillingLabels } = useSiteContent();
   const metal = table.metals[0];
 
   return (
@@ -402,7 +398,7 @@ function PriceList({ table }: { table: GalleryPriceTable }) {
         if (amount == null) return null;
         return (
           <li key={row.filling} className="flex items-baseline justify-between gap-4 py-2.5">
-            <span className="text-sm text-ink-700">{GALLERY_FILLING_LABELS[row.filling]}</span>
+            <span className="text-sm text-ink-700">{fillingLabels[row.filling]}</span>
             <span className="font-cormorant text-2xl font-semibold text-ink-900">
               {formatHuf(amount)} Ft
             </span>
@@ -423,7 +419,8 @@ function GalleryCard({
   onClick: () => void;
 }) {
   const [isLoaded, setIsLoaded] = useState(false);
-  const label = getGalleryLeafMeta(item.category).label;
+  const { galleryLeafLabels } = useSiteContent();
+  const label = galleryLeafLabels[item.category] ?? item.category;
   const showFullImage = item.category === 'ajandekutalvanyok';
 
   return (

@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Heart, ShieldCheck, X } from 'lucide-react';
-import { testimonials, trustStats, type Testimonial, type TestimonialPiece } from '../data/content';
+import { type Testimonial, type TestimonialPiece } from '../data/content';
+import { useSiteContent } from '../content/SiteContentContext';
 import { PetalDivider } from './FloralAccents';
 
 function isPlaceholderImage(image: string) {
@@ -9,6 +10,7 @@ function isPlaceholderImage(image: string) {
 }
 
 export default function Trust() {
+  const { testimonials, trustStats } = useSiteContent();
   const [lightbox, setLightbox] = useState<{ testimonialId: string; index: number } | null>(null);
 
   const activeTestimonial = lightbox

@@ -13,4 +13,9 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  server: {
+    watch: {
+      ignored: ['**/studio-emlekor-kucko/**'],
+    },
+  },
 });

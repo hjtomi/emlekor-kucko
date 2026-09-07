@@ -1,12 +1,19 @@
-import { useId, useState } from 'react';
+import { useId, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, ChevronDown } from 'lucide-react';
-import { faqItems } from '../data/content';
+import { useSiteContent } from '../content/SiteContentContext';
 import { PetalDivider } from './FloralAccents';
 
 export default function FAQ() {
+  const { faqItems } = useSiteContent();
   const baseId = useId();
   const [openId, setOpenId] = useState<string | null>(faqItems[0]?.id ?? null);
+
+  useEffect(() => {
+    if (!faqItems.some((item) => item.id === openId)) {
+      setOpenId(faqItems[0]?.id ?? null);
+    }
+  }, [faqItems, openId]);
 
   const toggle = (id: string) => {
     setOpenId((current) => (current === id ? null : id));

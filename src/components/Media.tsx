@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
-import { pressItems, type PressItem } from '../data/content';
+import { type PressItem } from '../data/content';
+import { useSiteContent } from '../content/SiteContentContext';
 import { PetalDivider } from './FloralAccents';
 
 function formatPressDate(isoDate: string) {
@@ -94,6 +95,7 @@ function PressList({ items }: { items: PressItem[] }) {
 }
 
 export default function Media() {
+  const { pressItems } = useSiteContent();
   if (pressItems.length === 0) return null;
 
   return (

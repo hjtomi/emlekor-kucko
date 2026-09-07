@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Facebook, Heart, Instagram } from 'lucide-react';
-import { contactInfo } from '../data/content';
+import { useSiteContent } from '../content/SiteContentContext';
 import { CornerBlossom } from './FloralAccents';
 
 const NAV_LINKS = [
@@ -10,6 +10,7 @@ const NAV_LINKS = [
 ];
 
 export default function Footer() {
+  const { contactInfo } = useSiteContent();
   const year = new Date().getFullYear();
   return (
     <footer className="relative overflow-hidden bg-ink-900 px-5 pt-16 pb-8 text-center sm:px-8">
