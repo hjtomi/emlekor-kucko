@@ -93,7 +93,7 @@ export default function FAQ() {
                       className="overflow-hidden"
                     >
                       <div className="border-t border-blush-100/80 px-5 pb-5 pt-1 sm:px-6 sm:pb-6">
-                        <p className="text-sm leading-relaxed text-ink-700 sm:text-base">
+                        <p className="whitespace-pre-line text-sm leading-relaxed text-ink-700 sm:text-base">
                           {item.answer}
                         </p>
                         {item.bullets && item.bullets.length > 0 && (
