@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Facebook, Heart, Instagram } from 'lucide-react';
 import { useSiteContent } from '../content/SiteContentContext';
 import { CornerBlossom } from './FloralAccents';
+import Impressum from './Impressum';
 
 const NAV_LINKS = [
   { label: 'Rólam', href: '#rolam' },
@@ -113,6 +114,8 @@ export default function Footer() {
             készült <Heart className="h-3 w-3 text-blush-300" fill="currentColor" /> szeretettel
           </span>
         </p>
+
+        <Impressum />
       </motion.div>
     </footer>
   );
